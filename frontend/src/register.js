@@ -1,0 +1,130 @@
+import { useState, useEffect } from 'react'
+import Alert from './components/alert'
+import FormRow from './formrow'
+import Wrapper from './wrappers'
+import { useAppContext } from './context/appcontext'
+import { useNavigate } from 'react-router-dom'
+import './index.css'
+const initialState = {
+  name: '',
+  phoneNo: '',
+  location: '',
+  email: '',
+  password: '',
+  isMember: true,
+}
+
+const Register = () => {
+  const navigate = useNavigate()
+  const [values, setValues] = useState(initialState)
+  const { user, isLoading, showAlert, displayAlert, setupUser, logoutUser } =
+    useAppContext()
+
+  const toggleMember = () => {
+    setValues({ ...values, isMember: !values.isMember })
+  }
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
+  }
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const { name, phoneNo, location, email, password, isMember } = values
+    if (!email || !password || (!isMember && !name && !phoneNo && !location)) {
+      displayAlert()
+      return
+    }
+    const currentUser = { name, phoneNo, location, email, password }
+    if (isMember) {
+      setupUser({
+        currentUser,
+        endPoint: 'login',
+        alertText: 'Login Successful! Redirecting...',
+      })
+    } else {
+      setupUser({
+        currentUser,
+        endPoint: 'register',
+        alertText: 'User Created! Redirecting...',
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate('/afterlogin')
+      }, 3000)
+    }
+  }, [user, navigate])
+
+  return (
+    <Wrapper className='full-page'>
+      <form className='form' onSubmit={onSubmit}>
+        <h3>ProjectHub</h3>
+        <br />
+        <h3>{values.isMember ? 'Welcome back' : 'Create your account'}</h3>
+        <br />
+        {showAlert && <Alert />}
+        {/* name input */}
+        {!values.isMember && (
+          <FormRow
+            type='text'
+            name='name'
+            value={values.name}
+            handleChange={handleChange}
+            placeholder='Full Name'
+          />
+        )}
+        {!values.isMember && (
+          <FormRow
+            type='tel'
+            name='phoneNo'
+            value={values.phoneNo}
+            handleChange={handleChange}
+            placeholder='+92'
+          />
+        )}
+        {!values.isMember && (
+          <FormRow
+            type='text'
+            name='location'
+            value={values.location}
+            handleChange={handleChange}
+            placeholder='City'
+          />
+        )}
+
+        {/* email input */}
+        <FormRow
+          type='email'
+          name='email'
+          value={values.email}
+          handleChange={handleChange}
+          placeholder='Email'
+        />
+
+        {/* password input */}
+        <FormRow
+          type='password'
+          name='password'
+          value={values.password}
+          handleChange={handleChange}
+          placeholder='Password'
+        />
+        <div className='d-grid gap-2'>
+          <button type='submit' className='btn btn-block' disabled={isLoading}>
+            Submit
+          </button>
+        </div>
+        <p>
+          {values.isMember ? 'Not a member yet?' : 'Already a member?'}
+          <button type='button' onClick={toggleMember} className='member-btn'>
+            {values.isMember ? 'Register' : 'Login'}
+          </button>
+        </p>
+      </form>
+    </Wrapper>
+  )
+}
+export default Register
