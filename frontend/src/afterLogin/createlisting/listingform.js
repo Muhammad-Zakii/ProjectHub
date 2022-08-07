@@ -84,7 +84,7 @@ const Listingform = () => {
                 type='text'
                 name='summary'
                 value={summary}
-                placeholder=' Add a summary to briefly introduce your project, business, website or domain. Keep it short and impactful.'
+                placeholder=' Add a summary to briefly introduce your project, business, website or domain. Keep it short and impactful'
                 onChange={listingInput}
               />
             </div>
