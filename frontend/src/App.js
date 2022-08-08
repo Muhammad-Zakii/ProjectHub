@@ -21,6 +21,7 @@ import Viewallprojectlisting from './afterLogin/listings/allprojectlisting'
 import ProfilePage from './afterLogin/ProfilePage/profilePage'
 import ContactPage from './afterLogin/contactPage/contactPage'
 import BidPage from './afterLogin/bidPage/bidPage'
+import OptionForSelling from './afterLogin/optionForSelling/optionForSelling'
 
 function App() {
   // const [data, setData] = React.useState(datas)
@@ -35,10 +36,10 @@ function App() {
         <Route path='/signup' element={<SignUp />} /> */}
         <Route path='*' element={<Error />} />
         <Route
-          path='/sellnow'
+          path='sellnow/' //chooseOption route name
           element={
             <ProtectedRoute>
-              <Sellnow />
+              <Sellnow /> {/* OptionForSelling // Component Name */}
             </ProtectedRoute>
           }
         />

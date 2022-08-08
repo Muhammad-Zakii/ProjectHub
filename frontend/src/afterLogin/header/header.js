@@ -6,6 +6,8 @@ const Head = () => {
     <div className='clas1'>
       <h2 style={{ position: 'relative', top: '-40px' }}>ProjectHub</h2>
       <Link to='/sellnow'>
+        {' '}
+        {/*chooseOption */}
         <button className='bt2'>Sell Now</button>
       </Link>
       <div className='pa'>

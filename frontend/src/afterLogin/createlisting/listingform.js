@@ -12,25 +12,27 @@ const Listingform = () => {
     showAlert,
     displayAlert,
     category,
+    categoryoptions,
     title,
     summary,
     description,
     siteage,
     profit,
     margin,
+    handleChange,
+    clearValues,
   } = useAppContext()
   const handleSubmit = (e) => {
-    e.preventDefault(e)
+    e.preventDefault()
     if (!title || !summary || !description) {
       displayAlert()
       return
     }
-    console.log('Listing created')
   }
   const listingInput = (e) => {
     const name = e.target.name
     const value = e.target.value
-    console.log(`${name}:${value}`)
+    handleChange({ name, value })
   }
 
   return (
@@ -43,15 +45,28 @@ const Listingform = () => {
         <Row className='justify-content-md-center'>
           <Col className='p-5' xs={12} md={6}>
             <label className='form-label'>Select category</label>
-            <select className='form-input' onChange={listingInput}>
-              <option selected value='--Please Select Category--'>
+            <select
+              className='form-input'
+              name='category'
+              value={category}
+              onChange={listingInput}
+            >
+              {categoryoptions.map((itemValue, index) => {
+                return (
+                  <option key={index} value={itemValue}>
+                    {itemValue}
+                  </option>
+                )
+              })}
+
+              {/* <option selected value='--Please Select Category--'>
                 --Choose Category--
               </option>
               <option value='Websites'>Websites</option>
               <option value='Andriod apps'>Andriod apps</option>
               <option value=' iOS apps'>iOS apps</option>
               <option value='Domains'>Domains</option>
-              <option value='Businesses'>Businesses</option>
+              <option value='Businesses'>Businesses</option> */}
             </select>
             <br />
 
@@ -139,11 +154,11 @@ const Listingform = () => {
               />
             </div>
             <div className='form-row'>
-              <p className='form-label'>
+              {/* <p className='form-label'>
                 How would you like to sell? Click on the button to select the
                 option.
-              </p>
-              <Pricing />
+              </p> */}
+              {/* <Pricing /> */}
             </div>
             <div className='text-center'>
               <button
@@ -151,7 +166,19 @@ const Listingform = () => {
                 className='btn btn-outline-warning'
                 onClick={handleSubmit}
               >
-                Upload listing
+                Upload Listing
+              </button>
+            </div>
+            <div className='text-center'>
+              <button
+                type='button'
+                className='btn btn-outline-warning'
+                onClick={(e) => {
+                  e.preventDefault()
+                  clearValues()
+                }}
+              >
+                Clear Listing
               </button>
             </div>
           </Col>

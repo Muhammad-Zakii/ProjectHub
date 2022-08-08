@@ -1,26 +1,30 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useAppContext } from '../../context/appcontext'
+// import { useAppContext } from '../../context/appcontext'
 
-const {
-  // startbid: '',
-  // endbid: '',
-  // fixedprice: '',
-  // auctionduartion: '',
-  fixedprice,
-  startbid,
-  reserveprice,
-  duration,
-  isAunction,
-} = useAppContext
 const Pricing = () => {
-  const [choice, setChoice] = React.useState(useAppContext)
+  const {
+    fixedprice,
+    startbid,
+    reserveprice,
+    duration,
+    isAunction,
+    handleChange,
+  } = useAppContext()
+  const [choice, setChoice] = React.useState(useAppContext())
+
   const toggleMember = () => {
     setChoice({ ...choice, isMember: !choice.isMember })
   }
 
-  const handleChange = (e) => {
+  const handleChang = (e) => {
     setChoice({ ...choice, [e.target.name]: e.target.value })
+  }
+  const listingInput = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    handleChange({ name, value })
   }
   return (
     <>
@@ -36,7 +40,8 @@ const Pricing = () => {
               type='number'
               name='fixedprice'
               value={choice.fixedprice}
-              handleChange={handleChange}
+              handleChange={handleChang}
+              onChange={listingInput}
               placeholder='PKR'
             />
           </>
@@ -54,7 +59,8 @@ const Pricing = () => {
               type='number'
               name='startbid'
               value={choice.startbid}
-              handleChange={handleChange}
+              handleChange={handleChang}
+              onChange={listingInput}
               placeholder='PKR'
             />
           </>
@@ -72,7 +78,8 @@ const Pricing = () => {
               type='number'
               name='reserveprice'
               value={choice.reserveprice}
-              handleChange={handleChange}
+              handleChange={handleChang}
+              onChange={listingInput}
               placeholder='PKR'
             />
           </>
@@ -90,7 +97,8 @@ const Pricing = () => {
               type='number'
               name='duartion'
               value={choice.duration}
-              handleChange={handleChange}
+              handleChange={handleChang}
+              onChange={listingInput}
               placeholder='30'
             />
           </>

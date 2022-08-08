@@ -137,6 +137,8 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  HANDLE_CHANGE,
+  CLEAR_VALUES,
 } from './action'
 
 const token = localStorage.getItem('token')
@@ -152,6 +154,8 @@ const initialState = {
   token: token,
   // userLocation: userLocation || '',
   //Listing initial values starts from here.
+  isEditing: 'false',
+  editCategoryId: '',
   categoryoptions: [
     '--Please Select Category--',
     'Websites',
@@ -271,6 +275,12 @@ const AppProvider = ({ children }) => {
     }
     clearAlert()
   }
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } })
+  }
+  const clearValues = () => {
+    dispatch({ type: CLEAR_VALUES })
+  }
   return (
     <AppContext.Provider
       value={{
@@ -279,6 +289,8 @@ const AppProvider = ({ children }) => {
         setupUser,
         logoutUser,
         updateUser,
+        handleChange,
+        clearValues,
       }}
     >
       {children}

@@ -89,6 +89,8 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  HANDLE_CHANGE,
+  CLEAR_VALUES,
 } from './context/action'
 
 import { initialState } from './context/appcontext'
@@ -167,6 +169,34 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: 'danger',
       alertText: action.payload.msg,
+    }
+  }
+  if (action.type === HANDLE_CHANGE) {
+    return {
+      ...state,
+      [action.payload.name]: action.payload.value,
+    }
+  }
+  if (action.type === CLEAR_VALUES) {
+    const initialState = {
+      isEditing: 'false',
+      editCategoryId: '',
+      category: '--Please Select Category--',
+      title: '',
+      summary: '',
+      description: '',
+      siteage: '-',
+      profit: '-',
+      margin: '-',
+      fixedprice: 0,
+      startbid: 0,
+      reserveprice: 0,
+      duration: 30,
+      isAunction: true,
+    }
+    return {
+      ...state,
+      ...initialState,
     }
   }
 }
