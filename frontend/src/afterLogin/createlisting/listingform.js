@@ -8,6 +8,7 @@ import Wrapper from '../../wrappers'
 
 const Listingform = () => {
   const {
+    isLoading,
     isEditing,
     showAlert,
     displayAlert,
@@ -21,13 +22,18 @@ const Listingform = () => {
     margin,
     handleChange,
     clearValues,
+    createLising,
   } = useAppContext()
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!title || !summary || !description) {
-      displayAlert()
+    // if (!title || !summary || !description) {
+    //   displayAlert()
+    //   return
+    // }
+    if (isEditing) {
       return
     }
+    createLising()
   }
   const listingInput = (e) => {
     const name = e.target.name
@@ -165,14 +171,15 @@ const Listingform = () => {
                 type='button'
                 className='btn btn-outline-warning'
                 onClick={handleSubmit}
+                disabled={isLoading}
               >
                 Upload Listing
               </button>
             </div>
-            <div className='text-center'>
+            <div className='text-center mt-5'>
               <button
                 type='button'
-                className='btn btn-outline-warning'
+                className='btn btn-outline-success'
                 onClick={(e) => {
                   e.preventDefault()
                   clearValues()

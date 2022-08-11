@@ -139,6 +139,9 @@ import {
   UPDATE_USER_ERROR,
   HANDLE_CHANGE,
   CLEAR_VALUES,
+  CREATE_LISTING_BEGIN,
+  CREATE_LISTING_SUCCESS,
+  CREATE_LISTING_ERROR,
 } from './action'
 
 const token = localStorage.getItem('token')
@@ -281,6 +284,31 @@ const AppProvider = ({ children }) => {
   const clearValues = () => {
     dispatch({ type: CLEAR_VALUES })
   }
+  const createListing = async () => {
+    dispatch({ type: CREATE_LISTING_BEGIN })
+    try {
+      const { category, title, summary, description, siteage, profit, margin } =
+        state
+      await authFetch.post('/listing', {
+        category,
+        title,
+        summary,
+        description,
+        siteage,
+        profit,
+        margin,
+      })
+      dispatch({ type: CREATE_LISTING_SUCCESS })
+      dispatch({ CLEAR_VALUES })
+    } catch (error) {
+      if (error.response.status === 401) return
+      dispatch({
+        type: CREATE_LISTING_ERROR,
+        payload: { msg: error.response.data.msg },
+      })
+    }
+    clearAlert()
+  }
   return (
     <AppContext.Provider
       value={{
@@ -291,6 +319,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         handleChange,
         clearValues,
+        createListing,
       }}
     >
       {children}

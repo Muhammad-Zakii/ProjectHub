@@ -91,6 +91,9 @@ import {
   UPDATE_USER_ERROR,
   HANDLE_CHANGE,
   CLEAR_VALUES,
+  CREATE_LISTING_BEGIN,
+  CREATE_LISTING_SUCCESS,
+  CREATE_LISTING_ERROR,
 } from './context/action'
 
 import { initialState } from './context/appcontext'
@@ -197,6 +200,27 @@ const reducer = (state, action) => {
     return {
       ...state,
       ...initialState,
+    }
+  }
+  if (action.type === CREATE_LISTING_BEGIN) {
+    return { ...state, isLoading: true }
+  }
+  if (action.type === CREATE_LISTING_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Listing has been created',
+    }
+  }
+  if (action.type === CREATE_LISTING_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
     }
   }
 }
