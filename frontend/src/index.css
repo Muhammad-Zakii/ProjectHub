@@ -442,3 +442,7 @@ a:hover {
   text-align: center;
   margin: 10px;
 }
+.option {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1cm;
+}

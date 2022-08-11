@@ -36,10 +36,18 @@ function App() {
         <Route path='/signup' element={<SignUp />} /> */}
         <Route path='*' element={<Error />} />
         <Route
-          path='sellnow/' //chooseOption route name
+          path='chooseOption/' //sellnow route name
           element={
             <ProtectedRoute>
-              <Sellnow /> {/* OptionForSelling // Component Name */}
+              <OptionForSelling /> {/* Sellnow // Component Name */}
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/sellnow' // route name
+          element={
+            <ProtectedRoute>
+              <Sellnow /> {/* Sellnow // Component Name */}
             </ProtectedRoute>
           }
         />

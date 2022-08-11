@@ -5,9 +5,8 @@ const Head = () => {
   return (
     <div className='clas1'>
       <h2 style={{ position: 'relative', top: '-40px' }}>ProjectHub</h2>
-      <Link to='/sellnow'>
-        {' '}
-        {/*chooseOption */}
+      <Link to='/chooseOption'>
+        {/*sellnow */}
         <button className='bt2'>Sell Now</button>
       </Link>
       <div className='pa'>

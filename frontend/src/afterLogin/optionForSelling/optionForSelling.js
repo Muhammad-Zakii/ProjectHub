@@ -1,17 +1,22 @@
 import React from 'react'
 import Listingnavbar from '../navbars/listingnavbar'
-import { Row, Col, Card } from 'react-bootstrap'
+import { Row, Col, Card, Button } from 'react-bootstrap'
 import Footer from '../footer/footer2'
+import { Link } from 'react-router-dom'
 
 const OptionForSelling = () => {
   return (
     <>
       <Listingnavbar />
-      <h3>How would you like to sell?</h3>
-      <Row>
-        <Col className='justify-content-md-center' xs={12} md={6}>
+      <h3 className='mt-5' style={{ textAlign: 'center' }}>
+        How would you like to sell?
+      </h3>
+      <Row className='justify-content-md-center m-5'>
+        <Col className='option p-1' xs={12} md={6}>
           <Card border='success' className='w-75'>
-            <Card.Header>Auction</Card.Header>
+            <Card.Header>
+              <strong>Auction</strong>
+            </Card.Header>
             <Card.Body>
               <Card.Title> What is this?</Card.Title>
               <Card.Text>
@@ -34,13 +39,25 @@ const OptionForSelling = () => {
                     bidders
                   </li>
                 </ul>
+                <Link to='/sellnow'>
+                  <Button
+                    gap={2}
+                    className='col-md-5 mx-auto'
+                    variant='outline-success'
+                  >
+                    Sell By Price
+                  </Button>
+                </Link>
               </Card.Text>
             </Card.Body>
           </Card>
         </Col>
-        <Col className='justify-content-md-center' xs={12} md={6}>
+        <Col className='option p-1' xs={12} md={6}>
           <Card border='success' className='w-75 '>
-            <Card.Header>Asking Price</Card.Header>
+            <Card.Header>
+              {' '}
+              <strong>Asking Price</strong>
+            </Card.Header>
             <Card.Body>
               <Card.Title>What is this?</Card.Title>
               Set a price, then negotiate directly with buyers.
@@ -60,6 +77,15 @@ const OptionForSelling = () => {
                     You are willing to negotiate the final price with buyers
                   </li>
                 </ul>
+                <Link to='/sellnow'>
+                  <Button
+                    gap={2}
+                    className='col-md-5 mx-auto'
+                    variant='outline-success'
+                  >
+                    Sell By Auction
+                  </Button>
+                </Link>
               </Card.Text>
             </Card.Body>
           </Card>

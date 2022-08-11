@@ -1,6 +1,7 @@
 import React from 'react'
 import Listingnavbar from '../navbars/listingnavbar'
 import Listingform from './listingform'
+import Footer from '../footer/footer2'
 
 const Sellnow = () => {
   return (
@@ -14,6 +15,7 @@ const Sellnow = () => {
         </p>
       </div>
       <Listingform />
+      <Footer />
     </>
   )
 }
