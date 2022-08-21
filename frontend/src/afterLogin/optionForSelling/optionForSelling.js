@@ -39,7 +39,7 @@ const OptionForSelling = () => {
                     bidders
                   </li>
                 </ul>
-                <Link to='/sellnow'>
+                <Link to='/sellByPrice'>
                   <Button
                     gap={2}
                     className='col-md-5 mx-auto'
@@ -77,7 +77,7 @@ const OptionForSelling = () => {
                     You are willing to negotiate the final price with buyers
                   </li>
                 </ul>
-                <Link to='/sellnow'>
+                <Link to='/sellByAuction'>
                   <Button
                     gap={2}
                     className='col-md-5 mx-auto'

@@ -6,7 +6,7 @@ import { useAppContext } from '../../context/appcontext'
 import Alert from '../../components/alert'
 import Wrapper from '../../wrappers'
 
-const Listingform = () => {
+const Auctionform = () => {
   const {
     isLoading,
     isEditing,
@@ -20,11 +20,12 @@ const Listingform = () => {
     siteage,
     profit,
     margin,
-    fixedprice,
+    startbid,
+    reserveprice,
+    duration,
     handleChange,
     clearValues,
     createListing,
-    editlisting,
   } = useAppContext()
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -32,10 +33,9 @@ const Listingform = () => {
       displayAlert()
       return
     }
-    if (isEditing) {
-      editlisting()
-      return
-    }
+    // if (isEditing) {
+    //   return
+    // }
     createListing()
   }
   const listingInput = (e) => {
@@ -67,15 +67,6 @@ const Listingform = () => {
                   </option>
                 )
               })}
-
-              {/* <option selected value='--Please Select Category--'>
-                --Choose Category--
-              </option>
-              <option value='Websites'>Websites</option>
-              <option value='Andriod apps'>Andriod apps</option>
-              <option value=' iOS apps'>iOS apps</option>
-              <option value='Domains'>Domains</option>
-              <option value='Businesses'>Businesses</option> */}
             </select>
             <br />
 
@@ -163,26 +154,48 @@ const Listingform = () => {
               />
             </div>
             <div className='form-row'>
-              <label className='form-label' htmlFor='fixedprice'>
-                Fixed price
+              <label className='form-label' htmlFor='startbid'>
+                Start bid
               </label>
 
               <input
                 className='form-input'
                 type='text'
-                name='fixedprice'
-                value={fixedprice}
+                name='startbid'
+                value={startbid}
                 onChange={listingInput}
                 placeholder='PKR'
               />
             </div>
             <div className='form-row'>
-              {/* <p className='form-label'>
-                How would you like to sell? Click on the button to select the
-                option.
-              </p> */}
-              {/* <Pricing /> */}
+              <label className='form-label' htmlFor='endbid'>
+                Reserve Price
+              </label>
+
+              <input
+                className='form-input'
+                type='text'
+                name='reserveprice'
+                value={reserveprice}
+                onChange={listingInput}
+                placeholder='PKR'
+              />
             </div>
+            <div className='form-row'>
+              <label className='form-label' htmlFor='duration'>
+                Auction duration (days)
+              </label>
+
+              <input
+                className='form-input'
+                type='text'
+                name='duartion'
+                value={duration}
+                onChange={listingInput}
+                placeholder='30'
+              />
+            </div>
+            <div className='form-row'></div>
             <div className='text-center'>
               <button
                 type='button'
@@ -213,4 +226,4 @@ const Listingform = () => {
   )
 }
 
-export default Listingform
+export default Auctionform

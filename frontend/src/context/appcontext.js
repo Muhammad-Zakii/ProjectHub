@@ -1,128 +1,3 @@
-// import React, { useReducer, useContext } from 'react'
-// import reducer from '../reducer'
-// import axios from 'axios'
-// import {
-//   DISPLAY_ALERT,
-//   CLEAR_ALERT,
-//   REGISTER_USER_BEGIN,
-//   REGISTER_USER_SUCCESS,
-//   REGISTER_USER_ERROR,
-//   LOGIN_USER_BEGIN,
-//   LOGIN_USER_SUCCESS,
-//   LOGIN_USER_ERROR,
-// } from './action'
-
-// const user = localStorage.getItem('user')
-// // const token = localStorage.getItem('token')
-// // const city = localStorage.getItem('city')
-// export const initialState = {
-//   isLoading: false,
-//   showAlert: false,
-//   alertText: '',
-//   alertType: '',
-//   user: user ? JSON.parse(user) : null,
-//   // token: token,
-//   // city: city || '',
-// }
-// const AppContext = React.createContext()
-// const AppProvider = ({ children }) => {
-//   const [state, dispatch] = useReducer(reducer, initialState)
-
-//   const displayAlert = () => {
-//     dispatch({
-//       type: DISPLAY_ALERT,
-//     })
-//     clearAlert()
-//   }
-
-//   const clearAlert = () => {
-//     setTimeout(() => {
-//       dispatch({
-//         type: CLEAR_ALERT,
-//       })
-//     }, 3000)
-//   }
-//   const addUsertolocatStorage = ({ user, token, city }) => {
-//     localStorage.setItem('user', JSON.stringify(user))
-//     // localStorage.setItem('token', token)
-//     // localStorage.setItem('city', city)
-//   }
-//   const removerUserfromlocalStorage = () => {
-//     localStorage.removeItem('user')
-//     // localStorage.removeItem('token')
-//     // localStorage.removeItem('city')
-//   }
-//   const registerUser = async (currentUser) => {
-//     dispatch({ type: REGISTER_USER_BEGIN })
-//     try {
-//       const response = await axios.post('api/v1/auth/register', currentUser)
-
-//       const { user, token, city } = response.data
-//       dispatch({
-//         type: REGISTER_USER_SUCCESS,
-//         payload: {
-//           user,
-//           token,
-//           city,
-//         },
-//       })
-//       addUsertolocatStorage({
-//         user,
-//         token,
-//         city,
-//       })
-//     } catch (error) {
-//       dispatch({
-//         type: REGISTER_USER_ERROR,
-//         payload: { msg: error.response.data.msg },
-//       })
-//     }
-//     clearAlert()
-//   }
-//   const loginUser = async (currentUser) => {
-//     dispatch({ type: LOGIN_USER_BEGIN })
-//     try {
-//       const { data } = await axios.post('api/v1/auth/login', currentUser)
-
-//       const { user, token, city } = data
-//       dispatch({
-//         type: LOGIN_USER_SUCCESS,
-//         payload: {
-//           user,
-//           token,
-//           city,
-//         },
-//       })
-//     } catch (error) {
-//       dispatch({
-//         type: LOGIN_USER_ERROR,
-//         payload: { msg: error.response.data.msg },
-//       })
-//     }
-//     clearAlert()
-//   }
-
-//   return (
-//     <AppContext.Provider
-//       value={{
-//         ...state,
-//         displayAlert,
-//         registerUser,
-//         loginUser,
-//       }}
-//     >
-//       {children}
-//     </AppContext.Provider>
-//   )
-// }
-// // make sure use
-// export const useAppContext = () => {
-//   return useContext(AppContext)
-// }
-
-// export { AppProvider }
-
-//______________________________________________________________________________________
 import React, { useReducer, useContext } from 'react'
 
 import reducer from '../reducer'
@@ -142,6 +17,10 @@ import {
   CREATE_LISTING_BEGIN,
   CREATE_LISTING_SUCCESS,
   CREATE_LISTING_ERROR,
+  GET_LISTING_BEGIN,
+  GET_LISTING_SUCCESS,
+  SET_EDIT_JOB,
+  SET_FILTER_CATEGORY,
 } from './action'
 
 const token = localStorage.getItem('token')
@@ -165,6 +44,7 @@ const initialState = {
     'Andriod apps',
     'iOS apps',
     'Domains',
+    'Projects',
     'Businesses',
   ],
   category: '--Please Select Category--',
@@ -179,6 +59,10 @@ const initialState = {
   reserveprice: 0,
   duration: 30,
   isAunction: true,
+  listing: [],
+  totalListing: 0,
+  numOfPages: 1,
+  page: 1,
 }
 const AppContext = React.createContext()
 
@@ -287,8 +171,19 @@ const AppProvider = ({ children }) => {
   const createListing = async () => {
     dispatch({ type: CREATE_LISTING_BEGIN })
     try {
-      const { category, title, summary, description, siteage, profit, margin } =
-        state
+      const {
+        category,
+        title,
+        summary,
+        description,
+        siteage,
+        profit,
+        margin,
+        fixedprice,
+        startbid,
+        reserveprice,
+        duration,
+      } = state
       await authFetch.post('/listing', {
         category,
         title,
@@ -297,9 +192,13 @@ const AppProvider = ({ children }) => {
         siteage,
         profit,
         margin,
+        fixedprice,
+        startbid,
+        reserveprice,
+        duration,
       })
       dispatch({ type: CREATE_LISTING_SUCCESS })
-      dispatch({ CLEAR_VALUES })
+      // dispatch({ CLEAR_VALUES })
     } catch (error) {
       if (error.response.status === 401) return
       dispatch({
@@ -309,6 +208,55 @@ const AppProvider = ({ children }) => {
     }
     clearAlert()
   }
+  const getAllListing = async () => {
+    const url = `/listing`
+    dispatch({ type: GET_LISTING_BEGIN })
+    try {
+      const { data } = await authFetch.get(url)
+      const { listing, totalListing, numOfPages } = data
+      dispatch({
+        type: GET_LISTING_SUCCESS,
+        payload: {
+          listing,
+          totalListing,
+          numOfPages,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+    clearAlert()
+  }
+  // const filteritems = (reccategory) => {
+  //   const {
+  //     category,
+  //     title,
+  //     summary,
+
+  //     fixedprice,
+  //   } = state
+  //   dispatch({
+  //     type: SET_FILTER_CATEGORY,
+  //     payload: {
+  //       category,
+  //       title,
+  //       summary,
+
+  //       fixedprice,
+  //     },
+  //   })
+  //   // console.log(reccategory)
+  // }
+  const seteditlisting = (id) => {
+    dispatch({ type: SET_EDIT_JOB, payload: { id } })
+  }
+  const editlisting = () => {
+    console.log('Edit Listing')
+  }
+  const deletelisting = (id) => {
+    console.log(`delete listing:${id}`)
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -320,6 +268,11 @@ const AppProvider = ({ children }) => {
         handleChange,
         clearValues,
         createListing,
+        getAllListing,
+        seteditlisting,
+        deletelisting,
+        editlisting,
+        // filteritems,
       }}
     >
       {children}

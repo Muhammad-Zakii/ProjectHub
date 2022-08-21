@@ -11,42 +11,52 @@ import Footer from '../../footer'
 import '../../index.css'
 import { Col, Row } from 'react-bootstrap'
 import Charts from '../chart/chart'
+import { useAppContext } from '../../context/appcontext'
 const Viewlisting = () => {
-  let { id } = useParams()
-  const [listing, setListing] = useState([])
+  let { _id } = useParams()
+
+  const { listing } = useAppContext()
+
+  const [listings, setListings] = useState([])
   useEffect(() => {
-    let listing = datas.find((listing) => listing.id === parseInt(id))
-    if (listing) {
-      setListing(listing)
+    let lest = listing.find((list) => list._id === _id)
+    console.log(lest)
+    if (lest) {
+      setListings(lest)
     }
   }, [])
+
   return (
     <>
       <Navbar />
       {/* <ViewallNavbar /> */}
-      {listing ? (
+      {listings ? (
         <div>
           <div className='blog-wrap'>
-            <Afternav price={listing.price} />
+            <Afternav price={listings.fixedprice} />
           </div>
           <div style={{ margin: '60px' }}>
             <Row>
               <Col md='8' sm='12' className='justify-content-md-center'>
                 <div className='list-header'>
-                  <h4>{listing.category}</h4>
+                  <h4>{listings.category}</h4>
                   <br />
                   <br />
-                  <h1>{listing.websitename}</h1>
+                  <h1>{listings.title}</h1>
                 </div>
                 <div className='list-desc'>
-                  <p>{listing.description}</p>
+                  <p>{listings.summary}</p>
                 </div>
-                <Flexbox />
+                <Flexbox
+                  siteage={listings.siteage}
+                  profit={listings.profit}
+                  margin={listings.margin}
+                />
                 <div className='about-listing'>
                   <h4>
                     <strong>About the business</strong>
                   </h4>
-                  <p>{listing.about}</p>
+                  <p>{listings.description}</p>
                 </div>
                 <div style={{ width: '500px', height: '500px' }}>
                   <Charts />
@@ -54,7 +64,7 @@ const Viewlisting = () => {
               </Col>
               <Col md='4' sm='12' className='justify-content-md-center'>
                 <div className='card-desc'>
-                  <Carddesc img={listing.img} price={listing.price} />
+                  <Carddesc img={listings.img} price={listings.fixedprice} />
                 </div>
                 <div className='about-seller'>
                   <Col className='justify-content-md-center mt-5'>

@@ -3,18 +3,34 @@ import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 
 import React from 'react'
 import '../../index.css'
-// import Swal from 'sweetalert2'
 import { Link, useNavigate } from 'react-router-dom'
-// import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useAppContext } from '../../context/appcontext'
+import Wrapper from '../../wrappers'
 
 function Landingpageafterlogin() {
-  const [data, setData] = React.useState(datas)
+  const { getAllListing, listing, page, totalListing } = useAppContext()
+  const [list, setList] = useState(listing)
+
+  //datas
 
   const filterItems = (cate) => {
-    const reccategory = datas.filter((currentCategory) => {
+    const reccategory = listing.filter((currentCategory) => {
+      //datas
       return currentCategory.category === cate
     })
-    setData(reccategory)
+    setList(reccategory)
+    console.log(reccategory)
+  }
+  useEffect(() => {
+    getAllListing()
+  }, [])
+  if (listing.length === 0) {
+    return (
+      <Wrapper>
+        <h3>No listing to display...</h3>
+      </Wrapper>
+    )
   }
   return (
     <>
@@ -30,51 +46,65 @@ function Landingpageafterlogin() {
         <nav className='fo'>
           <button
             className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('WEBSITE')}
+            onClick={() => filterItems('Websites')}
             href=''
           >
             Websites
           </button>
           <button
             className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('Andriod app')}
+            onClick={() => filterItems('Andriod apps')}
             href=''
           >
             Andriod apps
           </button>
           <button
             className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('iOS app')}
+            onClick={() => filterItems('iOS apps')}
             href=''
           >
             iOS apps
           </button>
           <button
             className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('DOMAIN')}
+            onClick={() => filterItems('Domains')}
             href=''
           >
             Domains
           </button>
           <button
             className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('PROJECT')}
+            onClick={() => filterItems('Projects')}
             href=''
           >
             Projects
           </button>
           <button
             className='btn btn-outline-secondary fo'
-            onClick={() => setData(datas)}
+            onClick={() => filterItems('Businesses')}
+            href=''
+          >
+            Businesses
+          </button>
+          {/* <button
+            className='btn btn-outline-secondary fo'
+            onClick={() => setList(listing)} //datas
             href=''
           >
             All
-          </button>
+          </button> */}
         </nav>
       </div>
-      <section className='wrapper'>
+      {/* <section className='wrapper'>
         {data.map((dataall, index) => {
           return <Data key={index} {...dataall}></Data>
+        })}
+      </section> */}
+      {/* Dynamically data fetching starts form here. */}
+
+      <section className='wrapper'>
+        {listing.map((dataall) => {
+          return <Data key={dataall._id} {...dataall}></Data>
         })}
       </section>
       <section className='col-12 text-center'>
@@ -93,8 +123,10 @@ function Landingpageafterlogin() {
 // }
 function Data(props) {
   const navigate = useNavigate()
+  const { deletelisting, seteditlisting } = useAppContext()
 
-  const { id, img, category, websitename, description, price, bid } = props
+  const { _id, img, category, title, summary, description, fixedprice, bid } =
+    props
 
   return (
     <div>
@@ -103,12 +135,12 @@ function Data(props) {
           <Card style={{ minHeight: '35rem', overflow: 'auto' }}>
             <Card.Img variant='top' src={img} />
             <Card.Body>
-              <Card.Title>{websitename}</Card.Title>
-              <Card.Text>{description}</Card.Text>
+              <Card.Title>{title}</Card.Title>
+              <Card.Text>{summary}</Card.Text>
             </Card.Body>
             <ListGroup className='list-group-flush'>
               <ListGroupItem>Category: {category}</ListGroupItem>
-              <ListGroupItem>Asking Price: {price}</ListGroupItem>
+              <ListGroupItem>Asking Price: {fixedprice}</ListGroupItem>
 
               {/* <ListGroupItem>
                 <Link to='/signup'>{status}</Link>
@@ -118,18 +150,18 @@ function Data(props) {
               style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
             >
               <Button
-                className='bt3'
+                variant='outline-primary'
                 style={{ flex: 1 }}
-                variant='primary'
+                // variant='primary'
                 onClick={() => {
-                  navigate(`/viewlisting/${id}`)
+                  navigate(`/viewlisting/${_id}`)
                 }}
               >
                 View Listing
               </Button>
               {/* <Button variant='primary'>View Listing</Button> */}
-              <Button className='bt3' style={{ flex: 1 }} variant='danger'>
-                Bids: {bid}
+              <Button variant='outline-danger' style={{ flex: 1 }}>
+                Total Bids: {bid}
               </Button>
             </Card.Body>
           </Card>

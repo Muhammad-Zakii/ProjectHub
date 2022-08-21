@@ -9,9 +9,11 @@ import { Card, ListGroup, ListGroupItem, Button, Navbar } from 'react-bootstrap'
 import ViewallNavbar from '../header/viewallnav'
 import Footer from '../../footer'
 import NavBarr from '../navbars/navbar'
+// import { useAppContext } from '../../context/appcontext'
 
 const Viewallproj = () => {
   const [data, setData] = useState(largedata)
+  // const { getAllListing, listing, page, totalListing } = useAppContext()
 
   return (
     <div>

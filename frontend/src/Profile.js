@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppContext } from './context/appcontext'
-import { FaUser, FaSignOutAlt, FaRegSun } from 'react-icons/fa'
+import { FaUser, FaSignOutAlt, FaRegSun, FaAddressBook } from 'react-icons/fa'
 
 const Profile = () => {
   const { user, logoutUser } = useAppContext()
@@ -24,6 +24,12 @@ const Profile = () => {
             {' '}
             <FaUser />
             Profile
+          </Link>
+
+          <Link to='/mylistings' className='menu'>
+            {' '}
+            <FaAddressBook />
+            My Listings
           </Link>
 
           <a className='menu'>

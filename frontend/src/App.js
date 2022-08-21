@@ -22,6 +22,8 @@ import ProfilePage from './afterLogin/ProfilePage/profilePage'
 import ContactPage from './afterLogin/contactPage/contactPage'
 import BidPage from './afterLogin/bidPage/bidPage'
 import OptionForSelling from './afterLogin/optionForSelling/optionForSelling'
+import SellByAuction from './afterLogin/createlisting/sellbyauction'
+import MyListings from './afterLogin/mylistings/mylistings'
 
 function App() {
   // const [data, setData] = React.useState(datas)
@@ -44,15 +46,22 @@ function App() {
           }
         />
         <Route
-          path='/sellnow' // route name
+          path='/sellByPrice' // route name
           element={
             <ProtectedRoute>
               <Sellnow /> {/* Sellnow // Component Name */}
             </ProtectedRoute>
           }
         />
+        <Route
+          path='/sellByAuction' // route name
+          element={
+            <ProtectedRoute>
+              <SellByAuction /> {/* Sellnow // Component Name */}
+            </ProtectedRoute>
+          }
+        />
         <Route path='/viewprojects' element={<Projects />} />
-
         <Route
           path='/afterlogin'
           element={
@@ -70,7 +79,7 @@ function App() {
           }
         />
         <Route
-          path='/viewlisting/:id'
+          path='/viewlisting/:_id'
           element={
             <ProtectedRoute>
               <Viewlisting />
@@ -109,7 +118,15 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* Dummy will be removed  */}
+        {/* My listings route */}
+        <Route
+          path='/mylistings'
+          element={
+            <ProtectedRoute>
+              <MyListings />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )

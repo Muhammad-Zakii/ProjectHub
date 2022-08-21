@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   res.send('Welcome!')
 })
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/listing', listingRouter)
+app.use('/api/v1/listing', authenticateUser, listingRouter)
 
 app.use(Middleware)
 app.use(errorhandler)

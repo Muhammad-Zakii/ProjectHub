@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../index.css'
 
-const Flexbox = () => {
+const Flexbox = (props) => {
   return (
     <div
       className='d-flex align-items-stretch bd-highlight example-parent flex-desc'
@@ -9,15 +9,15 @@ const Flexbox = () => {
     >
       <div className='p-2 bd-highlight col-example'>
         <h4>Site age</h4>
-        <h6>2 years</h6>
+        <h6>{props.siteage} years</h6>
       </div>
       <div className='p-2 bd-highlight col-example'>
         <h4>Monthly profit</h4>
-        <h6>20000 PKR</h6>
+        <h6>{props.profit} PKR</h6>
       </div>
       <div className='p-2 bd-highlight col-example'>
         <h4>Profit margin</h4>
-        <h6>100%</h6>
+        <h6>{props.margin} %</h6>
       </div>
     </div>
   )

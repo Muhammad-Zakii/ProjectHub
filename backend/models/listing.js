@@ -10,6 +10,7 @@ const ListingSchema = new mongoose.Schema(
         'Andriod apps',
         'iOS apps',
         'Domains',
+        'Projects',
         'Businesses',
       ],
       default: '--Please Select Category--',
@@ -23,7 +24,7 @@ const ListingSchema = new mongoose.Schema(
     summary: {
       type: String,
       required: [true, 'Please provide the short summary of your category.'],
-      maxlength: 100,
+      maxlength: 500,
     },
     description: {
       type: String,
@@ -31,12 +32,12 @@ const ListingSchema = new mongoose.Schema(
         true,
         'Please provide the complete description of your category.',
       ],
-      maxlength: 500,
+      maxlength: 1500,
     },
     siteage: {
       type: String,
       default: '-',
-      required: true,
+      // required: true,
     },
     profit: {
       type: String,
@@ -48,19 +49,19 @@ const ListingSchema = new mongoose.Schema(
     },
 
     fixedprice: {
-      type: Number,
+      type: String,
       default: '0',
     },
     startbid: {
-      type: Number,
+      type: String,
       default: '0',
     },
     reserveprice: {
-      type: Number,
+      type: String,
       default: '0',
     },
-    duartion: {
-      type: Number,
+    duration: {
+      type: String,
       default: '30',
     },
     createdBy: {
