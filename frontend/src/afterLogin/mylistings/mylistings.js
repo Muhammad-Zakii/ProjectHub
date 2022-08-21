@@ -5,16 +5,20 @@ import '../../index.css'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useAppContext } from '../../context/appcontext'
+import NavBarr from '../navbars/navbar'
+import Footer from '../footer/footer2'
 
 const MyListings = () => {
   const { getAllListing, listing, page, totalListing } = useAppContext()
   return (
     <div>
+      <NavBarr />
       <section className='wrapper'>
         {listing.map((dataall) => {
           return <OwnListing key={dataall._id} {...dataall}></OwnListing>
         })}
       </section>
+      <Footer />
     </div>
   )
 }
