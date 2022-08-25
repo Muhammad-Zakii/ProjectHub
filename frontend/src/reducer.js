@@ -15,8 +15,12 @@ import {
   CREATE_LISTING_ERROR,
   GET_LISTING_BEGIN,
   GET_LISTING_SUCCESS,
-  SET_EDIT_JOB,
+  SET_EDIT_LISTING,
   SET_FILTER_CATEGORY,
+  DELETE_LISTING_BEGIN,
+  EDIT_LISTING_BEGIN,
+  EDIT_LISTING_SUCCESS,
+  EDIT_LISTING_ERROR,
 } from './context/action'
 
 import { initialState } from './context/appcontext'
@@ -158,7 +162,7 @@ const reducer = (state, action) => {
       numOfPages: action.payload.numOfPages,
     }
   }
-  if (action.type === SET_EDIT_JOB) {
+  if (action.type === SET_EDIT_LISTING) {
     const list = state.listing.find((list) => list._id === action.payload.id)
     const {
       _id,
@@ -189,6 +193,33 @@ const reducer = (state, action) => {
       startbid,
       reserveprice,
       duration,
+    }
+  }
+  if (action.type === DELETE_LISTING_BEGIN) {
+    return { ...state, isLoading: true }
+  }
+  if (action.type === EDIT_LISTING_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    }
+  }
+  if (action.type === EDIT_LISTING_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Listing has been updated successfully.',
+    }
+  }
+  if (action.type === EDIT_LISTING_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: 'danger',
+      alertText: action.payload.msg,
     }
   }
   // if (action.type === SET_FILTER_CATEGORY) {

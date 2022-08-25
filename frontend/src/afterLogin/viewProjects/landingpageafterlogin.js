@@ -9,7 +9,8 @@ import { useAppContext } from '../../context/appcontext'
 import Wrapper from '../../wrappers'
 
 function Landingpageafterlogin() {
-  const { getAllListing, listing, page, totalListing } = useAppContext()
+  const { getAllListing, listing, page, totalListing, getGlobalListing } =
+    useAppContext()
   const [list, setList] = useState(listing)
 
   //datas
@@ -20,10 +21,9 @@ function Landingpageafterlogin() {
       return currentCategory.category === cate
     })
     setList(reccategory)
-    console.log(reccategory)
   }
   useEffect(() => {
-    getAllListing()
+    getGlobalListing()
   }, [])
   if (listing.length === 0) {
     return (
@@ -123,7 +123,6 @@ function Landingpageafterlogin() {
 // }
 function Data(props) {
   const navigate = useNavigate()
-  const { deletelisting, seteditlisting } = useAppContext()
 
   const { _id, img, category, title, summary, description, fixedprice, bid } =
     props

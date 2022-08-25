@@ -1,10 +1,9 @@
 import React from 'react'
 import '../../index.css'
-import Pricing from './pricing'
+
 import { Row, Col } from 'react-bootstrap'
 import { useAppContext } from '../../context/appcontext'
 import Alert from '../../components/alert'
-import Wrapper from '../../wrappers'
 
 const Auctionform = () => {
   const {
@@ -26,6 +25,7 @@ const Auctionform = () => {
     handleChange,
     clearValues,
     createListing,
+    editlisting,
   } = useAppContext()
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -33,9 +33,10 @@ const Auctionform = () => {
       displayAlert()
       return
     }
-    // if (isEditing) {
-    //   return
-    // }
+    if (isEditing) {
+      editlisting()
+      return
+    }
     createListing()
   }
   const listingInput = (e) => {
@@ -48,7 +49,7 @@ const Auctionform = () => {
     <>
       <form className='m-3'>
         <h3 className='head3'>
-          {isEditing ? 'Edit your listing' : 'Create your listing'}
+          {isEditing ? 'Edit your listing' : 'Create your listing.'}
         </h3>
         {showAlert && <Alert />}
         <Row className='justify-content-md-center'>

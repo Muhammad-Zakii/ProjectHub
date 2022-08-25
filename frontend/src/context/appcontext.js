@@ -19,8 +19,12 @@ import {
   CREATE_LISTING_ERROR,
   GET_LISTING_BEGIN,
   GET_LISTING_SUCCESS,
-  SET_EDIT_JOB,
+  SET_EDIT_LISTING,
   SET_FILTER_CATEGORY,
+  DELETE_LISTING_BEGIN,
+  EDIT_LISTING_BEGIN,
+  EDIT_LISTING_SUCCESS,
+  EDIT_LISTING_ERROR,
 } from './action'
 
 const token = localStorage.getItem('token')
@@ -34,9 +38,9 @@ const initialState = {
   alertType: '',
   user: user ? JSON.parse(user) : null,
   token: token,
-  // userLocation: userLocation || '',
+
   //Listing initial values starts from here.
-  isEditing: 'false',
+  isEditing: false,
   editCategoryId: '',
   categoryoptions: [
     '--Please Select Category--',
@@ -170,6 +174,7 @@ const AppProvider = ({ children }) => {
   }
   const createListing = async () => {
     dispatch({ type: CREATE_LISTING_BEGIN })
+
     try {
       const {
         category,
@@ -227,6 +232,25 @@ const AppProvider = ({ children }) => {
     }
     clearAlert()
   }
+  const getGlobalListing = async () => {
+    const url = `/listing/getgloballisting`
+    dispatch({ type: GET_LISTING_BEGIN })
+    try {
+      const { data } = await authFetch.get(url)
+      const { listing, totalListing, numOfPages } = data
+      dispatch({
+        type: GET_LISTING_SUCCESS,
+        payload: {
+          listing,
+          totalListing,
+          numOfPages,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+    clearAlert()
+  }
   // const filteritems = (reccategory) => {
   //   const {
   //     category,
@@ -248,13 +272,57 @@ const AppProvider = ({ children }) => {
   //   // console.log(reccategory)
   // }
   const seteditlisting = (id) => {
-    dispatch({ type: SET_EDIT_JOB, payload: { id } })
+    dispatch({ type: SET_EDIT_LISTING, payload: { id } })
   }
-  const editlisting = () => {
-    console.log('Edit Listing')
+  const editlisting = async () => {
+    dispatch({ type: EDIT_LISTING_BEGIN })
+
+    try {
+      const {
+        category,
+        title,
+        summary,
+        description,
+        siteage,
+        profit,
+        margin,
+        fixedprice,
+        startbid,
+        reserveprice,
+        duration,
+      } = state
+      await authFetch.patch(`/listing/${state.editCategoryId}`, {
+        category,
+        title,
+        summary,
+        description,
+        siteage,
+        profit,
+        margin,
+        fixedprice,
+        startbid,
+        reserveprice,
+        duration,
+      })
+      dispatch({ type: EDIT_LISTING_SUCCESS })
+      dispatch({ type: CLEAR_VALUES })
+    } catch (error) {
+      if (error.response.status === 401) return
+      dispatch({
+        type: EDIT_LISTING_ERROR,
+        payload: { msg: error.response.data.msg },
+      })
+    }
+    clearAlert()
   }
-  const deletelisting = (id) => {
-    console.log(`delete listing:${id}`)
+  const deletelisting = async (listingId) => {
+    dispatch({ type: DELETE_LISTING_BEGIN })
+    try {
+      await authFetch.delete(`/listing/${listingId}`)
+      getAllListing()
+    } catch (error) {
+      logoutUser()
+    }
   }
 
   return (
@@ -272,6 +340,7 @@ const AppProvider = ({ children }) => {
         seteditlisting,
         deletelisting,
         editlisting,
+        getGlobalListing,
         // filteritems,
       }}
     >

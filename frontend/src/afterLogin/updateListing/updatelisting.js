@@ -1,55 +1,68 @@
 import React from 'react'
-import '../../index.css'
-import Pricing from './pricing'
+import { useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { useAppContext } from '../../context/appcontext'
 import Alert from '../../components/alert'
-import Wrapper from '../../wrappers'
 
-const Listingform = () => {
+const Updatelisting = () => {
   const {
-    isLoading,
-    isEditing,
+    listing,
     showAlert,
     displayAlert,
-    category,
-    categoryoptions,
-    title,
-    summary,
-    description,
-    siteage,
-    profit,
-    margin,
-    fixedprice,
-    handleChange,
-    clearValues,
-    createListing,
     editlisting,
+    isLoading,
+    clearValues,
+    categoryoptions,
   } = useAppContext()
+  const [category, setCategory] = useState(listing.category)
+  const [title, setTitle] = useState(listing.title)
+  const [summary, setSummary] = useState(listing?.summary)
+  const [description, setDescription] = useState(listing?.description)
+  const [siteage, setSiteAge] = useState(listing?.siteage)
+  const [profit, setProfit] = useState(listing?.profit)
+  const [margin, setMargin] = useState(listing?.margin)
+  const [fixedprice, setFixedPrice] = useState(listing?.fixedprice)
+  const [startbid, setStartBid] = useState(listing?.startbid)
+  const [reserveprice, setReservePrice] = useState(listing?.reserveprice)
+  const [duration, setDuration] = useState(listing?.duration)
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!title || !summary || !description) {
+    if (
+      !category ||
+      !title ||
+      !summary ||
+      !description ||
+      !siteage ||
+      !profit ||
+      !margin ||
+      !fixedprice ||
+      !startbid ||
+      !reserveprice ||
+      !duration
+    ) {
+      // test and remove temporary
       displayAlert()
       return
     }
-    if (isEditing) {
-      editlisting()
-      return
-    }
-    createListing()
-  }
-  const listingInput = (e) => {
-    const name = e.target.name
-    const value = e.target.value
-    handleChange({ name, value })
-  }
 
+    editlisting({
+      category,
+      title,
+      summary,
+      description,
+      siteage,
+      profit,
+      margin,
+      fixedprice,
+      startbid,
+      reserveprice,
+      duration,
+    })
+  }
   return (
-    <>
+    <div>
       <form className='m-3'>
-        <h3 className='head3'>
-          {isEditing ? 'Edit your listing' : 'Create your listing.'}
-        </h3>
+        <h3 className='head3'></h3>
         {showAlert && <Alert />}
         <Row className='justify-content-md-center'>
           <Col className='p-5' xs={12} md={6}>
@@ -58,7 +71,7 @@ const Listingform = () => {
               className='form-input'
               name='category'
               value={category}
-              onChange={listingInput}
+              handleChange={(e) => setCategory(e.target.value)}
             >
               {categoryoptions.map((itemValue, index) => {
                 return (
@@ -67,15 +80,6 @@ const Listingform = () => {
                   </option>
                 )
               })}
-
-              {/* <option selected value='--Please Select Category--'>
-                --Choose Category--
-              </option>
-              <option value='Websites'>Websites</option>
-              <option value='Andriod apps'>Andriod apps</option>
-              <option value=' iOS apps'>iOS apps</option>
-              <option value='Domains'>Domains</option>
-              <option value='Businesses'>Businesses</option> */}
             </select>
             <br />
 
@@ -97,7 +101,7 @@ const Listingform = () => {
                 name='title'
                 value={title}
                 placeholder='title'
-                onChange={listingInput}
+                handleChange={(e) => setTitle(e.target.value)}
               />
             </div>
             <div className='form-row'>
@@ -109,7 +113,7 @@ const Listingform = () => {
                 name='summary'
                 value={summary}
                 placeholder=' Add a summary to briefly introduce your project, business, website or domain. Keep it short and impactful.'
-                onChange={listingInput}
+                handleChange={(e) => setSummary(e.target.value)}
               />
             </div>
             <div className='form-row'>
@@ -121,7 +125,7 @@ const Listingform = () => {
                 name='description'
                 value={description}
                 placeholder=' This is where you tell buyers everything they need to know. Don’t hold back. The more detail you provide, the better value you will get.'
-                onChange={listingInput}
+                handleChange={(e) => setDescription(e.target.value)}
               />
             </div>
           </Col>
@@ -135,7 +139,7 @@ const Listingform = () => {
                 name='siteage'
                 value={siteage}
                 placeholder='Site Age'
-                onChange={listingInput}
+                handleChange={(e) => setSiteAge(e.target.value)}
               />
             </div>
             <div className='form-row'>
@@ -147,7 +151,7 @@ const Listingform = () => {
                 name='profit'
                 value={profit}
                 placeholder='Monthly Profit'
-                onChange={listingInput}
+                handleChange={(e) => setProfit(e.target.value)}
               />
             </div>
             <div className='form-row'>
@@ -159,7 +163,7 @@ const Listingform = () => {
                 name='margin'
                 value={margin}
                 placeholder='Profit Margin'
-                onChange={listingInput}
+                handleChange={(e) => setMargin(e.target.value)}
               />
             </div>
             <div className='form-row'>
@@ -172,25 +176,60 @@ const Listingform = () => {
                 type='text'
                 name='fixedprice'
                 value={fixedprice}
-                onChange={listingInput}
+                handleChange={(e) => setFixedPrice(e.target.value)}
                 placeholder='PKR'
               />
             </div>
             <div className='form-row'>
-              {/* <p className='form-label'>
-                How would you like to sell? Click on the button to select the
-                option.
-              </p> */}
-              {/* <Pricing /> */}
+              <label className='form-label' htmlFor='startbid'>
+                Start bid
+              </label>
+
+              <input
+                className='form-input'
+                type='text'
+                name='startbid'
+                value={startbid}
+                handleChange={(e) => setStartBid(e.target.value)}
+                placeholder='PKR'
+              />
             </div>
+            <div className='form-row'>
+              <label className='form-label' htmlFor='endbid'>
+                Reserve Price
+              </label>
+
+              <input
+                className='form-input'
+                type='text'
+                name='reserveprice'
+                value={reserveprice}
+                handleChange={(e) => setReservePrice(e.target.value)}
+                placeholder='PKR'
+              />
+            </div>
+            <div className='form-row'>
+              <label className='form-label' htmlFor='duration'>
+                Auction duration (days)
+              </label>
+
+              <input
+                className='form-input'
+                type='text'
+                name='duartion'
+                value={duration}
+                handleChange={(e) => setDuration(e.target.value)}
+                placeholder='30'
+              />
+            </div>
+            <div className='form-row'></div>
             <div className='text-center'>
               <button
                 type='button'
                 className='btn btn-outline-warning'
-                onClick={handleSubmit}
                 disabled={isLoading}
               >
-                Upload Listing
+                {isLoading ? 'Please Wait...' : 'Update Listing'}
               </button>
             </div>
             <div className='text-center mt-5'>
@@ -208,9 +247,8 @@ const Listingform = () => {
           </Col>
         </Row>
       </form>
-      {/* </Wrapper> */}
-    </>
+    </div>
   )
 }
 
-export default Listingform
+export default Updatelisting

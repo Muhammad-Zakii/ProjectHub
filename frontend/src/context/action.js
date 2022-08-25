@@ -1,16 +1,3 @@
-// export const DISPLAY_ALERT = 'SHOW_ALERT'
-// export const CLEAR_ALERT = 'CLEAR_ALERT'
-// //Register
-// export const REGISTER_USER_BEGIN = 'REGISTER_USER_BEGIN'
-// export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
-// export const REGISTER_USER_ERROR = 'REGISTER_USER_ERROR'
-// //Login
-// export const LOGIN_USER_BEGIN = 'LOGIN_USER_BEGIN'
-// export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
-// export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR'
-
-//____________________________________________________________________________________
-
 export const DISPLAY_ALERT = 'SHOW_ALERT'
 export const CLEAR_ALERT = 'CLEAR_ALERT'
 
@@ -34,6 +21,12 @@ export const CREATE_LISTING_ERROR = 'CREATE_LISTING_ERROR'
 export const GET_LISTING_BEGIN = 'GET_LISTING_BEGIN'
 export const GET_LISTING_SUCCESS = 'GET_LISTING_SUCCESS'
 
-export const SET_EDIT_JOB = 'SET_EDIT_JOB'
+export const SET_EDIT_LISTING = 'SET_EDIT_LISTING'
 
-export const SET_FILTER_CATEGORY = 'SET_FILTER_CATEGORY'
+export const DELETE_LISTING_BEGIN = 'DELETE_LISTING_BEGIN'
+
+export const EDIT_LISTING_BEGIN = 'EDIT_LISTING_BEGIN'
+export const EDIT_LISTING_SUCCESS = 'EDIT_LISTING_SUCCESS'
+export const EDIT_LISTING_ERROR = 'EDIT_LISTING_ERROR'
+
+// export const SET_FILTER_CATEGORY = 'SET_FILTER_CATEGORY'
