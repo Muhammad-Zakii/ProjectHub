@@ -1,6 +1,7 @@
 import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 
 import React, { useEffect } from 'react'
+import Swal from 'sweetalert2'
 
 import '../../index.css'
 import { Link, useNavigate } from 'react-router-dom'
@@ -8,14 +9,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/appcontext'
 import NavBarr from '../navbars/navbar'
 import Footer from '../footer/footer2'
-
 import Wrapper from '../../wrappers'
-
+import Loading from '../loadingSpinner/loading'
 const MyListings = () => {
-  const { getAllListing, listing, page, totalListing } = useAppContext()
+  const { getAllListing, listing, isLoading, page, totalListing } =
+    useAppContext()
   useEffect(() => {
     getAllListing()
   }, [])
+  if (isLoading) {
+    return <Loading center />
+  }
   if (listing.length === 0) {
     return (
       <Wrapper>

@@ -5,7 +5,15 @@ import { useState } from 'react'
 import { largedata } from './largedata'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom'
-import { Card, ListGroup, ListGroupItem, Button, Alert } from 'react-bootstrap'
+import {
+  Card,
+  ListGroup,
+  ListGroupItem,
+  Button,
+  Alert,
+  Row,
+  Col,
+} from 'react-bootstrap'
 import Viewallnavbar from './viewallnav'
 import Footer from './footer'
 
@@ -14,11 +22,16 @@ const Viewallprojects = () => {
   return (
     <div>
       <Viewallnavbar />
-      <section className='wrapper'>
+      <Row>
         {data.map((dataall, index) => {
-          return <Data key={index} {...dataall}></Data>
+          return (
+            <Col xs={12} md={4}>
+              <Data key={index} {...dataall}></Data>
+            </Col>
+          )
         })}
-      </section>
+      </Row>
+
       <section className='col-12 text-center'>
         <div className='pad'>
           <Link to='/'>

@@ -1,5 +1,12 @@
 import { datas } from '../../data'
-import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import {
+  Card,
+  ListGroup,
+  ListGroupItem,
+  Button,
+  Row,
+  Col,
+} from 'react-bootstrap'
 
 import React from 'react'
 import '../../index.css'
@@ -7,10 +14,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useAppContext } from '../../context/appcontext'
 import Wrapper from '../../wrappers'
+import Loading from '../loadingSpinner/loading'
 
 function Landingpageafterlogin() {
-  const { getAllListing, listing, page, totalListing, getGlobalListing } =
-    useAppContext()
+  const {
+    getAllListing,
+    listing,
+    isLoading,
+    page,
+    totalListing,
+    getGlobalListing,
+  } = useAppContext()
   const [list, setList] = useState(listing)
 
   //datas
@@ -25,6 +39,9 @@ function Landingpageafterlogin() {
   useEffect(() => {
     getGlobalListing()
   }, [])
+  if (isLoading) {
+    return <Loading center />
+  }
   if (listing.length === 0) {
     return (
       <Wrapper>
@@ -86,27 +103,17 @@ function Landingpageafterlogin() {
           >
             Businesses
           </button>
-          {/* <button
-            className='btn btn-outline-secondary fo'
-            onClick={() => setList(listing)} //datas
-            href=''
-          >
-            All
-          </button> */}
         </nav>
       </div>
-      {/* <section className='wrapper'>
-        {data.map((dataall, index) => {
-          return <Data key={index} {...dataall}></Data>
-        })}
-      </section> */}
-      {/* Dynamically data fetching starts form here. */}
-
-      <section className='wrapper'>
+      <Row>
         {listing.map((dataall) => {
-          return <Data key={dataall._id} {...dataall}></Data>
+          return (
+            <Col xs={12} md={4}>
+              <Data key={dataall._id} {...dataall}></Data>
+            </Col>
+          )
         })}
-      </section>
+      </Row>
       <section className='col-12 text-center'>
         <div className='pad'>
           <Link to='/viewallproj'>

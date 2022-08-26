@@ -15,6 +15,7 @@ const Wrapper = styled.section`
   h3 {
     text-align: center;
   }
+
   p {
     margin: 0;
     margin-top: 1rem;

@@ -1,5 +1,12 @@
 import { datas } from './data'
-import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import {
+  Card,
+  ListGroup,
+  ListGroupItem,
+  Button,
+  Col,
+  Row,
+} from 'react-bootstrap'
 
 import React from 'react'
 import './index.css'
@@ -72,12 +79,20 @@ function Landingpagebeforelogin() {
           </button>
         </nav>
       </div>
-      <section className='wrapper'>
+      <Row>
+        {/* <section className='wrapper'> */}
         {data.map((dataall, index) => {
-          return <Data key={index} {...dataall}></Data>
+          return (
+            <Col xs={12} md={4}>
+              <Data key={index} {...dataall}></Data>
+            </Col>
+          )
         })}
-      </section>
-      <section className='col-12 text-center'>
+        {/* </section> */}
+      </Row>
+
+      <section className='text-center'>
+        {/* className='col-12 text-center' */}
         <div className='pad'>
           <Link to='/viewprojects'>
             <Button variant='primary'>View all projects</Button>

@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../index.css'
-import Pricing from './pricing'
+
 import { Row, Col } from 'react-bootstrap'
 import { useAppContext } from '../../context/appcontext'
 import Alert from '../../components/alert'

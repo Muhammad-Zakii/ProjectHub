@@ -24,7 +24,6 @@ import BidPage from './afterLogin/bidPage/bidPage'
 import OptionForSelling from './afterLogin/optionForSelling/optionForSelling'
 import SellByAuction from './afterLogin/createlisting/sellbyauction'
 import MyListings from './afterLogin/mylistings/mylistings'
-import Updatelisting from './afterLogin/updateListing/updatelisting'
 
 function App() {
   // const [data, setData] = React.useState(datas)
@@ -128,15 +127,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* Update listing route */}
-        {/* <Route
-          path='/updateListing'
-          element={
-            <ProtectedRoute>
-              <Updatelisting />
-            </ProtectedRoute>
-          }
-        /> */}
       </Routes>
     </BrowserRouter>
   )
