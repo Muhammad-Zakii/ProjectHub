@@ -7,8 +7,8 @@ const ListingSchema = new mongoose.Schema(
       enum: [
         '--Please Select Category--',
         'Websites',
-        'Andriod apps',
-        'iOS apps',
+        'Andriodapps',
+        'iOSapps',
         'Domains',
         'Projects',
         'Businesses',
@@ -20,6 +20,15 @@ const ListingSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please provide the name of your category.'],
       maxlength: 50,
+    },
+    image1: {
+      type: String,
+    },
+    image2: {
+      type: String,
+    },
+    cloudinary_id: {
+      type: String,
     },
     summary: {
       type: String,

@@ -45,14 +45,23 @@ function OwnListing(props) {
   const navigate = useNavigate()
   const { deletelisting, seteditlisting } = useAppContext()
 
-  const { _id, img, category, title, summary, description, fixedprice, bid } =
-    props
+  const {
+    _id,
+    image1,
+    image2,
+    category,
+    title,
+    summary,
+    description,
+    fixedprice,
+    bid,
+  } = props
 
   return (
     <div className='str'>
       <a className={'linkk'}>
         <Card style={{ minHeight: '35rem', overflow: 'auto' }}>
-          <Card.Img variant='top' src={img} />
+          <Card.Img variant='top' src={image1} />
           <Card.Body>
             <Card.Title>{title}</Card.Title>
             <Card.Text>{summary}</Card.Text>

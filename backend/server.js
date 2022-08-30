@@ -13,6 +13,12 @@ import listingRouter from './route/listingRouter.js'
 import errorhandler from './middleware/errorhandler.js'
 import Middleware from './middleware/middleware.js'
 import authenticateUser from './middleware/auth.js'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+
+const __dirname = path.dirname(__filename)
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'))
@@ -24,6 +30,7 @@ app.get('/', (req, res) => {
   res.send('Welcome!')
 })
 app.use('/api/v1/auth', authRouter)
+app.use('/static', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/v1/listing', authenticateUser, listingRouter)
 
 app.use(Middleware)

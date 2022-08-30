@@ -45,13 +45,15 @@ const initialState = {
   categoryoptions: [
     '--Please Select Category--',
     'Websites',
-    'Andriod apps',
-    'iOS apps',
+    'Andriodapps',
+    'iOSapps',
     'Domains',
     'Projects',
     'Businesses',
   ],
   category: '--Please Select Category--',
+  image1: '',
+  image2: '',
   title: '',
   summary: '',
   description: '',
@@ -174,34 +176,17 @@ const AppProvider = ({ children }) => {
   }
   const createListing = async () => {
     dispatch({ type: CREATE_LISTING_BEGIN })
-
     try {
-      const {
-        category,
-        title,
-        summary,
-        description,
-        siteage,
-        profit,
-        margin,
-        fixedprice,
-        startbid,
-        reserveprice,
-        duration,
-      } = state
-      await authFetch.post('/listing', {
-        category,
-        title,
-        summary,
-        description,
-        siteage,
-        profit,
-        margin,
-        fixedprice,
-        startbid,
-        reserveprice,
-        duration,
-      })
+      const formData = new FormData()
+
+      for (const key in state) {
+        if (Object.hasOwnProperty.call(state, key)) {
+          formData.append(key, state[key])
+        }
+      }
+      console.log(state)
+
+      await authFetch.post('/listing', formData)
       dispatch({ type: CREATE_LISTING_SUCCESS })
       // dispatch({ CLEAR_VALUES })
     } catch (error) {
@@ -280,6 +265,8 @@ const AppProvider = ({ children }) => {
     try {
       const {
         category,
+        image1,
+        image2,
         title,
         summary,
         description,
@@ -293,6 +280,8 @@ const AppProvider = ({ children }) => {
       } = state
       await authFetch.patch(`/listing/${state.editCategoryId}`, {
         category,
+        image1,
+        image2,
         title,
         summary,
         description,

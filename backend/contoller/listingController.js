@@ -3,16 +3,30 @@ import { StatusCodes } from 'http-status-codes'
 import BadRequestError from '../errors/bad-request.js'
 import NotFoundError from '../errors/not-found.js'
 import checkpremissions from '../utils/checkpremissions.js'
-
+import mongoose from 'mongoose'
 const createListing = async (req, res) => {
-  const { category, title, summary, description } = req.body
-
+  const {
+    category,
+    title,
+    summary,
+    description,
+    siteage,
+    profit,
+    margin,
+    fixedprice,
+    startbid,
+    reserveprice,
+    duration,
+  } = req.body
+  console.log(req.body)
+  let image1 = req.file?.filename
+  console.log(image1)
   if (!category || !title || !summary || !description) {
     throw new BadRequestError('Please provide all values.')
   }
   req.body.createdBy = req.user.userId
 
-  const listing = await Listing.create(req.body)
+  const listing = await Listing.create({ ...req.body, image1: image1 })
   res.status(StatusCodes.CREATED).json({ listing })
 }
 const getAllListing = async (req, res) => {
@@ -38,6 +52,8 @@ const updatelisting = async (req, res) => {
     title,
     summary,
     description,
+    image1,
+    image2,
     siteage,
     profit,
     margin,
@@ -76,10 +92,35 @@ const deletelisting = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'Listing remove successfully.' })
 }
 
+// Functionality for Admin Panel
+const showstats = async (req, res) => {
+  let stats = await Listing.aggregate([
+    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    { $group: { _id: '$category', count: { $sum: 1 } } },
+  ])
+  stats = stats.reduce((acc, curr) => {
+    const { _id: category, count } = curr
+    acc[category] = count
+    return acc
+  }, {})
+
+  const defaultStats = {
+    Websites: stats.Websites || 0,
+    Andriodapps: stats.Andriodapps || 0,
+    iOSapps: stats.iOSapps || 0,
+    Domains: stats.Domains || 0,
+    Projects: stats.Projects || 0,
+    Businesses: stats.Businesses || 0,
+  }
+  let monthlyApplications = []
+  res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications })
+}
+
 export {
   createListing,
   getAllListing,
   updatelisting,
   deletelisting,
   getGlobalListing,
+  showstats,
 }

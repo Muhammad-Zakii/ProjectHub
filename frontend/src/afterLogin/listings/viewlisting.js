@@ -64,7 +64,7 @@ const Viewlisting = () => {
               </Col>
               <Col md='4' sm='12' className='justify-content-md-center'>
                 <div className='card-desc'>
-                  <Carddesc img={listings.img} price={listings.fixedprice} />
+                  <Carddesc img={listings.image1} price={listings.fixedprice} />
                 </div>
                 <div className='about-seller'>
                   <Col className='justify-content-md-center mt-5'>

@@ -24,11 +24,14 @@ const Listingform = () => {
     handleChange,
     clearValues,
     createListing,
+    image1,
     editlisting,
+    // image2,
   } = useAppContext()
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!title || !summary || !description) {
+
+    if (!category || !title || !summary || !description) {
       displayAlert()
       return
     }
@@ -41,7 +44,11 @@ const Listingform = () => {
   const listingInput = (e) => {
     const name = e.target.name
     const value = e.target.value
-    handleChange({ name, value })
+    if (name === 'image1') {
+      handleChange({ name, value: e.target.files[0] })
+    } else {
+      handleChange({ name, value })
+    }
   }
 
   return (
@@ -67,15 +74,6 @@ const Listingform = () => {
                   </option>
                 )
               })}
-
-              {/* <option selected value='--Please Select Category--'>
-                --Choose Category--
-              </option>
-              <option value='Websites'>Websites</option>
-              <option value='Andriod apps'>Andriod apps</option>
-              <option value=' iOS apps'>iOS apps</option>
-              <option value='Domains'>Domains</option>
-              <option value='Businesses'>Businesses</option> */}
             </select>
             <br />
 
@@ -83,9 +81,19 @@ const Listingform = () => {
               <label className='form-label'>
                 Please select atleast one image
               </label>
-              <input className='form-input' type='file' />
+              <input
+                className='form-input'
+                type='file'
+                name='image1'
+                onChange={listingInput}
+              />
             </div>
-            <input className='form-input' type='file' />
+            {/* <input
+              className='form-input'
+              type='file'
+              // value={image2}
+              // onChange={listingInput}
+            /> */}
 
             <div className='form-row'>
               <br />

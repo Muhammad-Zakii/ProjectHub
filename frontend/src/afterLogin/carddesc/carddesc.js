@@ -10,7 +10,7 @@ const Carddesc = (props) => {
       style={{ display: 'flex', justifyContent: 'center', width: '90%' }}
     >
       <Card>
-        <Card.Img variant='top' src={props.img} />
+        <Card.Img variant='top' src={props.image1} />
         <Card.Body>
           <Card.Title>Asking Price</Card.Title>
           <Card.Text>{props.price}</Card.Text>
@@ -35,7 +35,7 @@ const Carddesc = (props) => {
           </Link>
           <ListGroupItem></ListGroupItem>
         </ListGroup>
-        <Card.Body></Card.Body>
+        <Card.Body>Total bidding:</Card.Body>
       </Card>
     </div>
   )
