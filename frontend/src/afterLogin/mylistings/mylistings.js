@@ -61,7 +61,10 @@ function OwnListing(props) {
     <div className='str'>
       <a className={'linkk'}>
         <Card style={{ minHeight: '35rem', overflow: 'auto' }}>
-          <Card.Img variant='top' src={image1} />
+          <Card.Img
+            variant='top'
+            src={`http://localhost:7000/static/listings/${image1}`}
+          />
           <Card.Body>
             <Card.Title>{title}</Card.Title>
             <Card.Text>{summary}</Card.Text>

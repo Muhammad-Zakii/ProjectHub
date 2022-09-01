@@ -10,7 +10,10 @@ const Carddesc = (props) => {
       style={{ display: 'flex', justifyContent: 'center', width: '90%' }}
     >
       <Card>
-        <Card.Img variant='top' src={props.image1} />
+        <Card.Img
+          variant='top'
+          src={`http://localhost:7000/static/listings/${props.img}`}
+        />
         <Card.Body>
           <Card.Title>Asking Price</Card.Title>
           <Card.Text>{props.price}</Card.Text>

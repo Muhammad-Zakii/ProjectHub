@@ -25,6 +25,7 @@ const Auctionform = () => {
     handleChange,
     clearValues,
     createListing,
+    image1,
     editlisting,
   } = useAppContext()
   const handleSubmit = (e) => {
@@ -42,7 +43,11 @@ const Auctionform = () => {
   const listingInput = (e) => {
     const name = e.target.name
     const value = e.target.value
-    handleChange({ name, value })
+    if (name === 'image1') {
+      handleChange({ name, value: e.target.files[0] })
+    } else {
+      handleChange({ name, value })
+    }
   }
 
   return (
@@ -75,7 +80,12 @@ const Auctionform = () => {
               <label className='form-label'>
                 Please select atleast one image
               </label>
-              <input className='form-input' type='file' />
+              <input
+                className='form-input'
+                type='file'
+                name='image1'
+                onChange={listingInput}
+              />
             </div>
             <input className='form-input' type='file' />
 
