@@ -1,12 +1,48 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 import NavBarr from '../navbars/navbar'
 import { Card, Row, Col, Button } from 'react-bootstrap'
 import FormRow from '../../formrow'
 import '../../index.css'
 import Footer from '../footer/footer2'
+import emailjs from '@emailjs/browser'
+import Swal from 'sweetalert2'
 
 const ContactPage = () => {
+  const refform = useRef()
+
+  const sendEmail = (e) => {
+    e.preventDefault()
+
+    emailjs
+      .sendForm(
+        'service_ve14ad7',
+        'Contact_Page',
+        refform.current,
+        'YKUTnodPybQmuhl4g'
+      )
+      .then(
+        () => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Message has been send successfully.',
+            showConfirmButton: false,
+            timer: 2000,
+          })
+        },
+        () => {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Failed to send a message,please try again.',
+            showConfirmButton: false,
+            timer: 2000,
+          })
+        }
+      )
+    refform.current.reset()
+  }
   return (
     <>
       <NavBarr />
@@ -34,25 +70,28 @@ const ContactPage = () => {
           </div>
         </Col>
         <Col>
-          <FormRow type='fname' name='fname' placeholder='First name' />
-          <FormRow type='lname' name='lname' placeholder='Last name' />
-          <FormRow
-            type='email'
-            name='email'
-            placeholder='Email of the Seller'
-          />
-          <FormRow type='subject' name='subject' placeholder='Subject' />
-          <div className='form-row'>
-            <label className='form-label'>Message</label>
+          <form ref={refform} onSubmit={sendEmail}>
+            <FormRow type='email' name='Your email' placeholder='Your Email' />
+            <FormRow type='Name' name='Name' placeholder='Name' />
 
-            <textarea
-              className='form-textarea'
-              type='text'
-              name='summary'
-              placeholder='Message'
+            <FormRow
+              type='email'
+              name='Seller email'
+              placeholder='Email of the Seller'
             />
-          </div>
-          <Button variant='primary'>Send Message</Button>
+
+            <div className='form-row'>
+              <label className='form-label'>Message</label>
+
+              <textarea
+                className='form-textarea'
+                type='text'
+                name='summary'
+                placeholder='Message'
+              />
+            </div>
+            <Button variant='primary'>Send Message</Button>
+          </form>
         </Col>
       </Row>
       <Footer />
