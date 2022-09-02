@@ -16,7 +16,7 @@ const ContactPage = () => {
 
     emailjs
       .sendForm(
-        'service_ve14ad7',
+        'service_jegmtfb',
         'Contact_Page',
         refform.current,
         'YKUTnodPybQmuhl4g'
@@ -71,14 +71,37 @@ const ContactPage = () => {
         </Col>
         <Col>
           <form ref={refform} onSubmit={sendEmail}>
-            <FormRow type='email' name='Your email' placeholder='Your Email' />
-            <FormRow type='Name' name='Name' placeholder='Name' />
+            <div className='form-row'>
+              <label className='form-label'>Seller Email</label>
 
-            <FormRow
-              type='email'
-              name='Seller email'
-              placeholder='Email of the Seller'
-            />
+              <input
+                className='form-input'
+                type='email'
+                name='email1'
+                placeholder='Seller email'
+              />
+            </div>
+            <div className='form-row'>
+              <label className='form-label'>Your name</label>
+
+              <input
+                className='form-input'
+                type='text'
+                name='name'
+                placeholder='Name'
+              />
+            </div>
+
+            <div className='form-row'>
+              <label className='form-label'>Buyer Email</label>
+
+              <input
+                className='form-input'
+                type='email'
+                name='email2'
+                placeholder='Buyer Email'
+              />
+            </div>
 
             <div className='form-row'>
               <label className='form-label'>Message</label>
@@ -86,11 +109,13 @@ const ContactPage = () => {
               <textarea
                 className='form-textarea'
                 type='text'
-                name='summary'
+                name='message'
                 placeholder='Message'
               />
             </div>
-            <Button variant='primary'>Send Message</Button>
+            <Button type='submit' value='SEND' variant='primary'>
+              Send Message
+            </Button>
           </form>
         </Col>
       </Row>
