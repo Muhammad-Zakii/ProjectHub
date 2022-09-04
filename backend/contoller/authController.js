@@ -65,6 +65,7 @@ import UnAuthenticatedError from '../errors/unauthenticatederror.js'
 
 const register = async (req, res) => {
   const { name, phoneNo, location, email, password } = req.body
+  let img = req.file?.filename
 
   if (!name || !phoneNo || !location || !email || !password) {
     throw new BadRequestError('please provide all values')
@@ -73,7 +74,15 @@ const register = async (req, res) => {
   if (userAlreadyExists) {
     throw new BadRequestError('Email already in use')
   }
-  const user = await User.create({ name, phoneNo, location, email, password })
+  const user = await User.create({
+    name,
+    phoneNo,
+    location,
+    img,
+    email,
+    password,
+  })
+  console.log(user)
 
   const token = user.createJWT()
   res.status(StatusCodes.CREATED).json({
@@ -82,6 +91,7 @@ const register = async (req, res) => {
       phoneNo: user.phoneNo,
       location: user.location,
       email: user.email,
+      img: user.img,
     },
     token,
   })

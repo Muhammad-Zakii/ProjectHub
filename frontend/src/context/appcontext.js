@@ -127,7 +127,17 @@ const AppProvider = ({ children }) => {
   const setupUser = async ({ currentUser, endPoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN })
     try {
-      const { data } = await axios.post(`/api/v1/auth/${endPoint}`, currentUser)
+      const formData = new FormData()
+
+      for (const key in currentUser) {
+        if (Object.hasOwnProperty.call(currentUser, key)) {
+          formData.append(key, currentUser[key])
+        }
+      }
+      // formData.set(currentUser)
+
+      const { data } = await axios.post(`/api/v1/auth/${endPoint}`, formData)
+      console.log(data)
 
       const { user, token } = data //location
       dispatch({
@@ -184,7 +194,6 @@ const AppProvider = ({ children }) => {
           formData.append(key, state[key])
         }
       }
-      console.log(state)
 
       await authFetch.post('/listing', formData)
       dispatch({ type: CREATE_LISTING_SUCCESS })

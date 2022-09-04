@@ -7,8 +7,12 @@ import '../../index.css'
 import Footer from '../footer/footer2'
 import emailjs from '@emailjs/browser'
 import Swal from 'sweetalert2'
+import { useAppContext } from '../../context/appcontext'
+import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
 
 const ContactPage = () => {
+  const { user, listing } = useAppContext()
+
   const refform = useRef()
 
   const sendEmail = (e) => {
@@ -48,20 +52,36 @@ const ContactPage = () => {
       <NavBarr />
       <Row className='m-5'>
         <Col>
-          <h4>Profile</h4>
+          <h4>Profile details</h4>
           <div className='clearfix'>
             <div className='row'>
-              <div className='col-md-4 animated fadeIn'>
+              <div className='col-md-4 animated fadeIn bg'>
                 <div className='card'>
                   <div className='card-body'>
                     <div className='avatar'>
-                      <img src='' className='card-img-top' alt='' />
+                      <img
+                        src={`http://localhost:7000/static/profiles/${user.img}`}
+                        className='card-img-top'
+                        alt=''
+                      />
                     </div>
-                    <h5 className='card-title'>Muhammad Zaki</h5>
+                    <h5 className='card-title'>
+                      <FaUser />
+                      Name: {user.name}
+                    </h5>
                     <p className='card-text'>
-                      Gujranwala
+                      <FaLocationArrow />
+                      Location: {user.location}
                       <br />
-                      <p className='phone'>03167141511</p>
+                      <p className='phone'>
+                        <FaPhone />
+                        PhoneNo: {user.phoneNo}
+                      </p>
+                    </p>
+                    <br />
+                    <p className='phone'>
+                      <FaAt />
+                      Email: {user.email}
                     </p>
                   </div>
                 </div>
@@ -69,8 +89,11 @@ const ContactPage = () => {
             </div>
           </div>
         </Col>
-        <Col>
+      </Row>
+      <Row className='m-5'>
+        <Col md={7}>
           <form ref={refform} onSubmit={sendEmail}>
+            {' '}
             <div className='form-row'>
               <label className='form-label'>Seller Email</label>
 
@@ -90,8 +113,7 @@ const ContactPage = () => {
                 name='name'
                 placeholder='Name'
               />
-            </div>
-
+            </div>{' '}
             <div className='form-row'>
               <label className='form-label'>Buyer Email</label>
 
@@ -102,7 +124,6 @@ const ContactPage = () => {
                 placeholder='Buyer Email'
               />
             </div>
-
             <div className='form-row'>
               <label className='form-label'>Message</label>
 
@@ -119,7 +140,11 @@ const ContactPage = () => {
           </form>
         </Col>
       </Row>
-      <Footer />
+      <Row>
+        <Col>
+          <Footer />
+        </Col>
+      </Row>
     </>
   )
 }

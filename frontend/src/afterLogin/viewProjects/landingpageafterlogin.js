@@ -115,13 +115,13 @@ function Landingpageafterlogin() {
           )
         })}
       </Row>
-      <section className='col-12 text-center'>
+      {/* <section className='col-12 text-center'>
         <div className='pad'>
           <Link to='/viewallproj'>
             <Button variant='primary'>View more</Button>
           </Link>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }

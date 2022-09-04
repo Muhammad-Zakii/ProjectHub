@@ -95,7 +95,7 @@ const deletelisting = async (req, res) => {
 // Functionality for Admin Panel
 const showstats = async (req, res) => {
   let stats = await Listing.aggregate([
-    { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
+    // { $match: { createdBy: mongoose.Types.ObjectId(req.user.userId) } },
     { $group: { _id: '$category', count: { $sum: 1 } } },
   ])
   stats = stats.reduce((acc, curr) => {

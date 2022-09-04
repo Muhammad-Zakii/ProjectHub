@@ -27,20 +27,11 @@ const NavBarr = () => {
                 How to sell
               </Link>
             </Nav.Link>
-
-            {/* <NavDropdown title='Browse' id='collasible-nav-dropdown'>
-              <NavDropdown.Item href='#action/3.1'>Websites</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.2'>
-                Andriod apps
-              </NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.2'>iOS apps</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.3'>Domains</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.4'>Projects</NavDropdown.Item>
-            </NavDropdown> */}
-            {/* <NavDropdown title='Join as' id='collasible-nav-dropdown'>
-              <NavDropdown.Item href='#action/3.2'>Seller</NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.3'>Buyer</NavDropdown.Item>
-            </NavDropdown> */}
+            <Nav.Link>
+              <Link className='linked' to=''>
+                Pricing
+              </Link>
+            </Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link>

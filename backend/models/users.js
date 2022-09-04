@@ -71,6 +71,9 @@ const UserSchema = new mongoose.Schema({
     maxlength: 20,
     trim: true,
   },
+  img: {
+    type: String,
+  },
   phoneNo: {
     type: Number,
     required: [true, 'Please provide Phone No'],

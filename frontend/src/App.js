@@ -1,18 +1,14 @@
 import './App.css'
 
-import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
-import { datas } from './data'
-// import { Component } from 'react'
 import Howtosell from './howtosell'
 import Landing from './landing'
-// import Login from './login'
-// import SignUp from './signup'
+
 import Register from './register'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Error from './error'
 import Sellnow from './afterLogin/createlisting/sellnow'
 import Projects from './viewallprojects'
-// import Alert from './components/alert'
+
 import Afterlogin from './afterLogin/afterlogin'
 import ProtectedRoute from './afterLogin/protectedRoutes/protectedRoute'
 import Viewallproj from './afterLogin/viewProjects/viewallproj'
@@ -34,8 +30,7 @@ function App() {
         <Route index element={<Landing />} />
         <Route path='/howtosell' element={<Howtosell />} />
         <Route path='/register' element={<Register />} />
-        {/* <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<SignUp />} /> */}
+
         <Route path='*' element={<Error />} />
         <Route
           path='chooseOption/' //sellnow route name
