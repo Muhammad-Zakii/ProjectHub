@@ -1,6 +1,7 @@
 import Admin from '../models/admin.js'
 import Listing from '../models/listing.js'
 import { StatusCodes } from 'http-status-codes'
+import User from '../models/users.js'
 
 const loginAdmin = async (req, res) => {
   const { email, password } = req.body
@@ -56,4 +57,15 @@ const getAllListingByAdmin = async (req, res) => {
     .status(StatusCodes.OK)
     .json({ listing, totalListing: listing.length, numOfPages: 1 })
 }
-export { loginAdmin, getListingByAdmin, showStatsToAdmin, getAllListingByAdmin }
+const getAllUsersByAdmin = async (req, res) => {
+  const users = await User.find()
+
+  res.status(StatusCodes.OK).json({ users, totalUsers: users.length })
+}
+export {
+  loginAdmin,
+  getListingByAdmin,
+  showStatsToAdmin,
+  getAllListingByAdmin,
+  getAllUsersByAdmin,
+}
