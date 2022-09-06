@@ -15,7 +15,7 @@ import { useAppContext } from '../../context/appcontext'
 const Viewlisting = () => {
   let { _id } = useParams()
 
-  const { listing } = useAppContext()
+  const { listing, user } = useAppContext()
 
   const [listings, setListings] = useState([])
   useEffect(() => {
@@ -69,8 +69,8 @@ const Viewlisting = () => {
                 <div className='about-seller'>
                   <Col className='justify-content-md-center mt-5'>
                     <h4>About the seller</h4>
-                    <h6>Muhammad Zaki</h6>
-                    <p>Location: gujranwala</p>
+                    <h6>Name: {user.name}</h6>
+                    <p>Location: {user.location}</p>
                   </Col>
                   <br />
                 </div>

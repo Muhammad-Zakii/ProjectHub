@@ -14,6 +14,7 @@ const ProfilePage = () => {
   const [phoneNo, setPhoneNo] = useState(user?.phoneNo)
   const [location, setLocation] = useState(user?.location)
   const [email, setEmail] = useState(user?.email)
+  const [img, setImg] = useState(user?.img)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -24,6 +25,7 @@ const ProfilePage = () => {
     }
 
     updateUser({ name, phoneNo, location, email })
+    console.log(updateUser)
   }
   return (
     <>
@@ -60,7 +62,12 @@ const ProfilePage = () => {
               value={email}
               handleChange={(e) => setEmail(e.target.value)}
             />
-
+            {/* <FormRow
+              type='file'
+              name='img'
+              labelText='Image'
+              handleChange={(e) => setImg(e.target.files[0])}
+            /> */}
             <button
               className='btn btn-block'
               type='submit'

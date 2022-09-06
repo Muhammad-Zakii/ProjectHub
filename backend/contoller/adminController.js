@@ -51,11 +51,11 @@ const showStatsToAdmin = async (req, res) => {
   res.status(StatusCodes.OK).json({ defaultStats, monthlyApplications })
 }
 const getAllListingByAdmin = async (req, res) => {
-  const listing = await Listing.find()
+  const listingadmin = await Listing.find()
 
   res
     .status(StatusCodes.OK)
-    .json({ listing, totalListing: listing.length, numOfPages: 1 })
+    .json({ listingadmin, totallistingbyadmin: listingadmin.length })
 }
 const getAllUsersByAdmin = async (req, res) => {
   const users = await User.find()

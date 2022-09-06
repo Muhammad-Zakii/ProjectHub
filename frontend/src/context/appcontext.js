@@ -127,16 +127,16 @@ const AppProvider = ({ children }) => {
   const setupUser = async ({ currentUser, endPoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN })
     try {
-      const formData = new FormData()
+      // const formData = new FormData()
 
-      for (const key in currentUser) {
-        if (Object.hasOwnProperty.call(currentUser, key)) {
-          formData.append(key, currentUser[key])
-        }
-      }
+      // for (const key in currentUser) {
+      //   if (Object.hasOwnProperty.call(currentUser, key)) {
+      //     formData.append(key, currentUser[key])
+      //   }
+      // }
       // formData.set(currentUser)
 
-      const { data } = await axios.post(`/api/v1/auth/${endPoint}`, formData)
+      const { data } = await axios.post(`/api/v1/auth/${endPoint}`, currentUser)
       console.log(data)
 
       const { user, token } = data //location
@@ -160,6 +160,14 @@ const AppProvider = ({ children }) => {
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN })
     try {
+      const formData = new FormData()
+
+      // for (const key in currentUser) {
+      //   if (Object.hasOwnProperty.call(currentUser, key)) {
+      //     formData.append(key, currentUser[key])
+      //   }
+      // }
+      // formData.append(currentUser)
       const { data } = await authFetch.patch('/auth/updateUser', currentUser)
 
       const { user, token } = data

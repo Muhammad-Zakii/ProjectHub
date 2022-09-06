@@ -78,8 +78,10 @@ const Auctionform = () => {
 
             <div className='form-row'>
               <label className='form-label'>
+                <br />
                 Please select atleast one image
               </label>
+
               <input
                 className='form-input'
                 type='file'
@@ -87,10 +89,9 @@ const Auctionform = () => {
                 onChange={listingInput}
               />
             </div>
-            <input className='form-input' type='file' />
+            {/* <input className='form-input' type='file' /> */}
 
             <div className='form-row'>
-              <br />
               <label className='form-label'>Title</label>
 
               <input
@@ -180,7 +181,7 @@ const Auctionform = () => {
             </div>
             <div className='form-row'>
               <label className='form-label' htmlFor='endbid'>
-                Reserve Price
+                Base price
               </label>
 
               <input

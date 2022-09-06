@@ -117,6 +117,8 @@ const login = async (req, res) => {
 const updateUser = async (req, res) => {
   // res.send('UpdateUser')
   const { name, phoneNo, location, email } = req.body
+  // let img = req.file?.filename
+  // console.log(img)
 
   if (!name || !phoneNo || !location || !email) {
     throw new BadRequestError('Please provide all values')
@@ -127,6 +129,7 @@ const updateUser = async (req, res) => {
   user.phoneNo = phoneNo
   user.location = location
   user.email = email
+  user.img = img
 
   await user.save()
 
