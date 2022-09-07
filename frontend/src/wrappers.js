@@ -7,6 +7,20 @@ const Wrapper = styled.section`
     max-width: 400px;
     border-top: 5px solid var(--primary-500);
   }
+  .form-input,
+  .form-select,
+  .btn-block {
+    height: 35px;
+  }
+  .form-row {
+    margin-bottom: 0;
+  }
+  .form-center {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 2rem;
+    row-gap: 0.5rem;
+  }
   .form2 {
     max-width: 600px;
     // min-width: 300px;

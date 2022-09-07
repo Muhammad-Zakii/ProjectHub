@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react'
 import { useAppContext } from '../../context/appcontext'
 import Wrapper from '../../wrappers'
 import Loading from '../loadingSpinner/loading'
+import SearchContainer from '../searchContainer/searchContainer'
 
 function Landingpageafterlogin() {
   const {
@@ -24,6 +25,8 @@ function Landingpageafterlogin() {
     page,
     totalListing,
     getGlobalListing,
+    search,
+    sort,
   } = useAppContext()
   const [list, setList] = useState(listing)
 
@@ -38,7 +41,7 @@ function Landingpageafterlogin() {
   }
   useEffect(() => {
     getGlobalListing()
-  }, [])
+  }, [search, sort])
   if (isLoading) {
     return <Loading center />
   }
@@ -60,7 +63,8 @@ function Landingpageafterlogin() {
       </div>
 
       <div class='container'>
-        <nav className='fo'>
+        <SearchContainer />
+        {/* <nav className='fo'>
           <button
             className='btn btn-outline-secondary fo'
             onClick={() => filterItems('Websites')}
@@ -103,7 +107,7 @@ function Landingpageafterlogin() {
           >
             Businesses
           </button>
-        </nav>
+        </nav> */}
       </div>
 
       <Row>

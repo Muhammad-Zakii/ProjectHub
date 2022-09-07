@@ -25,6 +25,7 @@ import {
   EDIT_LISTING_BEGIN,
   EDIT_LISTING_SUCCESS,
   EDIT_LISTING_ERROR,
+  CLEAR_FILTERS,
 } from './action'
 
 const token = localStorage.getItem('token')
@@ -69,6 +70,9 @@ const initialState = {
   totalListing: 0,
   numOfPages: 1,
   page: 1,
+  search: '',
+  sort: 'latest',
+  sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
 }
 const AppContext = React.createContext()
 
@@ -235,7 +239,11 @@ const AppProvider = ({ children }) => {
     clearAlert()
   }
   const getGlobalListing = async () => {
-    const url = `/listing/getgloballisting`
+    const { search, sort } = state
+    let url = `/listing/getgloballisting?sort=${sort}`
+    if (search) {
+      url = url + `&search=${search}`
+    }
     dispatch({ type: GET_LISTING_BEGIN })
     try {
       const { data } = await authFetch.get(url)
@@ -330,6 +338,9 @@ const AppProvider = ({ children }) => {
       logoutUser()
     }
   }
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS })
+  }
 
   return (
     <AppContext.Provider
@@ -347,6 +358,7 @@ const AppProvider = ({ children }) => {
         deletelisting,
         editlisting,
         getGlobalListing,
+        clearFilters,
         // filteritems,
       }}
     >

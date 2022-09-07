@@ -21,6 +21,7 @@ import {
   EDIT_LISTING_BEGIN,
   EDIT_LISTING_SUCCESS,
   EDIT_LISTING_ERROR,
+  CLEAR_FILTERS,
 } from './context/action'
 
 import { initialState } from './context/appcontext'
@@ -220,6 +221,13 @@ const reducer = (state, action) => {
       showAlert: true,
       alertType: 'danger',
       alertText: action.payload.msg,
+    }
+  }
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      search: '',
+      sort: 'latest',
     }
   }
   // if (action.type === SET_FILTER_CATEGORY) {

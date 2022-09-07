@@ -37,8 +37,30 @@ const getAllListing = async (req, res) => {
     .json({ listing, totalListing: listing.length, numOfPages: 1 })
 }
 const getGlobalListing = async (req, res) => {
-  const listing = await Listing.find()
-  console.log(listing)
+  const { sort, search } = req.query
+  const queryObject = {
+    list: Listing,
+  }
+
+  if (search) {
+    queryObject.category = { $regex: search, $options: 'i' }
+  }
+
+  let result = Listing.find(queryObject)
+
+  if (sort === 'latest') {
+    result = result.sort('-createdAt')
+  }
+  if (sort === 'oldest') {
+    result = result.sort('createdAt')
+  }
+  if (sort === 'a-z') {
+    result = result.sort('category')
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-category')
+  }
+  const listing = await result
 
   res
     .status(StatusCodes.OK)
