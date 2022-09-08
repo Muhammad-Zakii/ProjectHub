@@ -24,26 +24,26 @@ const Register = () => {
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember })
   }
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value })
-  }
   // const handleChange = (e) => {
-  //   const name = e.target.name
-  //   const value = e.target.value
-  //   if (name === 'img') {
-  //     {
-  //       setValues((prev) => ({ ...prev, [name]: e.target.files[0] }))
-  //     }
-  //   } else {
-  //     {
-  //       setValues((prev) => ({ ...prev, [name]: value }))
-  //     }
-  //   }
+  //   setValues({ ...values, [e.target.name]: e.target.value })
   // }
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    if (name === 'img') {
+      {
+        setValues((prev) => ({ ...prev, [name]: e.target.files[0] }))
+      }
+    } else {
+      {
+        setValues((prev) => ({ ...prev, [name]: value }))
+      }
+    }
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
-    const { name, phoneNo, location, email, password, isMember } = values
+    const { name, phoneNo, location, email, password, isMember, img } = values
     if (!email || !password || (!isMember && !name && !phoneNo && !location)) {
       displayAlert()
       return
@@ -52,10 +52,11 @@ const Register = () => {
       name,
       phoneNo,
       location,
+      img,
       email,
       password,
     }
-
+    console.log(img)
     if (isMember) {
       setupUser({
         currentUser,
@@ -111,7 +112,7 @@ const Register = () => {
               handleChange={handleChange}
               placeholder='City'
             />
-            {/* <FormRow type='file' name='img' handleChange={handleChange} /> */}
+            <FormRow type='file' name='img' handleChange={handleChange} />
           </>
         )}
 
