@@ -131,15 +131,7 @@ const AppProvider = ({ children }) => {
   const setupUser = async ({ currentUser, endPoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN })
     try {
-      const formData = new FormData()
-
-      for (const key in currentUser) {
-        if (Object.hasOwnProperty.call(currentUser, key)) {
-          formData.append(key, currentUser[key])
-        }
-      }
-
-      const { data } = await axios.post(`/api/v1/auth/${endPoint}`, formData)
+      const { data } = await axios.post(`/api/v1/auth/${endPoint}`, currentUser)
       console.log(data)
 
       const { user, token } = data //location

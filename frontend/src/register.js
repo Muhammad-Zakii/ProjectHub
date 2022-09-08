@@ -59,13 +59,20 @@ const Register = () => {
     console.log(img)
     if (isMember) {
       setupUser({
-        currentUser,
+        currentUser: { email, password },
         endPoint: 'login',
         alertText: 'Login Successful! Redirecting...',
       })
     } else {
+      const formData = new FormData()
+
+      for (const key in currentUser) {
+        if (Object.hasOwnProperty.call(currentUser, key)) {
+          formData.append(key, currentUser[key])
+        }
+      }
       setupUser({
-        currentUser,
+        currentUser: formData,
         endPoint: 'register',
         alertText: 'User Created! Redirecting...',
       })
