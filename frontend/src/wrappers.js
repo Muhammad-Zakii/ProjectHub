@@ -7,15 +7,19 @@ const Wrapper = styled.section`
     max-width: 400px;
     border-top: 5px solid var(--primary-500);
   }
-  .form-input,
+  .form3 {
+    width: 50%;
+    max-width: 50%;
+  }
+  .form3-input,
   .form-select,
   .btn-block {
     height: 35px;
   }
-  .form-row {
+  .form3-row {
     margin-bottom: 0;
   }
-  .form-center {
+  .form3-center {
     display: grid;
     grid-template-columns: 1fr;
     column-gap: 2rem;

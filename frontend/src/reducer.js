@@ -227,6 +227,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       search: '',
+      searchCategory: 'all',
       sort: 'latest',
     }
   }

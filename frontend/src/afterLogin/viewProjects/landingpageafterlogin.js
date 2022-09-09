@@ -27,21 +27,22 @@ function Landingpageafterlogin() {
     getGlobalListing,
     search,
     sort,
+    searchCategory,
   } = useAppContext()
   const [list, setList] = useState(listing)
 
   //datas
   console.log(listing)
-  const filterItems = (cate) => {
-    const reccategory = listing.filter((currentCategory) => {
-      //datas
-      return currentCategory.category === cate
-    })
-    setList(reccategory)
-  }
+  // const filterItems = (cate) => {
+  //   const reccategory = listing.filter((currentCategory) => {
+  //     //datas
+  //     return currentCategory.category === cate
+  //   })
+  //   setList(reccategory)
+  // }
   useEffect(() => {
     getGlobalListing()
-  }, [search, sort])
+  }, [search, searchCategory, sort])
   if (isLoading) {
     return <Loading center />
   }

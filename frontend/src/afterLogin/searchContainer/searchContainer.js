@@ -6,8 +6,16 @@ import '../../index.css'
 import FormSelect from '../../formSelect'
 
 const SearchContainer = () => {
-  const { isLoading, search, sort, sortOptions, handleChange, clearFilters } =
-    useAppContext()
+  const {
+    isLoading,
+    search,
+    sort,
+    sortOptions,
+    handleChange,
+    clearFilters,
+    searchCategory,
+    categoryoptionss,
+  } = useAppContext()
   const handleSearch = (e) => {
     if (isLoading) return
     handleChange({ name: e.target.name, value: e.target.value })
@@ -18,7 +26,7 @@ const SearchContainer = () => {
   }
   return (
     <Wrapper>
-      <form className='form'>
+      <form className='form3'>
         <h4>Search</h4>
         <div className='form-center'>
           <FormRow
@@ -26,6 +34,14 @@ const SearchContainer = () => {
             name='search'
             value={search}
             handleChange={handleSearch}
+            placeholder='e.g. Websites , Projects , Andriod Applications'
+          />
+          <FormSelect
+            labelText='Filter category'
+            name='searchCategory'
+            value={searchCategory}
+            handleChange={handleSearch}
+            list={['All', ...categoryoptionss]}
           />
           <FormSelect
             name='sort'

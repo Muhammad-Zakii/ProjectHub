@@ -52,6 +52,15 @@ const initialState = {
     'Projects',
     'Businesses',
   ],
+  categoryoptionss: [
+    'Websites',
+    'Andriodapps',
+    'iOSapps',
+    'Domains',
+    'Projects',
+    'Businesses',
+  ],
+
   category: '--Please Select Category--',
   image1: '',
   image2: '',
@@ -71,6 +80,7 @@ const initialState = {
   numOfPages: 1,
   page: 1,
   search: '',
+  searchCategory: 'All',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
 }
@@ -230,8 +240,8 @@ const AppProvider = ({ children }) => {
     clearAlert()
   }
   const getGlobalListing = async () => {
-    const { search, sort } = state
-    let url = `/listing/getgloballisting?sort=${sort}`
+    const { search, sort, searchCategory } = state
+    let url = `/listing/getgloballisting?searchCategory=${searchCategory}&sort=${sort}`
     if (search) {
       url = url + `&search=${search}`
     }

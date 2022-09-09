@@ -37,9 +37,12 @@ const getAllListing = async (req, res) => {
     .json({ listing, totalListing: listing.length, numOfPages: 1 })
 }
 const getGlobalListing = async (req, res) => {
-  const { sort, search } = req.query
+  const { sort, search, searchCategory } = req.query
   const queryObject = {
     list: Listing,
+  }
+  if (searchCategory && searchCategory !== 'All') {
+    queryObject.category = searchCategory
   }
 
   if (search) {
