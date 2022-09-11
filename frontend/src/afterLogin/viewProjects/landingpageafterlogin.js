@@ -31,15 +31,6 @@ function Landingpageafterlogin() {
   } = useAppContext()
   const [list, setList] = useState(listing)
 
-  //datas
-  console.log(listing)
-  // const filterItems = (cate) => {
-  //   const reccategory = listing.filter((currentCategory) => {
-  //     //datas
-  //     return currentCategory.category === cate
-  //   })
-  //   setList(reccategory)
-  // }
   useEffect(() => {
     getGlobalListing()
   }, [search, searchCategory, sort])
@@ -65,50 +56,6 @@ function Landingpageafterlogin() {
 
       <div class='container'>
         <SearchContainer />
-        {/* <nav className='fo'>
-          <button
-            className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('Websites')}
-            href=''
-          >
-            Websites
-          </button>
-          <button
-            className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('Andriod apps')}
-            href=''
-          >
-            Andriod apps
-          </button>
-          <button
-            className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('iOS apps')}
-            href=''
-          >
-            iOS apps
-          </button>
-          <button
-            className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('Domains')}
-            href=''
-          >
-            Domains
-          </button>
-          <button
-            className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('Projects')}
-            href=''
-          >
-            Projects
-          </button>
-          <button
-            className='btn btn-outline-secondary fo'
-            onClick={() => filterItems('Businesses')}
-            href=''
-          >
-            Businesses
-          </button>
-        </nav> */}
       </div>
 
       <Row>
@@ -120,34 +67,14 @@ function Landingpageafterlogin() {
           )
         })}
       </Row>
-      {/* <section className='col-12 text-center'>
-        <div className='pad'>
-          <Link to='/viewallproj'>
-            <Button variant='primary'>View more</Button>
-          </Link>
-        </div>
-      </section> */}
     </>
   )
 }
-// const HandleClick = () => {
-//   const navigate = useNavigate()
-//   navigate('/viewlisting')
-// }
+
 function Data(props) {
   const navigate = useNavigate()
 
-  const {
-    _id,
-    image1,
-    image2,
-    category,
-    title,
-    summary,
-    description,
-    fixedprice,
-    bid,
-  } = props
+  const { _id, image1, category, title, summary, reserveprice, bid } = props
 
   return (
     <div>
@@ -164,7 +91,7 @@ function Data(props) {
             </Card.Body>
             <ListGroup className='list-group-flush'>
               <ListGroupItem>Category: {category}</ListGroupItem>
-              <ListGroupItem>Asking Price: {fixedprice}</ListGroupItem>
+              <ListGroupItem>Asking Price: {reserveprice}</ListGroupItem>
 
               {/* <ListGroupItem>
                 <Link to='/signup'>{status}</Link>

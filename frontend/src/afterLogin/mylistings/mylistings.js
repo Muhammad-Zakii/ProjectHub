@@ -45,17 +45,7 @@ function OwnListing(props) {
   const navigate = useNavigate()
   const { deletelisting, seteditlisting } = useAppContext()
 
-  const {
-    _id,
-    image1,
-    image2,
-    category,
-    title,
-    summary,
-    description,
-    fixedprice,
-    bid,
-  } = props
+  const { _id, image1, category, title, summary, reserveprice, bid } = props
 
   return (
     <div className='str'>
@@ -71,7 +61,7 @@ function OwnListing(props) {
           </Card.Body>
           <ListGroup className='list-group-flush'>
             <ListGroupItem>Category: {category}</ListGroupItem>
-            <ListGroupItem>Asking Price: {fixedprice}</ListGroupItem>
+            <ListGroupItem>Asking Price: {reserveprice} PKR</ListGroupItem>
 
             {/* <ListGroupItem>
                 <Link to='/signup'>{status}</Link>

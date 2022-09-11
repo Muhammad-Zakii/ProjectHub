@@ -4,6 +4,16 @@ import dotenv from 'dotenv'
 dotenv.config()
 import 'express-async-errors'
 import morgan from 'morgan'
+//Payment
+
+import Stripe from 'stripe'
+const stripe = new Stripe(
+  'sk_test_51LevKgBwi9lkF3mIBV0F7LNjuCw7KhWyt0EdmFq69QD6jz9v8fTu796xUaFa8saCMl97HydDOoaZnXu4SSzl0nYY00dFNLlCYQ'
+)
+
+//uuid
+import { v4 as uuidv4 } from 'uuid'
+
 // DataBase
 import connectDB from './db/database.js'
 //router
@@ -42,6 +52,11 @@ app.use('/admin', adminRouter)
 
 app.use('/static', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/v1/listing', authenticateUser, listingRouter)
+// app.post('/payment', (req, res) => {
+//   const { listing, token } = req.body
+//   console.log(listing)
+//   console.log(listing.category)
+// })
 
 app.use(Middleware)
 app.use(errorhandler)

@@ -16,7 +16,7 @@ const Carddesc = (props) => {
         />
         <Card.Body>
           <Card.Title>Asking Price</Card.Title>
-          <Card.Text>{props.price}</Card.Text>
+          <Card.Text>{props.basePrice} PKR</Card.Text>
         </Card.Body>
 
         <ListGroup className='list-group-flush'>

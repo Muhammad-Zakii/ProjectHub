@@ -20,6 +20,7 @@ const Listingform = () => {
     profit,
     margin,
     fixedprice,
+    reserveprice,
     handleChange,
     clearValues,
     createListing,
@@ -177,8 +178,8 @@ const Listingform = () => {
               <input
                 className='form-input'
                 type='text'
-                name='fixedprice'
-                value={fixedprice}
+                name='reserveprice'
+                value={reserveprice}
                 onChange={listingInput}
                 placeholder='PKR'
               />

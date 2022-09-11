@@ -6,17 +6,19 @@ const Afternav = (props) => {
     <div className='container afternav'>
       <div className='row'>
         <div className='col order-last'>
-          <strong>Asking price: </strong>
-          {props.price}
+          <strong>Bidding start at: </strong>
+          {props.startbid} PKR
         </div>
         <div className='col order-first'>
           <strong>Description</strong>
         </div>
         <div className='col order-first'>
-          <strong>Traffic</strong>
+          <strong>Asking price: </strong>
+          {props.baseprice} PKR
         </div>
         <div className='col order-first'>
-          <strong>Financials</strong>
+          <strong>Duration(Number of days): </strong>
+          {props.duration}
         </div>
       </div>
     </div>

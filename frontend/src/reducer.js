@@ -122,7 +122,7 @@ const reducer = (state, action) => {
       fixedprice: 0,
       startbid: 0,
       reserveprice: 0,
-      duration: 30,
+      duration: 0,
       isAunction: true,
     }
     return {

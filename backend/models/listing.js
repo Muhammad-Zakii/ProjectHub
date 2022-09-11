@@ -57,10 +57,10 @@ const ListingSchema = new mongoose.Schema(
       default: '-',
     },
 
-    fixedprice: {
-      type: String,
-      default: '0',
-    },
+    // fixedprice: {
+    //   type: String,
+    //   default: '0',
+    // },
     startbid: {
       type: String,
       default: '0',
@@ -71,7 +71,7 @@ const ListingSchema = new mongoose.Schema(
     },
     duration: {
       type: String,
-      default: '30',
+      default: '0',
     },
     createdBy: {
       type: mongoose.Types.ObjectId,

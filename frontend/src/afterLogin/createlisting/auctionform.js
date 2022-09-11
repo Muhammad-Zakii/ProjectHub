@@ -195,16 +195,16 @@ const Auctionform = () => {
             </div>
             <div className='form-row'>
               <label className='form-label' htmlFor='duration'>
-                Auction duration (days)
+                Auction duration(days)
               </label>
 
               <input
                 className='form-input'
                 type='text'
-                name='duartion'
+                name='duration'
                 value={duration}
                 onChange={listingInput}
-                placeholder='30'
+                placeholder='Days'
               />
             </div>
             <div className='form-row'></div>

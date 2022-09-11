@@ -2,8 +2,8 @@ import Listing from '../models/listing.js'
 import { StatusCodes } from 'http-status-codes'
 import BadRequestError from '../errors/bad-request.js'
 import NotFoundError from '../errors/not-found.js'
-import checkpremissions from '../utils/checkpremissions.js'
-import mongoose from 'mongoose'
+// import checkpremissions from '../utils/checkpremissions.js'
+// import mongoose from 'mongoose'
 const createListing = async (req, res) => {
   const {
     category,
@@ -77,8 +77,6 @@ const updatelisting = async (req, res) => {
     title,
     summary,
     description,
-    image1,
-    image2,
     siteage,
     profit,
     margin,
@@ -87,6 +85,7 @@ const updatelisting = async (req, res) => {
     reserveprice,
     duration,
   } = req.body
+  // let image1 = req.file?.filename
   if (!category || !title || !summary || !description) {
     throw new BadRequestError('Please provide all values.')
   }
@@ -99,6 +98,7 @@ const updatelisting = async (req, res) => {
   const updatedListing = await Listing.findByIdAndUpdate(
     { _id: listingId },
     req.body,
+    // image1,
     {
       new: true,
       runValidators: true,

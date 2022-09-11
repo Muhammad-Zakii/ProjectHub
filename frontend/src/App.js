@@ -20,6 +20,7 @@ import BidPage from './afterLogin/bidPage/bidPage'
 import OptionForSelling from './afterLogin/optionForSelling/optionForSelling'
 import SellByAuction from './afterLogin/createlisting/sellbyauction'
 import MyListings from './afterLogin/mylistings/mylistings'
+import PaymentMethod from './afterLogin/paymentMethod/paymentMethod'
 
 function App() {
   // const [data, setData] = React.useState(datas)
@@ -119,6 +120,17 @@ function App() {
           element={
             <ProtectedRoute>
               <MyListings />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Payment Integration route */}
+
+        <Route
+          path='/paymentmethod'
+          element={
+            <ProtectedRoute>
+              <PaymentMethod />
             </ProtectedRoute>
           }
         />
