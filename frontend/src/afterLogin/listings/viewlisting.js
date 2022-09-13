@@ -17,6 +17,7 @@ const Viewlisting = () => {
   let { _id } = useParams()
 
   const { listing, user } = useAppContext()
+  console.log(listing)
 
   const [listings, setListings] = useState([])
   useEffect(() => {

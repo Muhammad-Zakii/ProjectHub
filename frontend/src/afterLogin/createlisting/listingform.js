@@ -1,9 +1,10 @@
 import React from 'react'
 import '../../index.css'
 
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Form } from 'react-bootstrap'
 import { useAppContext } from '../../context/appcontext'
 import Alert from '../../components/alert'
+import { faImage } from 'react-icons/fa'
 
 const Listingform = () => {
   const {
@@ -78,7 +79,15 @@ const Listingform = () => {
             <br />
 
             <div className='form-row'>
-              <label className='form-label'>
+              <br />
+              <Form.Label> Please select atleast one image</Form.Label>
+              <Form.Control
+                type='file'
+                required
+                name='image1'
+                onChange={listingInput}
+              />
+              {/* <label className='form-label'>
                 Please select atleast one image
               </label>
               <input
@@ -86,7 +95,7 @@ const Listingform = () => {
                 type='file'
                 name='image1'
                 onChange={listingInput}
-              />
+              /> */}
             </div>
             {/* <input
               className='form-input'
@@ -100,7 +109,7 @@ const Listingform = () => {
               <label className='form-label'>Title</label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='title'
                 value={title}
@@ -138,7 +147,7 @@ const Listingform = () => {
               <label className='form-label'>Site age</label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='siteage'
                 value={siteage}
@@ -150,7 +159,7 @@ const Listingform = () => {
               <label className='form-label'>Monthly profit</label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='profit'
                 value={profit}
@@ -162,7 +171,7 @@ const Listingform = () => {
               <label className='form-label'>Profit margin</label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='margin'
                 value={margin}
@@ -176,7 +185,7 @@ const Listingform = () => {
               </label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='reserveprice'
                 value={reserveprice}

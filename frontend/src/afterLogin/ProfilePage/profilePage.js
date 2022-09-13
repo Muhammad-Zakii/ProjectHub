@@ -18,13 +18,13 @@ const ProfilePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!name || !phoneNo || !location || !email) {
+    if (!name || !phoneNo || !location || !email || !img) {
       // test and remove temporary
       displayAlert()
       return
     }
 
-    updateUser({ name, phoneNo, location, email })
+    updateUser({ name, phoneNo, location, email, img })
     console.log(updateUser)
   }
   return (
@@ -62,12 +62,12 @@ const ProfilePage = () => {
               value={email}
               handleChange={(e) => setEmail(e.target.value)}
             />
-            {/* <FormRow
+            <FormRow
               type='file'
               name='img'
               labelText='Image'
               handleChange={(e) => setImg(e.target.files[0])}
-            /> */}
+            />
             <button
               className='btn btn-block'
               type='submit'

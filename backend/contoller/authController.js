@@ -124,6 +124,12 @@ const updateUser = async (req, res) => {
     throw new BadRequestError('Please provide all values')
   }
   const user = await User.findOne({ userId: req.user.userId })
+  let img = user.img
+  if (req.file) {
+    img = req.file.filename
+  } else {
+    img = req.body.img
+  }
 
   user.name = name
   user.phoneNo = phoneNo

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
+import { Button } from 'react-bootstrap'
 
-const PaymentMethod = () => {
+const PaymentMethod = (props) => {
   const [product, setProduct] = useState({
     name: 'Website from ProjectHub',
     price: 10000,
@@ -35,9 +36,9 @@ const PaymentMethod = () => {
         token={makePayment}
         name='Buy Listing'
       >
-        <button className='btn-large blue'>
+        <Button variant='primary' size='lg' active>
           Buy listing in just {product.price} PKR
-        </button>
+        </Button>
       </StripeCheckout>
     </div>
   )

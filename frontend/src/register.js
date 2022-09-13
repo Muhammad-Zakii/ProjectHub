@@ -4,6 +4,7 @@ import FormRow from './formrow'
 import Wrapper from './wrappers'
 import { useAppContext } from './context/appcontext'
 import { useNavigate } from 'react-router-dom'
+import { Form } from 'react-bootstrap'
 import './index.css'
 const initialState = {
   name: '',
@@ -119,6 +120,13 @@ const Register = () => {
               handleChange={handleChange}
               placeholder='City'
             />
+            <Form.Label> Please select atleast one image</Form.Label>
+            {/* <Form.Control
+              type='file'
+              required
+              name='img'
+              handleChange={handleChange}
+            /> */}
             <FormRow type='file' name='img' handleChange={handleChange} />
           </>
         )}

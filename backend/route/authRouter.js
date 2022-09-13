@@ -47,6 +47,8 @@ const upload = multer({ storage: storage })
 
 router.post('/register', [apiLimiter, upload.single('img')], register)
 router.route('/login').post(apiLimiter, login)
-router.route('/updateUser').patch(authenticateUser, updateUser)
+router
+  .route('/updateUser')
+  .patch([authenticateUser, upload.single('img')], updateUser)
 
 export default router

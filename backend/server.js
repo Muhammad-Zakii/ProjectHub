@@ -52,17 +52,18 @@ app.use('/admin', adminRouter)
 
 app.use('/static', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/v1/listing', authenticateUser, listingRouter)
-app.post('/payment', (req, res) => {
-  const { listing, token } = req.body
-  console.log(listing)
-  console.log(listing.category)
+app.post('/payment', async (req, res) => {
+  const { product, token } = req.body
+  // console.log(listing)
+  // console.log(listing.category)
   const idempontencyKey = uuid()
 
-  return stripe.customers
+  return await stripe.customers
     .create({
       email: token.email,
       source: token.id,
     })
+
     .then((customer) => {
       stripe.charges.create(
         {

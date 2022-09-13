@@ -2,6 +2,7 @@ import Listing from '../models/listing.js'
 import { StatusCodes } from 'http-status-codes'
 import BadRequestError from '../errors/bad-request.js'
 import NotFoundError from '../errors/not-found.js'
+import User from '../models/users.js'
 // import checkpremissions from '../utils/checkpremissions.js'
 // import mongoose from 'mongoose'
 const createListing = async (req, res) => {
@@ -31,13 +32,15 @@ const createListing = async (req, res) => {
 }
 const getAllListing = async (req, res) => {
   const listing = await Listing.find({ createdBy: req.user.userId })
+  const user = await User.findOne({ _id: req.user.userId })
   console.log(req.user.userId)
   res
     .status(StatusCodes.OK)
-    .json({ listing, totalListing: listing.length, numOfPages: 1 })
+    .json({ listing, user, totalListing: listing.length, numOfPages: 1 })
 }
 const getGlobalListing = async (req, res) => {
   const { sort, search, searchCategory } = req.query
+
   const queryObject = {
     list: Listing,
   }
@@ -85,20 +88,23 @@ const updatelisting = async (req, res) => {
     reserveprice,
     duration,
   } = req.body
-  // let image1 = req.file?.filename
   if (!category || !title || !summary || !description) {
     throw new BadRequestError('Please provide all values.')
   }
   const list = await Listing.findOne({ _id: listingId })
-
+  let image1 = list.image1
   if (!list) {
     throw new NotFoundError(`No listing with id :${listingId}`)
   }
   // checkpremissions(req.user, listing.createdBy)
+  if (req.file) {
+    image1 = req.file.filename
+  } else {
+    image1 = req.body.image1
+  }
   const updatedListing = await Listing.findByIdAndUpdate(
     { _id: listingId },
-    req.body,
-    // image1,
+    { ...req.body, image1 },
     {
       new: true,
       runValidators: true,

@@ -1,9 +1,10 @@
 import React from 'react'
 import '../../index.css'
 
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Form } from 'react-bootstrap'
 import { useAppContext } from '../../context/appcontext'
 import Alert from '../../components/alert'
+import FormSelect from '../../formSelect'
 
 const Auctionform = () => {
   const {
@@ -74,17 +75,15 @@ const Auctionform = () => {
                 )
               })}
             </select>
+
             <br />
 
             <div className='form-row'>
-              <label className='form-label'>
-                <br />
-                Please select atleast one image
-              </label>
-
-              <input
-                className='form-input'
+              <br />
+              <Form.Label> Please select atleast one image</Form.Label>
+              <Form.Control
                 type='file'
+                required={isEditing ? false : true}
                 name='image1'
                 onChange={listingInput}
               />
@@ -95,7 +94,7 @@ const Auctionform = () => {
               <label className='form-label'>Title</label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='title'
                 value={title}
@@ -133,7 +132,7 @@ const Auctionform = () => {
               <label className='form-label'>Site age</label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='siteage'
                 value={siteage}
@@ -145,7 +144,7 @@ const Auctionform = () => {
               <label className='form-label'>Monthly profit</label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='profit'
                 value={profit}
@@ -157,7 +156,7 @@ const Auctionform = () => {
               <label className='form-label'>Profit margin</label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='margin'
                 value={margin}
@@ -171,7 +170,7 @@ const Auctionform = () => {
               </label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='startbid'
                 value={startbid}
@@ -185,7 +184,7 @@ const Auctionform = () => {
               </label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='reserveprice'
                 value={reserveprice}
@@ -199,7 +198,7 @@ const Auctionform = () => {
               </label>
 
               <input
-                className='form-input'
+                className='form-control'
                 type='text'
                 name='duration'
                 value={duration}

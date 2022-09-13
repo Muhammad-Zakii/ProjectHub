@@ -78,7 +78,7 @@ function OwnListing(props) {
                 navigate(`/viewlisting/${_id}`)
               }}
             >
-              View Listing
+              View
             </Button>
             {/* <Button variant='primary'>View Listing</Button> */}
             {/* <Button variant='outline-danger' style={{ flex: 1 }}>
@@ -99,7 +99,7 @@ function OwnListing(props) {
               style={{ flex: 1 }}
               onClick={() => deletelisting(_id)}
             >
-              Delete Listing
+              Delete
             </Button>
 
             {/* <div className='d-grid gap-2'>

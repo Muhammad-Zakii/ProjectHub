@@ -37,7 +37,10 @@ const upload = multer({ storage: storage })
 
 router.get('/', getAllListing)
 router.post('/', upload.single('image1'), createListing)
-router.route('/:id').delete(deletelisting).patch(updatelisting)
+router
+  .route('/:id')
+  .delete(deletelisting)
+  .patch(upload.single('image1'), updatelisting)
 router.get('/getgloballisting', getGlobalListing)
 router.route('/stats').get(showstats)
 

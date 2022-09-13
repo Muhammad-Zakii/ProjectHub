@@ -165,15 +165,15 @@ const AppProvider = ({ children }) => {
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN })
     try {
-      // const formData = new FormData()
+      const formData = new FormData()
 
-      // for (const key in currentUser) {
-      //   if (Object.hasOwnProperty.call(currentUser, key)) {
-      //     formData.append(key, currentUser[key])
-      //   }
-      // }
+      for (const key in currentUser) {
+        if (Object.hasOwnProperty.call(currentUser, key)) {
+          formData.append(key, currentUser[key])
+        }
+      }
 
-      const { data } = await authFetch.patch('/auth/updateUser', currentUser)
+      const { data } = await authFetch.patch('/auth/updateUser', formData)
 
       const { user, token } = data
       dispatch({
@@ -289,36 +289,14 @@ const AppProvider = ({ children }) => {
     dispatch({ type: EDIT_LISTING_BEGIN })
 
     try {
-      const {
-        category,
-        image1,
-        image2,
-        title,
-        summary,
-        description,
-        siteage,
-        profit,
-        margin,
-        fixedprice,
-        startbid,
-        reserveprice,
-        duration,
-      } = state
-      await authFetch.patch(`/listing/${state.editCategoryId}`, {
-        category,
-        image1,
-        image2,
-        title,
-        summary,
-        description,
-        siteage,
-        profit,
-        margin,
-        fixedprice,
-        startbid,
-        reserveprice,
-        duration,
-      })
+      const formData = new FormData()
+
+      for (const key in state) {
+        if (Object.hasOwnProperty.call(state, key)) {
+          formData.append(key, state[key])
+        }
+      }
+      await authFetch.patch(`/listing/${state.editCategoryId}`, formData)
       dispatch({ type: EDIT_LISTING_SUCCESS })
       dispatch({ type: CLEAR_VALUES })
     } catch (error) {
