@@ -70,9 +70,9 @@ const initialState = {
   siteage: '-',
   profit: '-',
   margin: '-',
-  // fixedprice: 0,
+  status: false,
   startbid: 0,
-  reserveprice: 0,
+  price: 0,
   duration: 0,
   isAunction: true,
   listing: [],
@@ -321,6 +321,32 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CLEAR_FILTERS })
   }
 
+  const createBid = async (bid) => {
+    try {
+      const { data } = await authFetch.post(`/bid`, bid)
+      if (data) {
+        alert('Sended Successfully')
+      } else {
+        alert('Not Sended Successfully')
+      }
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
+  const getAllBid = async (listingId) => {
+    try {
+      const { data } = await authFetch.get(`/bid`, { listingId })
+      if (data) {
+        return data
+      } else {
+        console.log('Not Sended Successfully')
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -338,6 +364,8 @@ const AppProvider = ({ children }) => {
         editlisting,
         getGlobalListing,
         clearFilters,
+        createBid,
+        getAllBid,
         // filteritems,
       }}
     >

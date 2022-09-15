@@ -21,6 +21,7 @@ import authRouter from './route/authRouter.js'
 import listingRouter from './route/listingRouter.js'
 
 import adminRouter from './route/adminRouter.js'
+import bidRouter from './route/bidRouter.js'
 
 //Middleware
 import errorhandler from './middleware/errorhandler.js'
@@ -49,6 +50,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRouter)
 
 app.use('/admin', adminRouter)
+app.use('/api/v1/bid', authenticateUser, bidRouter)
 
 app.use('/static', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/v1/listing', authenticateUser, listingRouter)

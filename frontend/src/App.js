@@ -107,7 +107,8 @@ function App() {
           }
         />
         <Route
-          path='/biddingPage'
+          path='/biddingPage/:listingId'
+          // :listingId
           element={
             <ProtectedRoute>
               <BidPage />

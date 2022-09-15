@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import NavBarr from '../navbars/navbar'
 import { InputGroup, Form, Button } from 'react-bootstrap'
 import Footer from '../footer/footer2'
+import { useAppContext } from '../../context/appcontext'
+import { useParams } from 'react-router-dom'
+
+const initialData = { bidPrice: '0' }
+
 const BidPage = () => {
+  const { createBid } = useAppContext()
+  const [bid, setBid] = useState(initialData)
+  const { listingId } = useParams()
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setBid((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    createBid({ ...bid, listingId })
+  }
+
   return (
     <>
       <NavBarr />
@@ -26,14 +45,22 @@ const BidPage = () => {
             <br />
             <p className='about-listing'>Enter your maximum bid in PKR</p>
             <br />
-            <InputGroup>
-              <InputGroup.Text>PKR</InputGroup.Text>
-              <Form.Control as='textarea' aria-label='With textarea' />
-            </InputGroup>
-            <br />
-            <Button variant='primary' size='lg'>
-              Place Bid
-            </Button>
+            <form onSubmit={handleSubmit}>
+              <InputGroup>
+                <InputGroup.Text>PKR</InputGroup.Text>
+                <Form.Control
+                  onChange={handleChange}
+                  name='bidPrice'
+                  value={bid.bidPrice}
+                  as='textarea'
+                  aria-label='With textarea'
+                />
+              </InputGroup>
+              <br />
+              <Button type='submit' variant='primary' size='lg'>
+                Place Bid
+              </Button>
+            </form>
             <br />
             <br />
             <h4>Buyer Safty</h4>

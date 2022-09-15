@@ -21,7 +21,8 @@ const Auctionform = () => {
     profit,
     margin,
     startbid,
-    reserveprice,
+    price,
+    status,
     duration,
     handleChange,
     clearValues,
@@ -178,18 +179,27 @@ const Auctionform = () => {
                 placeholder='PKR'
               />
             </div>
-            <div className='form-row'>
-              <label className='form-label' htmlFor='endbid'>
-                Base price
-              </label>
+            <div>
+              <div className='form-row'>
+                <label className='form-label' htmlFor='endbid'>
+                  Base price
+                </label>
 
-              <input
-                className='form-control'
-                type='text'
-                name='reserveprice'
-                value={reserveprice}
+                <input
+                  className='form-control'
+                  type='text'
+                  name='price'
+                  value={price}
+                  onChange={listingInput}
+                  placeholder='PKR'
+                />
+              </div>
+              <Form.Check
+                aria-label='option 1'
+                name='status'
+                value={true}
+                required
                 onChange={listingInput}
-                placeholder='PKR'
               />
             </div>
             <div className='form-row'>

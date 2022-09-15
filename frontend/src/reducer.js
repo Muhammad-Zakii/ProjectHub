@@ -119,9 +119,9 @@ const reducer = (state, action) => {
       siteage: '-',
       profit: '-',
       margin: '-',
-      fixedprice: 0,
+      price: 0,
       startbid: 0,
-      reserveprice: 0,
+      status: false,
       duration: 0,
       isAunction: true,
     }
@@ -174,9 +174,9 @@ const reducer = (state, action) => {
       siteage,
       profit,
       margin,
-      fixedprice,
+      price,
       startbid,
-      reserveprice,
+      status,
       duration,
     } = list
     return {
@@ -190,9 +190,9 @@ const reducer = (state, action) => {
       siteage,
       profit,
       margin,
-      fixedprice,
+      price,
       startbid,
-      reserveprice,
+      status,
       duration,
     }
   }

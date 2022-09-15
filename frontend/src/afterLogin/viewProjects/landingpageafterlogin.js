@@ -74,7 +74,7 @@ function Landingpageafterlogin() {
 function Data(props) {
   const navigate = useNavigate()
 
-  const { _id, image1, category, title, summary, reserveprice, bid } = props
+  const { _id, image1, category, title, summary, price, bid } = props
 
   return (
     <div>
@@ -91,7 +91,7 @@ function Data(props) {
             </Card.Body>
             <ListGroup className='list-group-flush'>
               <ListGroupItem>Category: {category}</ListGroupItem>
-              <ListGroupItem>Asking Price: {reserveprice}</ListGroupItem>
+              <ListGroupItem>Price: {price}</ListGroupItem>
 
               {/* <ListGroupItem>
                 <Link to='/signup'>{status}</Link>

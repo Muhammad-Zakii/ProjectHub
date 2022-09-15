@@ -13,8 +13,8 @@ const Afternav = (props) => {
           <strong>Description</strong>
         </div>
         <div className='col order-first'>
-          <strong>Asking price: </strong>
-          {props.baseprice} PKR
+          <strong>Price: </strong>
+          {props.price} PKR
         </div>
         <div className='col order-first'>
           <strong>Duration(Number of days): </strong>

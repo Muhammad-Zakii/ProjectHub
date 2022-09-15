@@ -57,18 +57,19 @@ const ListingSchema = new mongoose.Schema(
       default: '-',
     },
 
-    // fixedprice: {
-    //   type: String,
-    //   default: '0',
-    // },
+    price: {
+      type: String,
+      default: '0',
+    },
     startbid: {
       type: String,
       default: '0',
     },
-    reserveprice: {
-      type: String,
-      default: '0',
+    status: {
+      type: Boolean,
+      default: false,
     },
+
     duration: {
       type: String,
       default: '0',

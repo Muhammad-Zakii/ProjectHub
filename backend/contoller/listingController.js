@@ -14,9 +14,9 @@ const createListing = async (req, res) => {
     siteage,
     profit,
     margin,
-    fixedprice,
+    price,
     startbid,
-    reserveprice,
+    status,
     duration,
   } = req.body
   console.log(req.body)
@@ -83,9 +83,9 @@ const updatelisting = async (req, res) => {
     siteage,
     profit,
     margin,
-    fixedprice,
+    price,
     startbid,
-    reserveprice,
+    status,
     duration,
   } = req.body
   if (!category || !title || !summary || !description) {
@@ -99,9 +99,10 @@ const updatelisting = async (req, res) => {
   // checkpremissions(req.user, listing.createdBy)
   if (req.file) {
     image1 = req.file.filename
-  } else {
-    image1 = req.body.image1
   }
+  // } else {
+  //   image1 = req.body.image1
+  // }
   const updatedListing = await Listing.findByIdAndUpdate(
     { _id: listingId },
     { ...req.body, image1 },

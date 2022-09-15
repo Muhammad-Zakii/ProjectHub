@@ -27,6 +27,7 @@ const Viewlisting = () => {
       setListings(lest)
     }
   }, [])
+  console.log(listings)
 
   return (
     <>
@@ -38,7 +39,7 @@ const Viewlisting = () => {
             <Afternav
               startbid={listings.startbid}
               duration={listings.duration}
-              baseprice={listings.reserveprice}
+              price={listings.price}
             />
           </div>
           <div style={{ margin: '60px' }}>
@@ -72,7 +73,9 @@ const Viewlisting = () => {
                 <div className='card-desc'>
                   <Carddesc
                     img={listings.image1}
-                    basePrice={listings.reserveprice}
+                    price={listings.price}
+                    status={listings.status}
+                    listingId={_id}
                   />
                 </div>
                 <div className='about-seller'>

@@ -20,8 +20,8 @@ const Listingform = () => {
     siteage,
     profit,
     margin,
-    fixedprice,
-    reserveprice,
+    price,
+    status,
     handleChange,
     clearValues,
     createListing,
@@ -179,19 +179,22 @@ const Listingform = () => {
                 onChange={listingInput}
               />
             </div>
-            <div className='form-row'>
-              <label className='form-label' htmlFor='fixedprice'>
-                Fixed price
-              </label>
+            <div>
+              <div className='form-row'>
+                <label className='form-label' htmlFor='price'>
+                  Price
+                </label>
 
-              <input
-                className='form-control'
-                type='text'
-                name='reserveprice'
-                value={reserveprice}
-                onChange={listingInput}
-                placeholder='PKR'
-              />
+                <input
+                  className='form-control'
+                  type='text'
+                  name='price'
+                  value={price}
+                  onChange={listingInput}
+                  placeholder='PKR'
+                />
+              </div>
+              {/* <Form.Check aria-label='option 1' /> */}
             </div>
             <div className='form-row'>
               {/* <p className='form-label'>
