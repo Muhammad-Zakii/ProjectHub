@@ -15,17 +15,26 @@ import { useAppContext } from '../../context/appcontext'
 import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
 const Viewlisting = () => {
   let { _id } = useParams()
-
-  const { listing, user } = useAppContext()
+  const [totalBid, setTotalBid] = useState(0)
+  const [bids, setBids] = useState([])
+  const { listing, user, getAllBid } = useAppContext()
   console.log(listing)
 
   const [listings, setListings] = useState([])
-  useEffect(() => {
+  const apiCall = async () => {
     let lest = listing.find((list) => list._id === _id)
     console.log(lest)
     if (lest) {
       setListings(lest)
+      const data = await getAllBid(_id)
+      setBids(data.bids)
+      setTotalBid(data.bids.length)
     }
+  }
+  console.log(bids)
+
+  useEffect(() => {
+    apiCall()
   }, [])
   console.log(listings)
 
@@ -69,14 +78,23 @@ const Viewlisting = () => {
                   <Charts />
                 </div>
               </Col>
+
               <Col md='4' sm='12' className='justify-content-md-center'>
                 <div className='card-desc'>
                   <Carddesc
                     img={listings.image1}
                     price={listings.price}
                     status={listings.status}
+                    createdAt={listings.createdAt}
+                    duration={listings.duration}
+                    totalBid={totalBid}
                     listingId={_id}
                   />
+                  {bids.map((bid, id) => (
+                    <div key={id}>
+                      <div>{bid.bidPrice}</div>
+                    </div>
+                  ))}
                 </div>
                 <div className='about-seller'>
                   <Col className='justify-content-md-center mt-5'>

@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/appcontext'
 import '../../index.css'
 
 const Carddesc = (props) => {
-  // const { getAllBid } = useAppContext()
-  // const [totalBid, setTotalBid] = useState(0)
-  // console.log(props.listingId)
-  // useEffect(async () => {
-  //   const total = await getAllBid(props.listingId)
-  //   setTotalBid(total.bids.length)
-  // }, [])
-
+  const [bool, setBool] = useState(false)
+  const navigate = useNavigate()
+  const checkBidTime = () => {
+    const createdDay = new Date(props.createdAt).getDate()
+    const requiredDay = Number(createdDay) + Number(props.duration) + 1
+    const currentDay = new Date().getDate()
+    if (currentDay >= requiredDay) {
+      setBool(true)
+    } else {
+      navigate(`/biddingPage/${props.listingId}`)
+    }
+  }
   return (
     <div
       className='shadow p-3 mb-5 bg-white rounded p-3'
@@ -37,27 +41,28 @@ const Carddesc = (props) => {
               Contact Seller
             </Button>
           </Link>
-          <Link to={`/biddingPage/${props.listingId}`} className='d-grid gap-2'>
-            {/* {`/biddingPage/${props.listingId}`} */}
-            {props.status ? (
-              <Button
-                style={{ flex: 3 }}
-                className='btn btn-primary btn-block mb-4 card-btn'
-              >
-                Make Bid
-              </Button>
-            ) : (
-              <Button
-                style={{ flex: 3 }}
-                className='btn btn-primary btn-block mb-4 card-btn'
-              >
-                Fixed Price
-              </Button>
-            )}
-          </Link>
+          {/* {`/biddingPage/${props.listingId}`} */}
+          {props.status ? (
+            <Button
+              disabled={bool}
+              onClick={checkBidTime}
+              style={{ flex: 3 }}
+              className='btn btn-primary btn-block mb-4 card-btn'
+            >
+              {/* {bool ? <icon></icon> : <icon></icon>} */}
+              Make Bid
+            </Button>
+          ) : (
+            <Button
+              style={{ flex: 3 }}
+              className='btn btn-primary btn-block mb-4 card-btn'
+            >
+              Fixed Price
+            </Button>
+          )}
           <ListGroupItem></ListGroupItem>
         </ListGroup>
-        <Card.Body>Total bidding: </Card.Body>
+        <Card.Body>Total bidding: {props.totalBid} </Card.Body>
         {/* {totalBid} */}
       </Card>
     </div>

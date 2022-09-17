@@ -14,9 +14,17 @@ const createBid = async (req, res) => {
   }
 }
 const getAllBid = async (req, res) => {
-  console.log(req.body)
+  console.log(req.params)
   try {
-    const bids = await Bid.find({ listingId: req.body.listingId })
+    const bids = await Bid.find({ listingId: req.params.id })
+
+    // const newBids = []
+    // for (const bid of bids) {
+    //   const user = await User.find({ _id: bid.userId })
+    //   newBids.conca({ bidPrice: bid.bidPrice, ...user })
+    // }
+
+    // console.log(newBids)
 
     res.status(StatusCodes.CREATED).json({ bids })
   } catch (error) {

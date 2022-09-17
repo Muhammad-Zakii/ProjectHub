@@ -9,9 +9,11 @@ import { useParams } from 'react-router-dom'
 const initialData = { bidPrice: '0' }
 
 const BidPage = () => {
-  const { createBid } = useAppContext()
+  const { createBid, listing } = useAppContext()
   const [bid, setBid] = useState(initialData)
   const { listingId } = useParams()
+  const list = listing.find((l) => l._id === listingId)
+  console.log(list)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -38,8 +40,8 @@ const BidPage = () => {
             </p>
             <br />
             <p className='about-listing'>
-              The Current Price is <strong>20000 PKR</strong>. Listing ends in:{' '}
-              <strong>5 days</strong>
+              The Current Price is <strong>{list.price} PKR</strong>. Listing
+              ends in: <strong>{list.duration} days</strong>
             </p>
             <h4>Your Bid</h4>
             <br />

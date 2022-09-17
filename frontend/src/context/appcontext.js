@@ -336,7 +336,7 @@ const AppProvider = ({ children }) => {
 
   const getAllBid = async (listingId) => {
     try {
-      const { data } = await authFetch.get(`/bid`, { listingId })
+      const { data } = await authFetch.get(`/bid/${listingId}`)
       if (data) {
         return data
       } else {
