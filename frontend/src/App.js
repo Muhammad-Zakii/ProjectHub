@@ -21,6 +21,7 @@ import OptionForSelling from './afterLogin/optionForSelling/optionForSelling'
 import SellByAuction from './afterLogin/createlisting/sellbyauction'
 import MyListings from './afterLogin/mylistings/mylistings'
 import PaymentMethod from './afterLogin/paymentMethod/paymentMethod'
+import ViewListingBySeller from './afterLogin/mylistings/viewlistingbyseller'
 
 function App() {
   // const [data, setData] = React.useState(datas)
@@ -120,6 +121,16 @@ function App() {
           element={
             <ProtectedRoute>
               <MyListings />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* View listing by seller */}
+        <Route
+          path='/viewlistingbyseller/:_id'
+          element={
+            <ProtectedRoute>
+              <ViewListingBySeller />
             </ProtectedRoute>
           }
         />

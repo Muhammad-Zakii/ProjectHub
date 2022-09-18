@@ -104,10 +104,9 @@ span {
 .clas1 {
   background-color: #141526;
   color: white;
-  /* padding-bottom: 3rem !important;
-  position: relative;
-  padding: 50px;
-  margin: 5px; */
+}
+.clas2 {
+  color: white;
 }
 .viewallnav {
   color: white;

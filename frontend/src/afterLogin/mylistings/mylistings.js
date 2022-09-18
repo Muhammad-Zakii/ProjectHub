@@ -78,7 +78,7 @@ function OwnListing(props) {
               style={{ flex: 1 }}
               // variant='primary'
               onClick={() => {
-                navigate(`/viewlisting/${_id}`)
+                navigate(`/viewlistingbyseller/${_id}`)
               }}
             >
               View

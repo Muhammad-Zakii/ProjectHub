@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { datas } from '../../data'
+
 import Navbar from '../navbars/navbar'
 
 import Afternav from '../afternav/afternav'
@@ -14,7 +14,7 @@ import Charts from '../chart/chart'
 import { useAppContext } from '../../context/appcontext'
 import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
 import Linksnavbar from '../navbars/linksnavbar'
-const Viewlisting = () => {
+const ViewListingBySeller = () => {
   let { _id } = useParams()
   const [totalBid, setTotalBid] = useState(0)
   const [bids, setBids] = useState([])
@@ -92,6 +92,11 @@ const Viewlisting = () => {
                     totalBid={totalBid}
                     listingId={_id}
                   />
+                  {bids.map((bid, id) => (
+                    <div key={id}>
+                      <div>{bid.bidPrice}</div>
+                    </div>
+                  ))}
                 </div>
                 <div className='about-seller'>
                   <Col className='justify-content-md-center mt-5'>
@@ -149,4 +154,4 @@ const Viewlisting = () => {
   )
 }
 
-export default Viewlisting
+export default ViewListingBySeller

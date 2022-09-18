@@ -23,7 +23,7 @@ import {
   EDIT_LISTING_ERROR,
   CLEAR_FILTERS,
 } from './context/action'
-import Swal from 'sweetalert2'
+
 import { initialState } from './context/appcontext'
 
 const reducer = (state, action) => {
