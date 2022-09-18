@@ -7,7 +7,7 @@ import FormSelect from '../../formSelect'
 
 const SearchContainer = () => {
   const {
-    isLoading,
+    // isLoading,
     search,
     sort,
     sortOptions,
@@ -17,7 +17,7 @@ const SearchContainer = () => {
     categoryoptionss,
   } = useAppContext()
   const handleSearch = (e) => {
-    if (isLoading) return
+    // if (isLoading) return
     handleChange({ name: e.target.name, value: e.target.value })
   }
   const handleSubmit = (e) => {
@@ -51,7 +51,7 @@ const SearchContainer = () => {
           />
           <button
             className='btn btn-block btn-danger'
-            disabled={isLoading}
+            // disabled={isLoading}
             onClick={handleSubmit}
           >
             Clear filter

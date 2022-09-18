@@ -23,7 +23,7 @@ import {
   EDIT_LISTING_ERROR,
   CLEAR_FILTERS,
 } from './context/action'
-
+import Swal from 'sweetalert2'
 import { initialState } from './context/appcontext'
 
 const reducer = (state, action) => {
@@ -83,7 +83,7 @@ const reducer = (state, action) => {
   if (action.type === UPDATE_USER_SUCCESS) {
     return {
       ...state,
-      isLoading: true,
+      isLoading: false,
       token: action.payload.token,
       user: action.payload.user,
       // userLocation: action.payload.location,
@@ -110,9 +110,10 @@ const reducer = (state, action) => {
   }
   if (action.type === CLEAR_VALUES) {
     const initialState = {
-      isEditing: 'false',
+      isEditing: false,
       editCategoryId: '',
       category: '--Please Select Category--',
+      image1: '',
       title: '',
       summary: '',
       description: '',
@@ -123,7 +124,6 @@ const reducer = (state, action) => {
       startbid: 0,
       status: false,
       duration: 0,
-      isAunction: true,
     }
     return {
       ...state,
@@ -168,6 +168,7 @@ const reducer = (state, action) => {
     const {
       _id,
       category,
+      image1,
       title,
       summary,
       description,
@@ -184,6 +185,7 @@ const reducer = (state, action) => {
       isEditing: true,
       editCategoryId: _id,
       category,
+      image1,
       title,
       summary,
       description,
@@ -231,14 +233,6 @@ const reducer = (state, action) => {
       sort: 'latest',
     }
   }
-  // if (action.type === SET_FILTER_CATEGORY) {
-  //   const reccategory = state.listing.filter((currentCategory) => {
-  //     //datas
-  //     return currentCategory.category === action.payload.category
-  //   })
-  //   return { ...state, reccategory }
-
-  // }
 }
 
 export default reducer

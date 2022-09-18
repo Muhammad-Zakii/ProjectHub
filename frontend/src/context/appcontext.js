@@ -1,6 +1,9 @@
 import React, { useReducer, useContext } from 'react'
 
 import reducer from '../reducer'
+
+import Swal from 'sweetalert2'
+
 import axios from 'axios'
 import {
   DISPLAY_ALERT,
@@ -210,7 +213,7 @@ const AppProvider = ({ children }) => {
 
       await authFetch.post('/listing', formData)
       dispatch({ type: CREATE_LISTING_SUCCESS })
-      // dispatch({ CLEAR_VALUES })
+      clearValues()
     } catch (error) {
       if (error.response.status === 401) return
       dispatch({
@@ -262,26 +265,6 @@ const AppProvider = ({ children }) => {
     }
     clearAlert()
   }
-  // const filteritems = (reccategory) => {
-  //   const {
-  //     category,
-  //     title,
-  //     summary,
-
-  //     fixedprice,
-  //   } = state
-  //   dispatch({
-  //     type: SET_FILTER_CATEGORY,
-  //     payload: {
-  //       category,
-  //       title,
-  //       summary,
-
-  //       fixedprice,
-  //     },
-  //   })
-  //   // console.log(reccategory)
-  // }
   const seteditlisting = (id) => {
     dispatch({ type: SET_EDIT_LISTING, payload: { id } })
   }
@@ -317,6 +300,7 @@ const AppProvider = ({ children }) => {
       logoutUser()
     }
   }
+
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS })
   }
@@ -325,9 +309,13 @@ const AppProvider = ({ children }) => {
     try {
       const { data } = await authFetch.post(`/bid`, bid)
       if (data) {
-        alert('Sended Successfully')
+        Swal.fire('Good job!', 'Your bid has been placed!', 'success')
       } else {
-        alert('Not Sended Successfully')
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       }
     } catch (error) {
       alert(error.message)
@@ -366,6 +354,7 @@ const AppProvider = ({ children }) => {
         clearFilters,
         createBid,
         getAllBid,
+
         // filteritems,
       }}
     >

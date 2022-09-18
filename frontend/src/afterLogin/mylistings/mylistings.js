@@ -43,6 +43,9 @@ const MyListings = () => {
 
 function OwnListing(props) {
   const navigate = useNavigate()
+  const showdeletealert = () => {
+    Swal.fire('Deleted!', 'Your listing has been deleted', 'success')
+  }
   const { deletelisting, seteditlisting } = useAppContext()
 
   const { _id, image1, category, title, summary, price, bid } = props
@@ -97,7 +100,10 @@ function OwnListing(props) {
             <Button
               variant='outline-danger'
               style={{ flex: 1 }}
-              onClick={() => deletelisting(_id)}
+              onClick={() => {
+                deletelisting(_id)
+                showdeletealert()
+              }}
             >
               Delete
             </Button>

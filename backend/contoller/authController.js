@@ -127,9 +127,10 @@ const updateUser = async (req, res) => {
   let img = user.img
   if (req.file) {
     img = req.file.filename
-  } else {
-    img = req.body.img
   }
+  // else {
+  //   img = req.body.img
+  // }
 
   user.name = name
   user.phoneNo = phoneNo

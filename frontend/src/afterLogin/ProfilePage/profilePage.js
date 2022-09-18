@@ -6,8 +6,14 @@ import Wrapper from '../../wrappers'
 import { useAppContext } from '../../context/appcontext'
 import NavBarr from '../navbars/navbar'
 import Footer from '../footer/footer2'
+import { Stack, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const ProfilePage = () => {
+  let navigate = useNavigate()
+  const cancelUserPage = () => {
+    navigate('/afterlogin')
+  }
   const { user, showAlert, displayAlert, updateUser, isLoading } =
     useAppContext()
   const [name, setName] = useState(user?.name)
@@ -68,13 +74,25 @@ const ProfilePage = () => {
               labelText='Image'
               handleChange={(e) => setImg(e.target.files[0])}
             />
-            <button
-              className='btn btn-block'
-              type='submit'
-              disabled={isLoading}
-            >
-              {isLoading ? 'Please Wait...' : 'Save Changes'}
-            </button>
+            {/* <Form.Control
+              type='file'
+              name='img'
+              labelText='Image'
+              handleChange={(e) => setImg(e.target.files[0])}
+            /> */}
+            <Stack gap={2} className='col-md-5 mx-auto'>
+              <Button
+                variant='outline-primary'
+                type='submit'
+                disabled={isLoading}
+              >
+                {isLoading ? 'Please Wait...' : 'Save Changes'}
+              </Button>
+
+              <Button onClick={cancelUserPage} variant='outline-danger'>
+                Cancel
+              </Button>
+            </Stack>
           </div>
         </form>
       </Wrapper>
