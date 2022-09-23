@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import { Card, ListGroup, Alert, Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/appcontext'
 import '../../index.css'
@@ -47,7 +47,7 @@ const Carddesc = (props) => {
           </Link>
           {/* {`/biddingPage/${props.listingId}`} */}
           {props.status ? (
-            <div>
+            <div className='d-grid gap-2'>
               <Button
                 disabled={props.bool}
                 onClick={checkBidTime}
@@ -57,7 +57,6 @@ const Carddesc = (props) => {
                 {/* {props.bool ? <icon></icon> : <icon></icon>} */}
                 Make Bid
               </Button>
-              <br />
               {props.bool && user?._id === props.highest['0']._id && (
                 <Button
                   style={{ flex: 3 }}
@@ -76,8 +75,17 @@ const Carddesc = (props) => {
             </Button>
           )}
         </ListGroup>
-        <Card.Body>Total bidding: {props.totalBid} </Card.Body>
-        <Card.Body>Highest bid: {props.highest.bidPrice} </Card.Body>
+        <Alert variant='info'>
+          <Card.Body>
+            Total biddings: <strong>{props.totalBid}</strong>
+          </Card.Body>
+        </Alert>
+        <Alert variant='warning'>
+          <Card.Body>
+            Highest bid: <strong>{props.highest.bidPrice}</strong>
+          </Card.Body>
+        </Alert>
+
         {/* {totalBid} */}
       </Card>
     </div>

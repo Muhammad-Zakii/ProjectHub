@@ -6,7 +6,7 @@ import Navbar from '../navbars/navbar'
 
 import Afternav from '../afternav/afternav'
 import Flexbox from '../flexbox/flexbox'
-import Carddesc from '../carddesc/carddesc'
+import CardForSeller from './cardforseller'
 import Footer from '../../footer'
 import '../../index.css'
 import { Col, Row, Table } from 'react-bootstrap'
@@ -88,16 +88,13 @@ const ViewListingBySeller = () => {
 
               <Col md='4' sm='12' className='justify-content-md-center'>
                 <div className='card-desc'>
-                  <Carddesc
+                  <CardForSeller
                     img={listings.image1}
                     price={listings.price}
-                    status={listings.status}
                     createdAt={listings.createdAt}
                     duration={listings.duration}
                     totalBid={totalBid}
                     highest={highest}
-                    bool={bool}
-                    setBool={setBool}
                     listingId={_id}
                   />
 

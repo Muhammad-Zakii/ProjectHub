@@ -65,10 +65,6 @@ function OwnListing(props) {
           <ListGroup className='list-group-flush'>
             <ListGroupItem>Category: {category}</ListGroupItem>
             <ListGroupItem>Price: {price} PKR</ListGroupItem>
-
-            {/* <ListGroupItem>
-                <Link to='/signup'>{status}</Link>
-              </ListGroupItem> */}
           </ListGroup>
           <Card.Body
             style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}

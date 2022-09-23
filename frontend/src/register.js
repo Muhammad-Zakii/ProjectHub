@@ -120,7 +120,7 @@ const Register = () => {
               handleChange={handleChange}
               placeholder='City'
             />
-            <Form.Label> Please select atleast one image</Form.Label>
+
             {/* <Form.Control
               type='file'
               required
