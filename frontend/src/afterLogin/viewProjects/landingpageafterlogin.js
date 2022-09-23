@@ -16,6 +16,7 @@ import { useAppContext } from '../../context/appcontext'
 import Wrapper from '../../wrappers'
 import Loading from '../loadingSpinner/loading'
 import SearchContainer from '../searchContainer/searchContainer'
+import Paginationbtn from '../pagination/paginationbtn'
 
 function Landingpageafterlogin() {
   const {
@@ -28,12 +29,13 @@ function Landingpageafterlogin() {
     search,
     sort,
     searchCategory,
+    numOfPages,
   } = useAppContext()
   const [list, setList] = useState(listing)
 
   useEffect(() => {
     getGlobalListing()
-  }, [search, searchCategory, sort])
+  }, [page, search, searchCategory, sort])
   if (isLoading) {
     return <Loading center />
   }
@@ -46,17 +48,22 @@ function Landingpageafterlogin() {
   }
   return (
     <>
-      <div className='cen'>
-        <h4>Browese latest businesses,projects and websites,domains</h4>
-        <p>
-          You can find here selling webistes domains,projects and other online
-          businesses
-        </p>
-      </div>
-
-      <div class='container'>
-        <SearchContainer />
-      </div>
+      <Row>
+        <div className='cen'>
+          <h4>Browese latest businesses,projects and websites,domains</h4>
+          <p>
+            You can find here selling webistes domains,projects and other online
+            businesses
+          </p>
+        </div>
+      </Row>
+      <Row>
+        <Col>
+          <div class='container'>
+            <SearchContainer />
+          </div>
+        </Col>
+      </Row>
 
       <Row>
         {listing.map((dataall) => {
@@ -66,6 +73,7 @@ function Landingpageafterlogin() {
             </Col>
           )
         })}
+        {numOfPages > 1 || <Paginationbtn />}
       </Row>
     </>
   )

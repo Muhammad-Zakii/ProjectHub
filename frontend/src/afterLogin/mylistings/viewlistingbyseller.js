@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
+import { datas } from '../../data'
 import Navbar from '../navbars/navbar'
 
 import Afternav from '../afternav/afternav'
@@ -9,7 +9,7 @@ import Flexbox from '../flexbox/flexbox'
 import Carddesc from '../carddesc/carddesc'
 import Footer from '../../footer'
 import '../../index.css'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Table } from 'react-bootstrap'
 import Charts from '../chart/chart'
 import { useAppContext } from '../../context/appcontext'
 import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
@@ -17,10 +17,11 @@ import Linksnavbar from '../navbars/linksnavbar'
 const ViewListingBySeller = () => {
   let { _id } = useParams()
   const [totalBid, setTotalBid] = useState(0)
+  const [highest, setHighest] = useState({})
   const [bids, setBids] = useState([])
   const { listing, user, getAllBid } = useAppContext()
   console.log(listing)
-
+  const [bool, setBool] = useState(false)
   const [listings, setListings] = useState([])
   const apiCall = async () => {
     let lest = listing.find((list) => list._id === _id)
@@ -29,16 +30,20 @@ const ViewListingBySeller = () => {
       setListings(lest)
       const data = await getAllBid(_id)
       setBids(data.bids)
+      const hi = data.bids.reduce((firstItem, lastItem) =>
+        firstItem.bidPrice > lastItem.bidPrice ? firstItem : lastItem
+      )
+      setHighest(hi)
       setTotalBid(data.bids.length)
     }
   }
-  console.log(bids)
+  console.log(highest)
 
   useEffect(() => {
     apiCall()
   }, [])
-  console.log(listings)
-
+  // console.log(listings)
+  console.log(bids)
   return (
     <>
       <Navbar />
@@ -90,13 +95,32 @@ const ViewListingBySeller = () => {
                     createdAt={listings.createdAt}
                     duration={listings.duration}
                     totalBid={totalBid}
+                    highest={highest}
+                    bool={bool}
+                    setBool={setBool}
                     listingId={_id}
                   />
-                  {bids.map((bid, id) => (
-                    <div key={id}>
-                      <div>{bid.bidPrice}</div>
-                    </div>
-                  ))}
+
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Bid Price</th>
+                        <th>Bid Placed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {bids.map((bid, id) => (
+                        <tr>
+                          <td>{id + 1}</td>
+                          <td>{bid['0'].name}</td>
+                          <td>{bid.bidPrice}</td>
+                          <td>{bid.createdAt}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
                 </div>
                 <div className='about-seller'>
                   <Col className='justify-content-md-center mt-5'>

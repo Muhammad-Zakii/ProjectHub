@@ -5,18 +5,22 @@ import { useAppContext } from '../../context/appcontext'
 import '../../index.css'
 
 const Carddesc = (props) => {
-  const [bool, setBool] = useState(false)
   const navigate = useNavigate()
+  const { user } = useAppContext()
+  console.log(user, props.highest)
+
   const checkBidTime = () => {
     const createdDay = new Date(props.createdAt).getDate()
     const requiredDay = Number(createdDay) + Number(props.duration) + 1
     const currentDay = new Date().getDate()
+
     if (currentDay >= requiredDay) {
-      setBool(true)
+      props.setBool(true)
     } else {
       navigate(`/biddingPage/${props.listingId}`)
     }
   }
+
   return (
     <div
       className='shadow p-3 mb-5 bg-white rounded p-3'
@@ -43,15 +47,26 @@ const Carddesc = (props) => {
           </Link>
           {/* {`/biddingPage/${props.listingId}`} */}
           {props.status ? (
-            <Button
-              disabled={bool}
-              onClick={checkBidTime}
-              style={{ flex: 3 }}
-              className='btn btn-primary btn-block mb-4 card-btn'
-            >
-              {/* {bool ? <icon></icon> : <icon></icon>} */}
-              Make Bid
-            </Button>
+            <div>
+              <Button
+                disabled={props.bool}
+                onClick={checkBidTime}
+                style={{ flex: 3 }}
+                className='btn btn-primary btn-block mb-4 card-btn'
+              >
+                {/* {props.bool ? <icon></icon> : <icon></icon>} */}
+                Make Bid
+              </Button>
+              <br />
+              {props.bool && user?._id === props.highest['0']._id && (
+                <Button
+                  style={{ flex: 3 }}
+                  className='btn btn-primary btn-block mb-4 card-btn'
+                >
+                  Make Payment
+                </Button>
+              )}
+            </div>
           ) : (
             <Button
               style={{ flex: 3 }}
@@ -60,9 +75,9 @@ const Carddesc = (props) => {
               Fixed Price
             </Button>
           )}
-          <ListGroupItem></ListGroupItem>
         </ListGroup>
         <Card.Body>Total bidding: {props.totalBid} </Card.Body>
+        <Card.Body>Highest bid: {props.highest.bidPrice} </Card.Body>
         {/* {totalBid} */}
       </Card>
     </div>

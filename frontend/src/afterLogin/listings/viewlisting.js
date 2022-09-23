@@ -17,10 +17,11 @@ import Linksnavbar from '../navbars/linksnavbar'
 const Viewlisting = () => {
   let { _id } = useParams()
   const [totalBid, setTotalBid] = useState(0)
+  const [highest, setHighest] = useState({})
   const [bids, setBids] = useState([])
   const { listing, user, getAllBid } = useAppContext()
   console.log(listing)
-
+  const [bool, setBool] = useState(false)
   const [listings, setListings] = useState([])
   const apiCall = async () => {
     let lest = listing.find((list) => list._id === _id)
@@ -29,10 +30,14 @@ const Viewlisting = () => {
       setListings(lest)
       const data = await getAllBid(_id)
       setBids(data.bids)
+      const hi = data.bids.reduce((firstItem, lastItem) =>
+        firstItem.bidPrice > lastItem.bidPrice ? firstItem : lastItem
+      )
+      setHighest(hi)
       setTotalBid(data.bids.length)
     }
   }
-  console.log(bids)
+  console.log(highest)
 
   useEffect(() => {
     apiCall()
@@ -90,6 +95,9 @@ const Viewlisting = () => {
                     createdAt={listings.createdAt}
                     duration={listings.duration}
                     totalBid={totalBid}
+                    highest={highest}
+                    bool={bool}
+                    setBool={setBool}
                     listingId={_id}
                   />
                 </div>

@@ -29,6 +29,7 @@ import {
   EDIT_LISTING_SUCCESS,
   EDIT_LISTING_ERROR,
   CLEAR_FILTERS,
+  CHANGE_PAGE,
 } from './action'
 
 const token = localStorage.getItem('token')
@@ -243,8 +244,8 @@ const AppProvider = ({ children }) => {
     clearAlert()
   }
   const getGlobalListing = async () => {
-    const { search, sort, searchCategory } = state
-    let url = `/listing/getgloballisting?searchCategory=${searchCategory}&sort=${sort}`
+    const { page, search, sort, searchCategory } = state
+    let url = `/listing/getgloballisting?page=${page}&searchCategory=${searchCategory}&sort=${sort}`
     if (search) {
       url = url + `&search=${search}`
     }
@@ -334,6 +335,9 @@ const AppProvider = ({ children }) => {
       console.log(error.message)
     }
   }
+  const changePage = (page) => {
+    dispatch({ type: CHANGE_PAGE, payload: { page } })
+  }
 
   return (
     <AppContext.Provider
@@ -354,6 +358,7 @@ const AppProvider = ({ children }) => {
         clearFilters,
         createBid,
         getAllBid,
+        changePage,
 
         // filteritems,
       }}

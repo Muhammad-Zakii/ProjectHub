@@ -31,6 +31,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 import cors from 'cors'
+import sendEmail from './utils/sendEmail.js'
 
 const __filename = fileURLToPath(import.meta.url)
 
@@ -54,11 +55,32 @@ app.use('/api/v1/bid', authenticateUser, bidRouter)
 
 app.use('/static', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/v1/listing', authenticateUser, listingRouter)
+
+app.post('/api/sendemail', async (req, res) => {
+  const { name } = req.body
+  const { email } = req.body
+
+  const { message } = req.body
+  try {
+    const na = name
+    const sent_to = email
+    const sent_from = process.env.EMAIL_USER
+    const reply_to = email
+    const subject = 'Thanks for messaging'
+    const mes = message
+    await sendEmail(subject, na, mes, sent_to, sent_from, reply_to)
+    res.status(200).json({ success: true, message: 'Email Sent' })
+  } catch (error) {
+    res.status(500).json(error.message)
+  }
+})
+
 app.post('/payment', async (req, res) => {
   const { product, token } = req.body
-  // console.log(listing)
-  // console.log(listing.category)
+
   const idempontencyKey = uuid()
+
+  //Sending email
 
   return await stripe.customers
     .create({

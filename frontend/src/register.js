@@ -4,7 +4,7 @@ import FormRow from './formrow'
 import Wrapper from './wrappers'
 import { useAppContext } from './context/appcontext'
 import { useNavigate } from 'react-router-dom'
-import { Form } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import './index.css'
 const initialState = {
   name: '',
@@ -149,9 +149,9 @@ const Register = () => {
           placeholder='Password'
         />
         <div className='d-grid gap-2'>
-          <button type='submit' className='btn btn-block' disabled={isLoading}>
+          <Button type='submit' variant='outline-primary' disabled={isLoading}>
             Submit
-          </button>
+          </Button>
         </div>
         <p>
           {values.isMember ? 'Not a member yet?' : 'Already a member?'}

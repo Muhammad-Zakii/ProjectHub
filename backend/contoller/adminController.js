@@ -62,10 +62,19 @@ const getAllUsersByAdmin = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ users, totalUsers: users.length })
 }
+// const getAllListingforOneUser = async (req, res) => {
+//   const listing = await Listing.find({ createdBy: req.user.userId })
+//   const user = await User.findOne({ _id: req.user.userId })
+//   console.log(req.user.userId)
+//   res
+//     .status(StatusCodes.OK)
+//     .json({ listing, user, totalListing: listing.length })
+// }
 export {
   loginAdmin,
   getListingByAdmin,
   showStatsToAdmin,
   getAllListingByAdmin,
   getAllUsersByAdmin,
+  // getAllListingforOneUser,
 }

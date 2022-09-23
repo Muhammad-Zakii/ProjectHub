@@ -1,61 +1,52 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
 import NavBarr from '../navbars/navbar'
 import { Card, Row, Col, Button } from 'react-bootstrap'
 import FormRow from '../../formrow'
 import '../../index.css'
 import Footer from '../footer/footer2'
-import emailjs from '@emailjs/browser'
+
 import Swal from 'sweetalert2'
 import { useAppContext } from '../../context/appcontext'
 import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
+import axios from 'axios'
 
 const ContactPage = () => {
   const { user, listing } = useAppContext()
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [name, setName] = useState('')
 
-  const refform = useRef()
-
-  const sendEmail = (e) => {
+  const submitRequest = async (e) => {
     e.preventDefault()
+    console.log({ name, email, message })
+    const data = {
+      name,
+      email,
+      message,
+    }
+    const response = await axios.post(
+      'http://localhost:3000/api/sendemail',
+      data
+    )
 
-    emailjs
-      .sendForm(
-        'service_jegmtfb',
-        'Contact_Page',
-        refform.current,
-        'YKUTnodPybQmuhl4g'
-      )
-      .then(
-        () => {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Message has been send successfully.',
-            showConfirmButton: false,
-            timer: 2000,
-          })
-        },
-        () => {
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Failed to send a message,please try again.',
-            showConfirmButton: false,
-            timer: 2000,
-          })
-        }
-      )
-    refform.current.reset()
+    if (response.status === 200) {
+      Swal.fire('Good job!', 'Your email has been sent', 'success')
+    } else if (response.status === 404) {
+      alert('Sorry')
+    }
   }
+
   return (
     <>
       <NavBarr />
+      {/* <Row className='m-5'></Row> */}
       <Row className='m-5'>
-        <Col>
+        <Col md={5}>
           <h4>Profile details</h4>
           <div className='clearfix'>
             <div className='row'>
-              <div className='col-md-4 animated fadeIn bg'>
+              <div className='col-md-7 animated fadeIn bg'>
                 <div className='card'>
                   <div className='card-body'>
                     <div className='avatar'>
@@ -89,41 +80,33 @@ const ContactPage = () => {
             </div>
           </div>
         </Col>
-      </Row>
-      <Row className='m-5'>
         <Col md={7}>
-          <form ref={refform} onSubmit={sendEmail}>
-            {' '}
-            <div className='form-row'>
-              <label className='form-label'>Seller Email</label>
-
-              <input
-                className='form-input'
-                type='email'
-                name='email1'
-                placeholder='Seller email'
-              />
-            </div>
+          <form onSubmit={submitRequest}>
+            {/* onSubmit={sendEmail}{' '} */}
             <div className='form-row'>
               <label className='form-label'>Your name</label>
 
               <input
                 className='form-input'
                 type='text'
+                value={name}
                 name='name'
                 placeholder='Name'
+                onChange={(e) => setName(e.target.value)}
               />
             </div>{' '}
             <div className='form-row'>
-              <label className='form-label'>Buyer Email</label>
+              <label className='form-label'>Email</label>
 
               <input
                 className='form-input'
                 type='email'
-                name='email2'
-                placeholder='Buyer Email'
+                name='email'
+                value={email}
+                placeholder='Email'
+                onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
+            </div>{' '}
             <div className='form-row'>
               <label className='form-label'>Message</label>
 
@@ -131,7 +114,10 @@ const ContactPage = () => {
                 className='form-textarea'
                 type='text'
                 name='message'
+                value={message}
                 placeholder='Message'
+                style={{ height: '250px' }}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
             <Button type='submit' value='SEND' variant='primary'>
