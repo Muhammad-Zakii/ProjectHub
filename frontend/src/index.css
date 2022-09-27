@@ -438,6 +438,16 @@ a:hover {
   margin: 4rem auto;
   transition: var(--transition);
 }
+.form3 {
+  width: 600px;
+  /* max-width: var(--fixed-width2); */
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-5);
+  padding: 3rem 2.5rem;
+  margin: 4rem auto;
+  transition: var(--transition);
+}
 .head3 {
   text-align: center;
   margin: 10px;

@@ -5,8 +5,10 @@ import { Row, Col, Form } from 'react-bootstrap'
 import { useAppContext } from '../../context/appcontext'
 import Alert from '../../components/alert'
 import { faImage } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 const Listingform = () => {
+  const navigate = useNavigate()
   const {
     isLoading,
     isEditing,
@@ -38,9 +40,13 @@ const Listingform = () => {
     }
     if (isEditing) {
       editlisting()
+
       return
     }
     createListing()
+    setTimeout(() => {
+      navigate('/afterlogin')
+    }, 3000)
   }
   const listingInput = (e) => {
     const name = e.target.name
@@ -50,6 +56,11 @@ const Listingform = () => {
     } else {
       handleChange({ name, value })
     }
+  }
+  const redirecting = () => {
+    setTimeout(() => {
+      navigate('/afterlogin')
+    }, 3000)
   }
 
   return (
@@ -208,6 +219,9 @@ const Listingform = () => {
                 type='button'
                 className='btn btn-outline-warning'
                 onClick={handleSubmit}
+                // onClick={() => {
+                //   handleSubmit redirecting()
+                // }}
                 disabled={isLoading}
               >
                 Upload Listing

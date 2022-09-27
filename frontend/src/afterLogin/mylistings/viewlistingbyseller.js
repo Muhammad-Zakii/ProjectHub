@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { datas } from '../../data'
+
 import Navbar from '../navbars/navbar'
 
 import Afternav from '../afternav/afternav'
@@ -37,7 +37,7 @@ const ViewListingBySeller = () => {
       setTotalBid(data.bids.length)
     }
   }
-  console.log(highest)
+  console.log(highest, 'this one')
 
   useEffect(() => {
     apiCall()

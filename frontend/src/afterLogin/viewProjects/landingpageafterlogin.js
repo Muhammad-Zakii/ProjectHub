@@ -73,7 +73,7 @@ function Landingpageafterlogin() {
             </Col>
           )
         })}
-        {numOfPages > 1 || <Paginationbtn />}
+        {numOfPages > 1 && <Paginationbtn />}
       </Row>
     </>
   )

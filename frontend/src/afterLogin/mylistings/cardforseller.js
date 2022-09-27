@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { Card, ListGroup, Alert, Button } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Card, Form, Row, Col, Alert, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+
 import { useAppContext } from '../../context/appcontext'
+import Offcanvas from 'react-bootstrap/Offcanvas'
+import Wrapper from '../../wrappers'
 import '../../index.css'
 
 const CardForSeller = (props) => {
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
   const navigate = useNavigate()
   const { user } = useAppContext()
-  console.log(user, props.highest)
+  // console.log(user, props.highest)
 
   const checkBidTime = () => {
     const createdDay = new Date(props.createdAt).getDate()
@@ -36,45 +43,55 @@ const CardForSeller = (props) => {
           <Card.Text>{props.price} PKR</Card.Text>
         </Card.Body>
 
-        {/* <ListGroup className='list-group-flush'>
-          <Link to='/ContactPage' className='d-grid gap-2'>
-            <Button
-              style={{ flex: 3 }}
-              className='btn btn-success btn-block mb-4 card-btn'
-            >
-              Contact Seller
-            </Button>
-          </Link>
-      
-          {props.status ? (
-            <div className='d-grid gap-2'>
-              <Button
-                disabled={props.bool}
-                onClick={checkBidTime}
-                style={{ flex: 3 }}
-                className='btn btn-primary btn-block mb-4 card-btn'
-              >
-              
-                Make Bid
-              </Button>
-              {props.bool && user?._id === props.highest['0']._id && (
-                <Button
-                  style={{ flex: 3 }}
-                  className='btn btn-primary btn-block mb-4 card-btn'
+        <Button
+          variant='primary'
+          onClick={handleShow}
+          variant='outline-primary'
+          className='me-2  btn-block mb-4 card-btn'
+        >
+          Notify highest bidder
+        </Button>
+        <Offcanvas show={show} onHide={handleClose} {...props}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Notify bidder</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <Wrapper>
+              <Form>
+                <Form.Group
+                  as={Row}
+                  className='mb-3'
+                  controlId='formPlaintextEmail'
                 >
-                  Make Payment
-                </Button>
-              )}
-            </div>
-          ) : (
-            <Button
-              style={{ flex: 3 }}
-              className='btn btn-primary btn-block mb-4 card-btn'
-            >
-              Fixed Price
-            </Button>
-          )}
-        </ListGroup> */}
+                  <Form.Label column sm='2'>
+                    Email
+                  </Form.Label>
+
+                  <Form.Control
+                    type='email'
+                    value={
+                      props.highest.bidPrice
+                        ? props.highest['0'].email
+                        : 'Email'
+                    }
+                    placeholder='Email'
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  as={Row}
+                  className='mb-3'
+                  controlId='formPlaintextPassword'
+                >
+                  <Form.Label>Message</Form.Label>
+                  <Form.Control as='textarea' rows={5} />
+                  <Button variant='outline-primary'>Notify</Button>
+                </Form.Group>
+              </Form>{' '}
+            </Wrapper>
+          </Offcanvas.Body>
+        </Offcanvas>
+
         <Alert variant='info'>
           <Card.Body>
             Total biddings: <strong>{props.totalBid}</strong>

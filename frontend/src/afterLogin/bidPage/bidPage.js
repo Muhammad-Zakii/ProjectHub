@@ -4,11 +4,12 @@ import NavBarr from '../navbars/navbar'
 import { InputGroup, Form, Button } from 'react-bootstrap'
 import Footer from '../footer/footer2'
 import { useAppContext } from '../../context/appcontext'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const initialData = { bidPrice: '0' }
 
 const BidPage = () => {
+  const navigate = useNavigate()
   const { createBid, listing } = useAppContext()
   const [bid, setBid] = useState(initialData)
   const { listingId } = useParams()
@@ -23,6 +24,7 @@ const BidPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     createBid({ ...bid, listingId })
+    navigate('/afterlogin')
   }
 
   return (

@@ -5,8 +5,10 @@ import { Row, Col, Form } from 'react-bootstrap'
 import { useAppContext } from '../../context/appcontext'
 import Alert from '../../components/alert'
 import FormSelect from '../../formSelect'
+import { useNavigate } from 'react-router-dom'
 
 const Auctionform = () => {
+  const navigate = useNavigate()
   const {
     isLoading,
     isEditing,
@@ -38,9 +40,13 @@ const Auctionform = () => {
     }
     if (isEditing) {
       editlisting()
+
       return
     }
     createListing()
+    setTimeout(() => {
+      navigate('/afterlogin')
+    }, 3000)
   }
   const listingInput = (e) => {
     const name = e.target.name
