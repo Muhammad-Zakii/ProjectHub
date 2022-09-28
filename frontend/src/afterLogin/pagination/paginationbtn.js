@@ -1,5 +1,5 @@
 import React from 'react'
-import Wrapper from '../../wrappers/wrapper2'
+import Wrapper2 from '../../wrappers/wrapper2'
 import { useAppContext } from '../../context/appcontext'
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi'
 
@@ -24,7 +24,7 @@ const Paginationbtn = () => {
     changePage(newPage)
   }
   return (
-    <Wrapper>
+    <Wrapper2>
       <button className='prev-btn' onClick={prevPage}>
         <HiChevronDoubleLeft />
         Prev
@@ -49,7 +49,7 @@ const Paginationbtn = () => {
         <HiChevronDoubleRight />
         Next
       </button>
-    </Wrapper>
+    </Wrapper2>
   )
 }
 
