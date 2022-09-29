@@ -119,9 +119,9 @@ const ViewListingBySeller = () => {
                     </tbody>
                   </Table>
                 </div>
-                <div className='about-seller'>
+                {/* <div className='about-seller'>
                   <Col className='justify-content-md-center mt-5'>
-                    <h4>About the Seller</h4>
+                    <h4>A Seller</h4>
 
                     <div className='card-body'>
                       <div className='avatar'>
@@ -152,14 +152,14 @@ const ViewListingBySeller = () => {
                     </div>
                   </Col>
                   <br />
-                </div>
-                <div className='payment-method'>
+                </div> */}
+                {/* <div className='payment-method'>
                   <hr />
                   <h4>Payment method</h4>
                   <h6>
                     <Link to='/paymentmethod'>Stripe</Link>
                   </h6>
-                </div>
+                </div> */}
               </Col>
             </Row>
           </div>

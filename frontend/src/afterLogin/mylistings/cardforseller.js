@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Card, Form, Row, Col, Alert, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
 import { useAppContext } from '../../context/appcontext'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Wrapper from '../../wrappers'
+import Swal from 'sweetalert2'
+import emailjs from '@emailjs/browser'
 import '../../index.css'
 
 const CardForSeller = (props) => {
@@ -26,6 +28,42 @@ const CardForSeller = (props) => {
     } else {
       navigate(`/biddingPage/${props.listingId}`)
     }
+  }
+  //Email Integration...............
+
+  const refform = useRef()
+
+  const sendEmail = (e) => {
+    e.preventDefault()
+
+    emailjs
+      .sendForm(
+        'service_569n8gp',
+        'Notify_Buyer',
+        refform.current,
+        'oGAm4SdMlSlzvjSWp'
+      )
+      .then(
+        () => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Message has been send successfully.',
+            showConfirmButton: false,
+            timer: 2000,
+          })
+        },
+        () => {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Failed to send a message,please try again.',
+            showConfirmButton: false,
+            timer: 2000,
+          })
+        }
+      )
+    refform.current.reset()
   }
 
   return (
@@ -57,7 +95,7 @@ const CardForSeller = (props) => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Wrapper>
-              <Form>
+              <Form ref={refform} onSubmit={sendEmail}>
                 <Form.Group
                   as={Row}
                   className='mb-3'
@@ -69,10 +107,11 @@ const CardForSeller = (props) => {
 
                   <Form.Control
                     type='email'
+                    name='email'
                     value={
                       props.highest.bidPrice
                         ? props.highest['0'].email
-                        : 'Email'
+                        : 'email'
                     }
                     placeholder='Email'
                   />
@@ -84,8 +123,10 @@ const CardForSeller = (props) => {
                   controlId='formPlaintextPassword'
                 >
                   <Form.Label>Message</Form.Label>
-                  <Form.Control as='textarea' rows={5} />
-                  <Button variant='outline-primary'>Notify</Button>
+                  <Form.Control name='message' as='textarea' rows={5} />
+                  <Button type='submit' value='SEND' variant='outline-primary'>
+                    Notify
+                  </Button>
                 </Form.Group>
               </Form>{' '}
             </Wrapper>

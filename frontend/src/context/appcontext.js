@@ -30,6 +30,8 @@ import {
   EDIT_LISTING_ERROR,
   CLEAR_FILTERS,
   CHANGE_PAGE,
+  GET_USER_BY_ADMIN_BEGAN,
+  GET_USER_BY_ADMIN_SUCCESS,
 } from './action'
 
 const token = localStorage.getItem('token')
@@ -87,6 +89,7 @@ const initialState = {
   searchCategory: 'All',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
+  users: [],
 }
 const AppContext = React.createContext()
 
@@ -257,6 +260,7 @@ const AppProvider = ({ children }) => {
         type: GET_LISTING_SUCCESS,
         payload: {
           listing,
+
           totalListing,
           numOfPages,
         },
@@ -338,6 +342,24 @@ const AppProvider = ({ children }) => {
   const changePage = (page) => {
     dispatch({ type: CHANGE_PAGE, payload: { page } })
   }
+  const getUsersByAdmin = async () => {
+    dispatch({ type: GET_USER_BY_ADMIN_BEGAN })
+    try {
+      const { data } = await axios.get(
+        'http://localhost:7000/admin/adminGetUsers'
+      )
+      dispatch({
+        type: GET_USER_BY_ADMIN_SUCCESS,
+        payload: {
+          users: data.users,
+          // totalUsers: data.totalUsers,
+        },
+      })
+    } catch (error) {
+      console.log(error.response)
+    }
+    clearAlert()
+  }
 
   return (
     <AppContext.Provider
@@ -359,6 +381,7 @@ const AppProvider = ({ children }) => {
         createBid,
         getAllBid,
         changePage,
+        getUsersByAdmin,
 
         // filteritems,
       }}

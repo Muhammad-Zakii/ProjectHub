@@ -19,13 +19,13 @@ const Viewlisting = () => {
   const [totalBid, setTotalBid] = useState(0)
   const [highest, setHighest] = useState({})
   const [bids, setBids] = useState([])
-  const { listing, user, getAllBid } = useAppContext()
+  const { listing, user, users, getAllBid, getUsersByAdmin } = useAppContext()
   console.log(listing)
   const [bool, setBool] = useState(false)
   const [listings, setListings] = useState([])
   const apiCall = async () => {
     let lest = listing.find((list) => list._id === _id)
-    console.log(lest)
+    // console.log(lest)
     if (lest) {
       setListings(lest)
       const data = await getAllBid(_id)
@@ -37,12 +37,14 @@ const Viewlisting = () => {
       setTotalBid(data.bids.length)
     }
   }
-  console.log(highest)
+  // console.log(highest)
+  console.log(listing['0'].createdBy, 'testinfff')
 
   useEffect(() => {
     apiCall()
+    getUsersByAdmin()
   }, [])
-  console.log(listings)
+  console.log(users, 'users')
 
   return (
     <>
@@ -101,40 +103,47 @@ const Viewlisting = () => {
                     listingId={_id}
                   />
                 </div>
-                <div className='about-seller'>
-                  <Col className='justify-content-md-center mt-5'>
-                    <h4>About the Seller</h4>
+                {users.map((us) => {
+                  if (us._id === listings.createdBy) {
+                    return (
+                      <div className='about-seller'>
+                        <Col className='justify-content-md-center mt-5'>
+                          <h4>About the Seller</h4>
 
-                    <div className='card-body'>
-                      <div className='avatar'>
-                        <img
-                          src={`http://localhost:7000/static/profiles/${user.img}`}
-                          className='card-img-top'
-                          alt=''
-                        />
-                      </div>
-                      <h5 className='card-title'>
-                        <FaUser />
-                        Name: {user.name}
-                      </h5>
-                      <p className='card-text'>
-                        <FaLocationArrow />
-                        Location: {user.location}
+                          <div className='card-body'>
+                            <div className='avatar'>
+                              <img
+                                src={`http://localhost:7000/static/profiles/${us.img}`}
+                                className='card-img-top'
+                                alt=''
+                              />
+                            </div>
+                            <h5 className='card-title'>
+                              <FaUser />
+                              Name: {us.name}
+                            </h5>
+                            <p className='card-text'>
+                              <FaLocationArrow />
+                              Location: {us.location}
+                              <br />
+                              <p className='phone'>
+                                <FaPhone />
+                                PhoneNo: {us.phoneNo}
+                              </p>
+                            </p>
+
+                            <p className='phone'>
+                              <FaAt />
+                              Email: {us.email}
+                            </p>
+                          </div>
+                        </Col>
                         <br />
-                        <p className='phone'>
-                          <FaPhone />
-                          PhoneNo: {user.phoneNo}
-                        </p>
-                      </p>
+                      </div>
+                    )
+                  }
+                })}
 
-                      <p className='phone'>
-                        <FaAt />
-                        Email: {user.email}
-                      </p>
-                    </div>
-                  </Col>
-                  <br />
-                </div>
                 <div className='payment-method'>
                   <hr />
                   <h4>Payment method</h4>

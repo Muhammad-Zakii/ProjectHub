@@ -91,7 +91,7 @@ const Register = () => {
   }, [user, navigate])
 
   return (
-    <Wrapper className='full-page backgroundImage'>
+    <Wrapper className='full-page'>
       <div className='overlay'></div>
       <video src={VideoBg} autoPlay loop muted />
       <div className='content1'>

@@ -93,6 +93,7 @@ const ContactPage = () => {
                 name='name'
                 placeholder='Name'
                 onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>{' '}
             <div className='form-row'>
@@ -105,6 +106,7 @@ const ContactPage = () => {
                 value={email}
                 placeholder='Email'
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>{' '}
             <div className='form-row'>
@@ -118,6 +120,7 @@ const ContactPage = () => {
                 placeholder='Message'
                 style={{ height: '250px' }}
                 onChange={(e) => setMessage(e.target.value)}
+                required
               />
             </div>
             <Button type='submit' value='SEND' variant='primary'>

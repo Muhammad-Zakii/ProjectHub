@@ -33,7 +33,7 @@ const createListing = async (req, res) => {
 const getAllListing = async (req, res) => {
   const listing = await Listing.find({ createdBy: req.user.userId })
   const user = await User.findOne({ _id: req.user.userId })
-  console.log(req.user.userId)
+  // console.log(req.user.userId)
   res
     .status(StatusCodes.OK)
     .json({ listing, user, totalListing: listing.length, numOfPages: 1 })

@@ -23,6 +23,8 @@ import {
   EDIT_LISTING_ERROR,
   CLEAR_FILTERS,
   CHANGE_PAGE,
+  GET_USER_BY_ADMIN_BEGAN,
+  GET_USER_BY_ADMIN_SUCCESS,
 } from './context/action'
 
 import { initialState } from './context/appcontext'
@@ -237,6 +239,17 @@ const reducer = (state, action) => {
   }
   if (action.type === CHANGE_PAGE) {
     return { ...state, page: action.payload.page }
+  }
+  if (action.type === GET_USER_BY_ADMIN_BEGAN) {
+    return { ...state, showAlert: false }
+  }
+  if (action.type === GET_USER_BY_ADMIN_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      users: action.payload.users,
+      //  totalUsers: action.payload.totalUsers,
+    }
   }
 }
 
