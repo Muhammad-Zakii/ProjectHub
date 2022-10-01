@@ -55,7 +55,7 @@ const Carddesc = (props) => {
                 className='btn btn-primary btn-block mb-4 card-btn'
               >
                 {/* {props.bool ? <icon></icon> : <icon></icon>} */}
-                Make Bid
+                {props.bool ? 'Bidding date ended' : 'Make bid'}
               </Button>
               {props.bool && user?._id === props.highest['0']._id && (
                 <Button

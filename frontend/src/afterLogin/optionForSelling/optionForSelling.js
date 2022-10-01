@@ -15,7 +15,7 @@ const OptionForSelling = () => {
         <Col className='option p-1' xs={12} md={6}>
           <Card border='success' className='w-75'>
             <Card.Header>
-              <strong>Auction</strong>
+              <strong>Fixed Price</strong>
             </Card.Header>
             <Card.Body>
               <Card.Title> What is this?</Card.Title>
@@ -56,7 +56,7 @@ const OptionForSelling = () => {
           <Card border='success' className='w-75 '>
             <Card.Header>
               {' '}
-              <strong>Asking Price</strong>
+              <strong>Auction</strong>
             </Card.Header>
             <Card.Body>
               <Card.Title>What is this?</Card.Title>

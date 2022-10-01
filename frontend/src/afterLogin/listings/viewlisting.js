@@ -9,11 +9,12 @@ import Flexbox from '../flexbox/flexbox'
 import Carddesc from '../carddesc/carddesc'
 import Footer from '../../footer'
 import '../../index.css'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Alert } from 'react-bootstrap'
 import Charts from '../chart/chart'
 import { useAppContext } from '../../context/appcontext'
 import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
 import Linksnavbar from '../navbars/linksnavbar'
+import BarChartt from '../chart/barchart'
 const Viewlisting = () => {
   let { _id } = useParams()
   const [totalBid, setTotalBid] = useState(0)
@@ -64,9 +65,11 @@ const Viewlisting = () => {
             <Row>
               <Col md='8' sm='12' className='justify-content-md-center'>
                 <div className='list-header'>
-                  <h4>{listings.category}</h4>
-                  <br />
-                  <br />
+                  <Alert variant='primary'>
+                    <h4>{listings.category}</h4>
+                  </Alert>
+                </div>
+                <div className='list-header'>
                   <h1>{listings.title}</h1>
                 </div>
                 <div className='list-desc'>
@@ -83,9 +86,18 @@ const Viewlisting = () => {
                   </h4>
                   <p>{listings.description}</p>
                 </div>
-                <div style={{ width: '500px', height: '500px' }}>
+                <div style={{ width: '350px', height: '350px' }}>
+                  <h3>Revenue & Profit</h3>
                   <Charts />
                 </div>
+                <div style={{ width: '500px', height: '500px' }}>
+                  <h3>Site Age In Years</h3>
+                  <br />
+                  <BarChartt />
+                </div>
+                <br />
+                <br />
+                <br />
               </Col>
 
               <Col md='4' sm='12' className='justify-content-md-center'>

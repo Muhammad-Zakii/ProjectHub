@@ -358,15 +358,12 @@ a:hover {
   padding: 15px;
 }
 .list-header {
-  /* margin-top: 30px;
-  padding: 80px; */
+  padding-bottom: 30px;
   font-weight: bold;
 }
 .list-desc {
-  /* padding-left: 80px; */
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  /* width: 500px; */
 }
 .flex-desc {
   /* padding-left: 80px; */
@@ -388,6 +385,7 @@ a:hover {
 .about-listing {
   /* width: 700px;
   padding-left: 80px; */
+  line-height: 35px;
   font-family: 'Open Sans', sans-serif;
 }
 .about-seller {
