@@ -72,6 +72,16 @@ const deleteUserByAdmin = async (req, res) => {
   await user.remove()
   res.status(StatusCodes.OK).json({ msg: 'User remove successfully.' })
 }
+const deleteListingByAdmin = async (req, res) => {
+  const { id: listingId } = req.params
+  const listing = await Listing.findOne({ _id: listingId })
+  if (!listing) {
+    throw new NotFoundError(`No User with id :${listingId}`)
+  }
+
+  await listing.remove()
+  res.status(StatusCodes.OK).json({ msg: 'Listing remove successfully.' })
+}
 
 export {
   loginAdmin,
@@ -80,5 +90,6 @@ export {
   getAllListingByAdmin,
   getAllUsersByAdmin,
   deleteUserByAdmin,
+  deleteListingByAdmin,
   // getAllListingforOneUser,
 }
