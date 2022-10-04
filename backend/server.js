@@ -6,22 +6,22 @@ import 'express-async-errors'
 import morgan from 'morgan'
 //Payment
 
-import Stripe from 'stripe'
-const stripe = new Stripe(
-  'sk_test_51LevKgBwi9lkF3mIBV0F7LNjuCw7KhWyt0EdmFq69QD6jz9v8fTu796xUaFa8saCMl97HydDOoaZnXu4SSzl0nYY00dFNLlCYQ'
-)
+// import Stripe from 'stripe'
+// const stripe = new Stripe(
+//   'sk_test_51LevKgBwi9lkF3mIBV0F7LNjuCw7KhWyt0EdmFq69QD6jz9v8fTu796xUaFa8saCMl97HydDOoaZnXu4SSzl0nYY00dFNLlCYQ'
+// )
 
 //uuid
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
 
 // DataBase
 import connectDB from './db/database.js'
 //router
 import authRouter from './route/authRouter.js'
 import listingRouter from './route/listingRouter.js'
-
 import adminRouter from './route/adminRouter.js'
 import bidRouter from './route/bidRouter.js'
+import paymentRouter from './route/paymentRouter.js'
 
 //Middleware
 import errorhandler from './middleware/errorhandler.js'
@@ -55,6 +55,7 @@ app.use('/api/v1/bid', authenticateUser, bidRouter)
 
 app.use('/static', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/v1/listing', authenticateUser, listingRouter)
+app.use('/payment', paymentRouter)
 
 app.post('/api/sendemail', async (req, res) => {
   const { name } = req.body
@@ -74,42 +75,6 @@ app.post('/api/sendemail', async (req, res) => {
     res.status(500).json(error.message)
   }
 })
-
-app.post('/payment', async (req, res) => {
-  const { product, token } = req.body
-
-  const idempontencyKey = uuid()
-
-  //Sending email
-
-  return await stripe.customers
-    .create({
-      email: token.email,
-      source: token.id,
-    })
-
-    .then((customer) => {
-      stripe.charges.create(
-        {
-          amount: product.price * 100,
-          currency: 'usd',
-          customer: customer.id,
-          receipt_email: token.email,
-          description: `purchase of ${product.name}`,
-          shipping: {
-            name: token.card.name,
-            address: {
-              country: token.card.address_country,
-            },
-          },
-        },
-        { idempontencyKey }
-      )
-    })
-    .then((result) => res.status(200).json(result))
-    .catch((err) => console.log(err))
-})
-
 app.use(Middleware)
 app.use(errorhandler)
 const port = process.env.PORT || 5000

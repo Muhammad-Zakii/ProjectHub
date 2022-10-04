@@ -37,7 +37,7 @@ const Carddesc = (props) => {
         </Card.Body>
 
         <ListGroup className='list-group-flush'>
-          <Link to='/ContactPage' className='d-grid gap-2'>
+          <Link to={`/ContactPage/${props.listingId}`} className='d-grid gap-2'>
             <Button
               style={{ flex: 3 }}
               className='btn btn-success btn-block mb-4 card-btn'

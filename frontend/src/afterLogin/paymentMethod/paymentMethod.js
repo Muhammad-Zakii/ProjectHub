@@ -1,47 +1,68 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
-import { Button } from 'react-bootstrap'
+import axios from 'axios'
 
-const PaymentMethod = (props) => {
-  const [product, setProduct] = useState({
-    name: 'Website from ProjectHub',
-    price: 10000,
-    productBy: 'ProjectHub',
-  })
-  const makePayment = (token) => {
-    const body = {
-      token,
-      product,
-    }
-    const headers = {
-      'Content-Type': 'application/json',
-    }
-    return fetch(`https://localhost:7000/payment`, {
+function PaymentMethod() {
+  const [amount, setAmount] = useState(0)
+
+  const handleToken = (token) => {
+    fetch('/payment/donate', {
       method: 'POST',
-      headers,
-      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token, amount }),
     })
-      .then((response) => {
-        console.log('RESPONSE ', response)
-        const { status } = response
-        console.log('STATUS ', status)
+      .then((res) => res.json())
+      .then((_) => {
+        window.alert('Transaction Successful.')
       })
-      .catch((error) => console.log(error))
+      .catch((_) => window.alert('Transaction Failed.'))
   }
+
+  const handleAmountChange = (e) => {
+    const value = e.target.value
+    setAmount(value)
+  }
+
   return (
-    <>
-      <div className='d-flex align-items-center justify-content-center text-center min-vh-100'>
-        <StripeCheckout
-          stripeKey={process.env.REACT_APP_KEY}
-          token={makePayment}
-          name='Buy Listing'
-        >
-          <Button variant='primary' size='lg' active>
-            Buy listing
-          </Button>
-        </StripeCheckout>
-      </div>
-    </>
+    <div
+      className='PaymentMethod'
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100vh',
+        flexDirection: 'column',
+        gap: 15,
+      }}
+    >
+      {/* <FormControl sx={{ m: 1 }}>
+        <InputLabel htmlFor='outlined-adornment-amount'>Amount</InputLabel>
+        <OutlinedInput
+          id='outlined-adornment-amount'
+          value={amount}
+          onChange={handleAmountChange}
+          startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+          label='Amount'
+        />
+      </FormControl> */}
+      <input
+        type='text'
+        value={amount}
+        onChange={handleAmountChange}
+        InputLabel='Amount'
+      />
+      <StripeCheckout
+        stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
+        token={handleToken}
+        name=''
+        panelLabel={`Donate`}
+        currency='PKR'
+        amount={amount * 100}
+      ></StripeCheckout>
+    </div>
   )
 }
 

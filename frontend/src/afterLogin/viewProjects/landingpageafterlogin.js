@@ -119,9 +119,9 @@ function Data(props) {
                 View Listing
               </Button>
               {/* <Button variant='primary'>View Listing</Button> */}
-              <Button variant='outline-danger' style={{ flex: 1 }}>
+              {/* <Button variant='outline-danger' style={{ flex: 1 }}>
                 Total Bids: {bid}
-              </Button>
+              </Button> */}
             </Card.Body>
           </Card>
         </a>

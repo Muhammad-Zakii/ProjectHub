@@ -100,7 +100,7 @@ function App() {
           }
         />
         <Route
-          path='/ContactPage'
+          path='/ContactPage/:listingId'
           element={
             <ProtectedRoute>
               <ContactPage />
