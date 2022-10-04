@@ -76,6 +76,7 @@ const ViewListingBySeller = () => {
                   siteage={listings.siteage}
                   profit={listings.profit}
                   margin={listings.margin}
+                  views={listings.views}
                 />
                 <div className='about-listing'>
                   <h4>

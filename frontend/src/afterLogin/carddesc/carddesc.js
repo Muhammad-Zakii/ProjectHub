@@ -58,21 +58,25 @@ const Carddesc = (props) => {
                 {props.bool ? 'Bidding date ended' : 'Make bid'}
               </Button>
               {props.bool && user?._id === props.highest['0']._id && (
-                <Button
-                  style={{ flex: 3 }}
-                  className='btn btn-primary btn-block mb-4 card-btn'
-                >
-                  Make Payment
-                </Button>
+                <Link to='/paymentmethod' className=' d-grid gap-2'>
+                  <Button
+                    className='btn btn-primary btn-block mb-4 card-btn'
+                    style={{ flex: 3 }}
+                  >
+                    Make Payment
+                  </Button>
+                </Link>
               )}
             </div>
           ) : (
-            <Button
-              style={{ flex: 3 }}
-              className='btn btn-primary btn-block mb-4 card-btn'
-            >
-              Fixed Price
-            </Button>
+            <Link to='/paymentmethod' className='d-grid gap-2'>
+              <Button
+                className='btn btn-primary btn-block mb-4 card-btn'
+                style={{ flex: 3 }}
+              >
+                Fixed Price
+              </Button>
+            </Link>
           )}
         </ListGroup>
         <Alert variant='info'>

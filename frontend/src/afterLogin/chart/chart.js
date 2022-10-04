@@ -1,67 +1,73 @@
-import React, { PureComponent } from 'react'
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'
+import React from 'react'
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts'
 
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-]
-
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
-
-const RADIAN = Math.PI / 180
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5
-  const x = cx + radius * Math.cos(-midAngle * RADIAN)
-  const y = cy + radius * Math.sin(-midAngle * RADIAN)
-
+export default function App(props) {
+  const data = [
+    {
+      name: 'Revenue',
+      Price: props.price,
+    },
+  ]
+  const data02 = [
+    {
+      name: 'Monthly profit',
+      Profit: props.profit,
+      // amt: 2400,
+    },
+  ]
   return (
-    <text
-      x={x}
-      y={y}
-      fill='white'
-      textAnchor={x > cx ? 'start' : 'end'}
-      dominantBaseline='central'
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
+    <>
+      <LineChart
+        width={500}
+        height={300}
+        data={data}
+        syncId='anyId'
+        margin={{
+          top: 10,
+          right: 30,
+          left: 0,
+          bottom: 0,
+        }}
+      >
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='name' />
+        <YAxis />
+        <Tooltip />
+        <Line type='monotone' dataKey='Price' stroke='#8884d8' fill='#8884d8' />
+      </LineChart>
+
+      <LineChart
+        width={500}
+        height={300}
+        data={data02}
+        // syncId='anyId'
+        margin={{
+          top: 10,
+          right: 30,
+          left: 0,
+          bottom: 0,
+        }}
+      >
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='name' />
+        <YAxis />
+        <Tooltip />
+        <Line
+          type='monotone'
+          dataKey='Profit'
+          stroke='#82ca9d'
+          fill='#82ca9d'
+        />
+        {/* <Brush /> */}
+      </LineChart>
+    </>
   )
-}
-
-export default class Example extends PureComponent {
-  static demoUrl =
-    'https://codesandbox.io/s/pie-chart-with-customized-label-dlhhj'
-
-  render() {
-    return (
-      <ResponsiveContainer width='100%' height='100%'>
-        <PieChart width={400} height={400}>
-          <Pie
-            data={data}
-            cx='50%'
-            cy='50%'
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={80}
-            fill='#8884d8'
-            dataKey='value'
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-    )
-  }
 }

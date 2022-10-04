@@ -22,6 +22,7 @@ const Listingform = () => {
     siteage,
     profit,
     margin,
+    views,
     price,
     status,
     handleChange,
@@ -187,6 +188,18 @@ const Listingform = () => {
                 name='margin'
                 value={margin}
                 placeholder='Profit Margin'
+                onChange={listingInput}
+              />
+            </div>
+            <div className='form-row'>
+              <label className='form-label'>Number of views</label>
+
+              <input
+                className='form-control'
+                type='text'
+                name='views'
+                value={views}
+                placeholder='Number of Views'
                 onChange={listingInput}
               />
             </div>

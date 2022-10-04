@@ -22,6 +22,7 @@ const Auctionform = () => {
     siteage,
     profit,
     margin,
+    views,
     startbid,
     price,
     status,
@@ -168,6 +169,18 @@ const Auctionform = () => {
                 name='margin'
                 value={margin}
                 placeholder='Profit Margin'
+                onChange={listingInput}
+              />
+            </div>
+            <div className='form-row'>
+              <label className='form-label'>Number of views</label>
+
+              <input
+                className='form-control'
+                type='text'
+                name='views'
+                value={views}
+                placeholder='Number of views'
                 onChange={listingInput}
               />
             </div>

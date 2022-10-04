@@ -10,7 +10,8 @@ import Carddesc from '../carddesc/carddesc'
 import Footer from '../../footer'
 import '../../index.css'
 import { Col, Row, Alert } from 'react-bootstrap'
-import Charts from '../chart/chart'
+import PieChart from '../chart/chart'
+import LineChart from '../chart/linechart'
 import { useAppContext } from '../../context/appcontext'
 import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
 import Linksnavbar from '../navbars/linksnavbar'
@@ -79,6 +80,7 @@ const Viewlisting = () => {
                   siteage={listings.siteage}
                   profit={listings.profit}
                   margin={listings.margin}
+                  views={listings.views}
                 />
                 <div className='about-listing'>
                   <h4>
@@ -86,18 +88,34 @@ const Viewlisting = () => {
                   </h4>
                   <p>{listings.description}</p>
                 </div>
-                <div style={{ width: '350px', height: '350px' }}>
-                  <h3>Revenue & Profit</h3>
-                  <Charts />
-                </div>
-                <div style={{ width: '500px', height: '500px' }}>
-                  <h3>Site Age In Years</h3>
-                  <br />
-                  <BarChartt />
-                </div>
-                <br />
-                <br />
-                <br />
+                <Col className='pt-30'>
+                  {' '}
+                  <div>
+                    <h3>Revenue & Profit</h3>
+                    <PieChart
+                      price={
+                        parseInt(listings.price) + parseInt(listings.profit)
+                      }
+                      profit={listings.profit}
+                    />
+                  </div>
+                </Col>
+                <Col className='pt-5'>
+                  {' '}
+                  <div>
+                    <h3>Site Age In Years</h3>
+                    <br />
+                    <BarChartt siteage={listings.siteage} />
+                  </div>
+                </Col>
+
+                <Col className='pt-5'>
+                  <div>
+                    <h3>Page views</h3>
+                    <br />
+                    <LineChart views={listings.views} />
+                  </div>
+                </Col>
               </Col>
 
               <Col md='4' sm='12' className='justify-content-md-center'>

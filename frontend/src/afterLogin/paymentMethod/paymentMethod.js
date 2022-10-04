@@ -29,18 +29,19 @@ const PaymentMethod = (props) => {
       .catch((error) => console.log(error))
   }
   return (
-    <div>
-      <h1>Payment integration</h1>
-      <StripeCheckout
-        stripeKey={process.env.REACT_APP_KEY}
-        token={makePayment}
-        name='Buy Listing'
-      >
-        <Button variant='primary' size='lg' active>
-          Buy listing in just {product.price} PKR
-        </Button>
-      </StripeCheckout>
-    </div>
+    <>
+      <div className='d-flex align-items-center justify-content-center text-center min-vh-100'>
+        <StripeCheckout
+          stripeKey={process.env.REACT_APP_KEY}
+          token={makePayment}
+          name='Buy Listing'
+        >
+          <Button variant='primary' size='lg' active>
+            Buy listing
+          </Button>
+        </StripeCheckout>
+      </div>
+    </>
   )
 }
 

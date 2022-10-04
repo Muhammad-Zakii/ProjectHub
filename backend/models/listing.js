@@ -56,6 +56,10 @@ const ListingSchema = new mongoose.Schema(
       type: String,
       default: '-',
     },
+    views: {
+      type: String,
+      default: '-',
+    },
 
     price: {
       type: String,

@@ -76,6 +76,7 @@ const initialState = {
   siteage: '-',
   profit: '-',
   margin: '-',
+  views: '-',
   status: false,
   startbid: 0,
   price: 0,
