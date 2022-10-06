@@ -4,7 +4,7 @@ import FormRow from './formrow'
 import Wrapper from './wrappers'
 import { useAppContext } from './context/appcontext'
 import { useNavigate } from 'react-router-dom'
-import { Form, Button, Col, Row } from 'react-bootstrap'
+import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import Pixel from '../src/assets/bgg.jpg'
 import VideoBg from '../src/assets/video.mp4'
 import './index.css'
@@ -92,8 +92,9 @@ const Register = () => {
 
   return (
     <Wrapper className='full-page'>
-      <div className='overlay'></div>
-      <video src={VideoBg} autoPlay loop muted />
+      <div className='overlay'>
+        <video src={VideoBg} autoPlay loop muted />
+      </div>
       <div className='content1'>
         <form className='form ' onSubmit={onSubmit}>
           <h3>ProjectHub</h3>

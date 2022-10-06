@@ -1,7 +1,6 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { datas } from '../../data'
 import Navbar from '../navbars/navbar'
 
 import Afternav from '../afternav/afternav'
@@ -9,7 +8,7 @@ import Flexbox from '../flexbox/flexbox'
 import Carddesc from '../carddesc/carddesc'
 import Footer from '../../footer'
 import '../../index.css'
-import { Col, Row, Alert } from 'react-bootstrap'
+import { Col, Row, Alert, Container } from 'react-bootstrap'
 import PieChart from '../chart/chart'
 import LineChart from '../chart/linechart'
 import { useAppContext } from '../../context/appcontext'
@@ -46,7 +45,8 @@ const Viewlisting = () => {
     apiCall()
     getUsersByAdmin()
   }, [])
-  console.log(users, 'users')
+  console.log(listing)
+  // console.log(users, 'users')
 
   return (
     <>
@@ -88,8 +88,22 @@ const Viewlisting = () => {
                   </h4>
                   <p>{listings.description}</p>
                 </div>
-                <Col className='pt-30'>
-                  {' '}
+                <Col>
+                  <div className='about-listing'>
+                    <h3>
+                      <strong>Video demo</strong>
+                    </h3>
+                    <Container>
+                      <div className='ratio ratio-16x9'>
+                        <iframe
+                          src={`https://www.youtube.com/embed/${listings.demo}`}
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    </Container>
+                  </div>
+                </Col>
+                <Col className='pt-5'>
                   <div>
                     <h3>Revenue & Profit</h3>
                     <PieChart

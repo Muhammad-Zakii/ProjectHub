@@ -19,6 +19,7 @@ const Listingform = () => {
     title,
     summary,
     description,
+    demo,
     siteage,
     profit,
     margin,
@@ -155,6 +156,18 @@ const Listingform = () => {
             </div>
           </Col>
           <Col className='p-5' xs={12} md={6}>
+            <div className='form-row'>
+              <label className='form-label'>Video demo</label>
+
+              <input
+                className='form-control'
+                type='text'
+                name='demo'
+                value={demo}
+                placeholder=' Add a video link.'
+                onChange={listingInput}
+              />
+            </div>
             <div className='form-row'>
               <label className='form-label'>Site age</label>
 

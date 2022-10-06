@@ -19,6 +19,7 @@ const Auctionform = () => {
     title,
     summary,
     description,
+    demo,
     siteage,
     profit,
     margin,
@@ -131,6 +132,18 @@ const Auctionform = () => {
                 name='description'
                 value={description}
                 placeholder=' This is where you tell buyers everything they need to know. Don’t hold back. The more detail you provide, the better value you will get.'
+                onChange={listingInput}
+              />
+            </div>
+            <div className='form-row'>
+              <label className='form-label'>Video demo</label>
+
+              <input
+                className='form-control'
+                type='text'
+                name='demo'
+                value={demo}
+                placeholder=' Add a video link.'
                 onChange={listingInput}
               />
             </div>

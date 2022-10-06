@@ -73,6 +73,7 @@ const initialState = {
   title: '',
   summary: '',
   description: '',
+  demo: '',
   siteage: '-',
   profit: '-',
   margin: '-',

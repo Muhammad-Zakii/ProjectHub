@@ -3,8 +3,47 @@ import { Card, ListGroup, Alert, Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/appcontext'
 import '../../index.css'
+import Swal from 'sweetalert2'
+//Stripe
+import StripeCheckout from 'react-stripe-checkout'
 
 const Carddesc = (props) => {
+  //stripe setup
+  // const [price, setPrice] = useState(0)
+  let amount = props.price
+  if (props.bool) {
+    amount = props.highest.bidPrice
+  } else {
+    amount = amount
+  }
+
+  const handleToken = (token) => {
+    fetch('/payment/donate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token, amount }),
+    })
+      .then((res) => res.json())
+      .then((_) => {
+        Swal.fire(
+          'Transaction Successful!',
+          'Your transaction has been successful',
+          'success'
+        )
+      })
+      .catch((_) =>
+        Swal.file('Transaction Failed.', 'Your transaction failed', 'error')
+      )
+  }
+
+  // const handleAmountChange = (e) => {
+  //   const value = price
+  //   // setPrice(value)
+  // }
+
+  //stripe setup end
   const navigate = useNavigate()
   const { user } = useAppContext()
   console.log(user, props.highest)
@@ -58,25 +97,56 @@ const Carddesc = (props) => {
                 {props.bool ? 'Bidding date ended' : 'Make bid'}
               </Button>
               {props.bool && user?._id === props.highest['0']._id && (
-                <Link to='/paymentmethod' className=' d-grid gap-2'>
-                  <Button
-                    className='btn btn-primary btn-block mb-4 card-btn'
-                    style={{ flex: 3 }}
+                <div className='d-grid gap-2'>
+                  <StripeCheckout
+                    className=' d-grid gap-2'
+                    stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
+                    token={handleToken}
+                    name=''
+                    panelLabel={`Listing Price`}
+                    currency='PKR'
+                    amount={amount * 100}
                   >
-                    Make Payment
-                  </Button>
-                </Link>
+                    <div className='d-grid gap-2'>
+                      <Button
+                        className='btn btn-primary btn-block mb-4 card-btn'
+                        style={{ flex: 3 }}
+                      >
+                        Make Payment
+                      </Button>
+                    </div>
+                  </StripeCheckout>
+                </div>
               )}
             </div>
           ) : (
-            <Link to='/paymentmethod' className='d-grid gap-2'>
-              <Button
-                className='btn btn-primary btn-block mb-4 card-btn'
-                style={{ flex: 3 }}
-              >
-                Fixed Price
-              </Button>
-            </Link>
+            // <Link to='/paymentmethod' className='d-grid gap-2'>
+            //   <Button
+            //     className='btn btn-primary btn-block mb-4 card-btn'
+            //     style={{ flex: 3 }}
+            //   >
+            //     Fixed Price
+            //   </Button>
+            // </Link>
+            //stripe checkout
+
+            <StripeCheckout
+              stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
+              token={handleToken}
+              name=''
+              panelLabel={`Listing Price`}
+              currency='PKR'
+              amount={amount * 100}
+            >
+              <div className='d-grid gap-2'>
+                <Button
+                  className='btn btn-primary btn-block mb-4 card-btn'
+                  style={{ flex: 3 }}
+                >
+                  Make Payment
+                </Button>
+              </div>
+            </StripeCheckout>
           )}
         </ListGroup>
         <Alert variant='info'>

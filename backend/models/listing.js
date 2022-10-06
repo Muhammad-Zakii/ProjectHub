@@ -43,6 +43,11 @@ const ListingSchema = new mongoose.Schema(
       ],
       maxlength: 1500,
     },
+    demo: {
+      type: String,
+      default: '',
+      // required: true,
+    },
     siteage: {
       type: String,
       default: '-',
