@@ -6,6 +6,7 @@ import {
   Button,
   Row,
   Col,
+  Alert,
 } from 'react-bootstrap'
 
 import React from 'react'
@@ -50,11 +51,13 @@ function Landingpageafterlogin() {
     <>
       <Row>
         <div className='cen'>
-          <h4>Browese latest businesses,projects and websites,domains</h4>
-          <p>
-            You can find here selling webistes domains,projects and other online
-            businesses
-          </p>
+          <Alert variant='success'>
+            <h4>Browese latest businesses,projects and websites,domains</h4>
+            <p>
+              You can find here selling webistes domains,projects and other
+              online businesses
+            </p>
+          </Alert>
         </div>
       </Row>
       <Row>
