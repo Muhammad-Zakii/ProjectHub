@@ -22,6 +22,7 @@ import SellByAuction from './afterLogin/createlisting/sellbyauction'
 import MyListings from './afterLogin/mylistings/mylistings'
 
 import ViewListingBySeller from './afterLogin/mylistings/viewlistingbyseller'
+import Attachments from './afterLogin/attachments/attachments'
 
 function App() {
   // const [data, setData] = React.useState(datas)
@@ -135,16 +136,16 @@ function App() {
           }
         />
 
-        {/* Payment Integration route */}
+        {/* Attachments after payment route */}
 
-        {/* <Route
-          path='/paymentmethod'
+        <Route
+          path='/attachments/:_id'
           element={
             <ProtectedRoute>
-              <PaymentMethod />
+              <Attachments />
             </ProtectedRoute>
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   )

@@ -39,7 +39,7 @@ const Viewlisting = () => {
     }
   }
   // console.log(highest)
-  console.log(listing['0'].createdBy, 'testinfff')
+  // console.log(listing['0'].createdBy, 'testinfff')
 
   useEffect(() => {
     apiCall()

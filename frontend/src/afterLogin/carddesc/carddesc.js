@@ -9,12 +9,12 @@ import StripeCheckout from 'react-stripe-checkout'
 
 const Carddesc = (props) => {
   //stripe setup
-  // const [price, setPrice] = useState(0)
+
   let amount = props.price
   if (props.bool) {
     amount = props.highest.bidPrice
   } else {
-    amount = amount
+    amount = props.price
   }
 
   const handleToken = (token) => {
@@ -32,6 +32,12 @@ const Carddesc = (props) => {
           'Your transaction has been successful',
           'success'
         )
+
+        setTimeout(() => {
+          navigate(`/attachments/${props.listingId}`)
+        }, 2000)
+
+        // navigate('/attachments')
       })
       .catch((_) =>
         Swal.file('Transaction Failed.', 'Your transaction failed', 'error')
@@ -45,7 +51,7 @@ const Carddesc = (props) => {
 
   //stripe setup end
   const navigate = useNavigate()
-  const { user } = useAppContext()
+  const { user, totalRevenue } = useAppContext()
   console.log(user, props.highest)
 
   const checkBidTime = () => {
@@ -97,39 +103,26 @@ const Carddesc = (props) => {
                 {props.bool ? 'Bidding date ended' : 'Make bid'}
               </Button>
               {props.bool && user?._id === props.highest['0']._id && (
-                <div className='d-grid gap-2'>
-                  <StripeCheckout
-                    className=' d-grid gap-2'
-                    stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
-                    token={handleToken}
-                    name=''
-                    panelLabel={`Listing Price`}
-                    currency='PKR'
-                    amount={amount * 100}
-                  >
-                    <div className='d-grid gap-2'>
-                      <Button
-                        className='btn btn-primary btn-block mb-4 card-btn'
-                        style={{ flex: 3 }}
-                      >
-                        Make Payment
-                      </Button>
-                    </div>
-                  </StripeCheckout>
-                </div>
+                <StripeCheckout
+                  stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
+                  token={handleToken}
+                  name=''
+                  panelLabel={`Listing Price`}
+                  currency='PKR'
+                  amount={amount * 100}
+                >
+                  <div className='d-grid gap-2'>
+                    <Button
+                      className='btn btn-primary btn-block mb-4 card-btn'
+                      style={{ flex: 3 }}
+                    >
+                      Make Payment
+                    </Button>
+                  </div>
+                </StripeCheckout>
               )}
             </div>
           ) : (
-            // <Link to='/paymentmethod' className='d-grid gap-2'>
-            //   <Button
-            //     className='btn btn-primary btn-block mb-4 card-btn'
-            //     style={{ flex: 3 }}
-            //   >
-            //     Fixed Price
-            //   </Button>
-            // </Link>
-            //stripe checkout
-
             <StripeCheckout
               stripeKey={process.env.REACT_APP_STRIPE_KEY || ''}
               token={handleToken}

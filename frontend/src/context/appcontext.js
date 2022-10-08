@@ -82,7 +82,7 @@ const initialState = {
   startbid: 0,
   price: 0,
   duration: 0,
-  isAunction: true,
+  // isAunction: true,
   listing: [],
   totalListing: 0,
   numOfPages: 1,
@@ -92,6 +92,7 @@ const initialState = {
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
   users: [],
+  totalRevenue: 0,
 }
 const AppContext = React.createContext()
 

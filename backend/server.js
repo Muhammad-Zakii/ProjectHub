@@ -48,6 +48,11 @@ app.use(express.json())
 app.get('/', (req, res) => {
   res.send('Welcome!')
 })
+//download attachments
+// app.use(express.static(path.join(__dirname + '/public')))
+// app.get('/', (req, res) => {
+//   res.download('./resume.zip')
+// })
 app.use('/api/v1/auth', authRouter)
 
 app.use('/admin', adminRouter)
