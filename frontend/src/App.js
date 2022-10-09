@@ -25,6 +25,7 @@ import ViewListingBySeller from './afterLogin/mylistings/viewlistingbyseller'
 import Attachments from './afterLogin/attachments/attachments'
 import Navbar from './afterLogin/navbars/navbar'
 import Footer from './footer'
+import Uploadattachments from './afterLogin/attachments/uploadattachments'
 
 function App() {
   // const [data, setData] = React.useState(datas)
@@ -146,6 +147,16 @@ function App() {
             <ProtectedRoute>
               <Navbar />
               <Attachments />
+              <Footer />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/uploadattachments'
+          element={
+            <ProtectedRoute>
+              <Navbar />
+              <Uploadattachments />
               <Footer />
             </ProtectedRoute>
           }

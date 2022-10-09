@@ -2,11 +2,14 @@ import React from 'react'
 
 import fileDownload from 'js-file-download'
 import axios from 'axios'
-import { Col, Row, Card, Button, Accordion, Alert } from 'react-bootstrap'
+import { Col, Row, Button, Accordion, Alert } from 'react-bootstrap'
 
 import { FaDownload } from 'react-icons/fa'
+import { useParams } from 'react-router-dom'
 
 export default function App() {
+  let { _id } = useParams()
+  console.log(_id)
   const handleDownload = (url, filename) => {
     axios
       .get(url, {
@@ -27,7 +30,8 @@ export default function App() {
         <Alert variant='success' className='m-3'>
           <h5 style={{ textAlign: 'center' }}>
             Find the attachments below you can download zip and pdf files for a
-            particular listing.You can also contact seller in case of any query.
+            particular listing. You can also contact seller in case of any
+            query.
           </h5>
         </Alert>
       </div>
@@ -54,10 +58,8 @@ export default function App() {
                       )
                     }}
                   >
-                    Download files
+                    Download files <FaDownload />
                   </Button>
-
-                  <FaDownload />
                 </div>
               </Accordion.Body>
             </Accordion.Item>
@@ -86,10 +88,8 @@ export default function App() {
                       )
                     }}
                   >
-                    Download reports
+                    Download reports <FaDownload />
                   </Button>
-
-                  <FaDownload />
                 </div>
               </Accordion.Body>
             </Accordion.Item>

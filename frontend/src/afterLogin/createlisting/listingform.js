@@ -47,7 +47,7 @@ const Listingform = () => {
     }
     createListing()
     setTimeout(() => {
-      navigate('/afterlogin')
+      navigate('/uploadattachments')
     }, 3000)
   }
   const listingInput = (e) => {
@@ -59,11 +59,11 @@ const Listingform = () => {
       handleChange({ name, value })
     }
   }
-  const redirecting = () => {
-    setTimeout(() => {
-      navigate('/afterlogin')
-    }, 3000)
-  }
+  // const redirecting = () => {
+  //   setTimeout(() => {
+  //     navigate('/afterlogin')
+  //   }, 3000)
+  // }
 
   return (
     <>

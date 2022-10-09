@@ -46,8 +46,9 @@ const Auctionform = () => {
       return
     }
     createListing()
+
     setTimeout(() => {
-      navigate('/afterlogin')
+      navigate('/uploadattachments')
     }, 3000)
   }
   const listingInput = (e) => {
