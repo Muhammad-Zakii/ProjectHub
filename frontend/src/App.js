@@ -23,6 +23,8 @@ import MyListings from './afterLogin/mylistings/mylistings'
 
 import ViewListingBySeller from './afterLogin/mylistings/viewlistingbyseller'
 import Attachments from './afterLogin/attachments/attachments'
+import Navbar from './afterLogin/navbars/navbar'
+import Footer from './footer'
 
 function App() {
   // const [data, setData] = React.useState(datas)
@@ -142,7 +144,9 @@ function App() {
           path='/attachments/:_id'
           element={
             <ProtectedRoute>
+              <Navbar />
               <Attachments />
+              <Footer />
             </ProtectedRoute>
           }
         />
