@@ -32,6 +32,7 @@ import {
   CHANGE_PAGE,
   GET_USER_BY_ADMIN_BEGAN,
   GET_USER_BY_ADMIN_SUCCESS,
+  // SHOW_ALERT_ATTACHMENTS,
 } from './action'
 
 const token = localStorage.getItem('token')
@@ -151,7 +152,7 @@ const AppProvider = ({ children }) => {
   const setupUser = async ({ currentUser, endPoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN })
     try {
-      const { data } = await axios.post(`/api/v1/auth/${endPoint}`, currentUser)
+      const { data } = await authFetch.post(`/auth/${endPoint}`, currentUser)
       console.log(data)
 
       const { user, token } = data //location
@@ -363,6 +364,9 @@ const AppProvider = ({ children }) => {
     }
     clearAlert()
   }
+  // const showAlert = () => {
+  //   dispatch({ type: SHOW_ALERT_ATTACHMENTS })
+  // }
 
   return (
     <AppContext.Provider
@@ -385,6 +389,7 @@ const AppProvider = ({ children }) => {
         getAllBid,
         changePage,
         getUsersByAdmin,
+        // showAlert,
 
         // filteritems,
       }}

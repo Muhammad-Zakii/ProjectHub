@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import '../../index.css'
 import { Row, Col, Button } from 'react-bootstrap'
+import imgg from '../../assets/fr.jpg'
 
 const Head = () => {
   return (
@@ -10,6 +11,7 @@ const Head = () => {
           <Col md={10} xs={8}>
             <h1>ProjectHub</h1>
           </Col>
+
           <Col md={2} xs={4}>
             <div className='align-items-right'>
               <Link to='/chooseOption'>
@@ -24,6 +26,7 @@ const Head = () => {
             </div>
           </Col>
         </Row>
+
         <Col className='mt-2 ms-4'>
           <h1 style={{ fontSize: '70px' }}>
             A great marketplace <br /> to buy and sell

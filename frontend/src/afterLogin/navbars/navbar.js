@@ -30,9 +30,14 @@ const NavBarr = () => {
                 How to sell
               </Link>
             </Nav.Link>
-            <Nav.Link>
-              <Link className='linked' to='/howtosell'>
-                Pricing
+            <Nav.Link className='me-auto'>
+              <Link className='linked' to='/afterlogin'>
+                Home
+              </Link>
+            </Nav.Link>
+            <Nav.Link className='me-auto'>
+              <Link className='linked' to='/chooseOption'>
+                Sell Now
               </Link>
             </Nav.Link>
           </Nav>

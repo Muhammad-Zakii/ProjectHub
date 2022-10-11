@@ -1,32 +1,24 @@
 import React, { useState } from 'react'
-import { Alert, Row, Col, Form } from 'react-bootstrap'
+import { Alert, Row, Col, Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+
+import { useAppContext } from '../../context/appcontext'
 
 const Uploadattachments = () => {
   const navigate = useNavigate()
-  // const [attachments, setAttachments] = useState('')
-  // const [loading, setLoading] = useState(false)
 
-  // const uploadImage = async (e) => {
-  //   const files = e.target.files
-  //   const data = new FormData()
-  //   data.append('file', files[0])
-  //   data.append('upload_preset', 'ml_default')
-  //   setLoading(true)
-  //   const res = await fetch('	https://res.cloudinary.com/dchhfc3sy/raw/upload', {
-  //     method: 'POST',
-  //     body: data,
-  //   })
-  //   const file = await res.json()
+  const [show, setShow] = useState(false)
 
-  //   setAttachments(file.secure_url)
-  //   setLoading(false)
+  // const navigatee = () => {
+  //   setTimeout(() => {
+  //     navigate('/afterlogin')
+  //   }, 2000)
   // }
-  // }
-  const navigatee = () => {
+  const handleClick = () => {
+    setShow(!show)
     setTimeout(() => {
       navigate('/afterlogin')
-    }, 2000)
+    }, 3000)
   }
 
   return (
@@ -42,6 +34,9 @@ const Uploadattachments = () => {
         </Alert>
       </div>
       <Row className='m-5'>
+        <Alert show={show} variant='success'>
+          Attachments has been uploaded
+        </Alert>
         <Col md={6}>
           {' '}
           <div className='form-row'>
@@ -79,16 +74,14 @@ const Uploadattachments = () => {
           <button
             type='button'
             className='btn btn-outline-success'
-            onClick={navigatee}
-            // onClick={handleSubmit}
-            // onClick={() => {
-            //   handleSubmit redirecting()
-            // }}
-            // disabled={isLoading}
+            onClick={handleClick}
           >
             Upload attachments
           </button>
         </div>
+        {/* <Button onClick={() => setShow(false)} variant='outline-success'>
+          Close me y'all!
+        </Button> */}
       </Row>
     </>
   )

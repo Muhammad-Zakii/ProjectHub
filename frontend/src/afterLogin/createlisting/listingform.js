@@ -59,11 +59,6 @@ const Listingform = () => {
       handleChange({ name, value })
     }
   }
-  // const redirecting = () => {
-  //   setTimeout(() => {
-  //     navigate('/afterlogin')
-  //   }, 3000)
-  // }
 
   return (
     <>

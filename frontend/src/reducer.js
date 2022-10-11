@@ -25,6 +25,7 @@ import {
   CHANGE_PAGE,
   GET_USER_BY_ADMIN_BEGAN,
   GET_USER_BY_ADMIN_SUCCESS,
+  // SHOW_ALERT_ATTACHMENTS,
 } from './context/action'
 
 import { initialState } from './context/appcontext'
@@ -125,6 +126,7 @@ const reducer = (state, action) => {
       siteage: '-',
       profit: '-',
       margin: '-',
+      views: '',
       price: 0,
       startbid: 0,
       status: false,
@@ -236,7 +238,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       search: '',
-      searchCategory: 'all',
+      searchCategory: '',
       sort: 'latest',
     }
   }
@@ -254,6 +256,14 @@ const reducer = (state, action) => {
       //  totalUsers: action.payload.totalUsers,
     }
   }
+  // if (action.type === SHOW_ALERT_ATTACHMENTS) {
+  //   return {
+  //     isLoading: false,
+  //     showAlert: true,
+  //     alertType: 'success',
+  //     alertText: 'Attachments has been uploaded successfully.',
+  //   }
+  // }
 }
 
 export default reducer

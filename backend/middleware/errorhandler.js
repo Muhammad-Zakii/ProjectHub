@@ -12,7 +12,7 @@ const errorhandler = (err, req, res, next) => {
   // }
   if (err.code && err.code === 11000) {
     defaultError.status = StatusCodes.BAD_REQUEST
-    defaultError.msg = `${Object.keys(err.keyValue)} has to be uniqe`
+    defaultError.msg = `${Object.keys(err.keyValue)} has to be unique`
   }
   // res.status(defaultError.status).json({ msg: err })
   res.status(defaultError.status).json({ msg: defaultError.msg })

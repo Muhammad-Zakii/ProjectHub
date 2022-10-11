@@ -8,7 +8,7 @@ const afterlogin = () => {
   return (
     <div>
       <NavBarr />
-      <Linksnavbar />
+      {/* <Linksnavbar /> */}
       <Header />
       <Landingpageafterlogin />
       <Footer />

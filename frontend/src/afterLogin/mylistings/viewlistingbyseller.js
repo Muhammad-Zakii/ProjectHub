@@ -9,9 +9,11 @@ import Flexbox from '../flexbox/flexbox'
 import CardForSeller from './cardforseller'
 import Footer from '../../footer'
 import '../../index.css'
-import { Col, Row, Table } from 'react-bootstrap'
+import { Col, Row, Table, Alert, Container } from 'react-bootstrap'
 import Charts from '../chart/chart'
 import { useAppContext } from '../../context/appcontext'
+import PieChart from '../chart/chart'
+import LineChart from '../chart/linechart'
 import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
 import Linksnavbar from '../navbars/linksnavbar'
 import BarChartt from '../chart/barchart'
@@ -64,9 +66,11 @@ const ViewListingBySeller = () => {
             <Row>
               <Col md='8' sm='12' className='justify-content-md-center'>
                 <div className='list-header'>
-                  <h4>{listings.category}</h4>
-                  <br />
-                  <br />
+                  <Alert variant='primary'>
+                    <h4>{listings.category}</h4>
+                  </Alert>
+                </div>
+                <div className='list-header'>
                   <h1>{listings.title}</h1>
                 </div>
                 <div className='list-desc'>
@@ -84,18 +88,48 @@ const ViewListingBySeller = () => {
                   </h4>
                   <p>{listings.description}</p>
                 </div>
-                <div style={{ width: '350px', height: '350px' }}>
-                  <h3>Revenue & Profit</h3>
-                  <Charts />
-                </div>
-                <div style={{ width: '500px', height: '500px' }}>
-                  <h3>Site Age In Years</h3>
-                  <br />
-                  <BarChartt />
-                </div>
-                <br />
-                <br />
-                <br />
+                <Col>
+                  <div className='about-listing'>
+                    <h3>
+                      <strong>Video demo</strong>
+                    </h3>
+                    <Container>
+                      <div className='ratio ratio-16x9'>
+                        <iframe
+                          src={`https://www.youtube.com/embed/${listings.demo}`}
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    </Container>
+                  </div>
+                </Col>
+                <Col className='pt-5'>
+                  <div>
+                    <h3>Revenue & Profit</h3>
+                    <PieChart
+                      price={
+                        parseInt(listings.price) + parseInt(listings.profit)
+                      }
+                      profit={listings.profit}
+                    />
+                  </div>
+                </Col>
+                <Col className='pt-5'>
+                  {' '}
+                  <div>
+                    <h3>Site Age In Years</h3>
+                    <br />
+                    <BarChartt siteage={listings.siteage} />
+                  </div>
+                </Col>
+
+                <Col className='pt-5'>
+                  <div>
+                    <h3>Page views</h3>
+                    <br />
+                    <LineChart views={listings.views} />
+                  </div>
+                </Col>
               </Col>
 
               <Col md='4' sm='12' className='justify-content-md-center'>
@@ -103,13 +137,15 @@ const ViewListingBySeller = () => {
                   <CardForSeller
                     img={listings.image1}
                     price={listings.price}
+                    status={listings.status}
                     createdAt={listings.createdAt}
                     duration={listings.duration}
                     totalBid={totalBid}
                     highest={highest}
+                    bool={bool}
+                    setBool={setBool}
                     listingId={_id}
                   />
-
                   <Table striped bordered hover>
                     <thead>
                       <tr>
@@ -131,47 +167,46 @@ const ViewListingBySeller = () => {
                     </tbody>
                   </Table>
                 </div>
-                {/* <div className='about-seller'>
-                  <Col className='justify-content-md-center mt-5'>
-                    <h4>A Seller</h4>
+                {/* {users.map((us) => {
+                  if (us._id === listings.createdBy) {
+                    return (
+                      <div className='about-seller'>
+                        <Col className='justify-content-md-center mt-5'>
+                          <h4>About the Seller</h4>
 
-                    <div className='card-body'>
-                      <div className='avatar'>
-                        <img
-                          src={`http://localhost:7000/static/profiles/${user.img}`}
-                          className='card-img-top'
-                          alt=''
-                        />
-                      </div>
-                      <h5 className='card-title'>
-                        <FaUser />
-                        Name: {user.name}
-                      </h5>
-                      <p className='card-text'>
-                        <FaLocationArrow />
-                        Location: {user.location}
+                          <div className='card-body'>
+                            <div className='avatar'>
+                              <img
+                                src={`http://localhost:7000/static/profiles/${us.img}`}
+                                className='card-img-top'
+                                alt=''
+                              />
+                            </div>
+                            <h5 className='card-title'>
+                              <FaUser />
+                              Name: {us.name}
+                            </h5>
+                            <p className='card-text'>
+                              <FaLocationArrow />
+                              Location: {us.location}
+                              <br />
+                              <p className='phone'>
+                                <FaPhone />
+                                PhoneNo: {us.phoneNo}
+                              </p>
+                            </p>
+
+                            <p className='phone'>
+                              <FaAt />
+                              Email: {us.email}
+                            </p>
+                          </div>
+                        </Col>
                         <br />
-                        <p className='phone'>
-                          <FaPhone />
-                          PhoneNo: {user.phoneNo}
-                        </p>
-                      </p>
-
-                      <p className='phone'>
-                        <FaAt />
-                        Email: {user.email}
-                      </p>
-                    </div>
-                  </Col>
-                  <br />
-                </div> */}
-                {/* <div className='payment-method'>
-                  <hr />
-                  <h4>Payment method</h4>
-                  <h6>
-                    <Link to='/paymentmethod'>Stripe</Link>
-                  </h6>
-                </div> */}
+                      </div>
+                    )
+                  }
+                })} */}
               </Col>
             </Row>
           </div>
