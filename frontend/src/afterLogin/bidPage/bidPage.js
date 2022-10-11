@@ -5,6 +5,8 @@ import { InputGroup, Form, Button } from 'react-bootstrap'
 import Footer from '../footer/footer2'
 import { useAppContext } from '../../context/appcontext'
 import { useNavigate, useParams } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const initialData = { bidPrice: '0' }
 
@@ -14,7 +16,7 @@ const BidPage = () => {
   const [bid, setBid] = useState(initialData)
   const { listingId } = useParams()
   const list = listing.find((l) => l._id === listingId)
-  console.log(list)
+  // console.log(list)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -24,7 +26,12 @@ const BidPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     createBid({ ...bid, listingId })
-    navigate('/afterlogin')
+    // toast.success('Your bid has been placed successfully!', {
+    //   position: toast.POSITION.TOP_RIGHT,
+    // })
+    setTimeout(() => {
+      navigate('/afterlogin')
+    }, 4000)
   }
 
   return (
@@ -64,6 +71,7 @@ const BidPage = () => {
               <Button type='submit' variant='primary' size='lg'>
                 Place Bid
               </Button>
+              <ToastContainer />
             </form>
             <br />
             <br />

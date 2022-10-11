@@ -1,4 +1,4 @@
-import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import { Alert, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 
 import React, { useEffect } from 'react'
 import Swal from 'sweetalert2'
@@ -11,6 +11,8 @@ import NavBarr from '../navbars/navbar'
 import Footer from '../footer/footer2'
 import Wrapper from '../../wrappers'
 import Loading from '../loadingSpinner/loading'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const MyListings = () => {
   const { getAllListing, listing, isLoading, page, totalListing } =
     useAppContext()
@@ -23,7 +25,13 @@ const MyListings = () => {
   if (listing.length === 0) {
     return (
       <Wrapper>
-        <h3>No listing to display for this specific user.</h3>
+        <Alert variant='dark' className='m-5' style={{ textAlign: 'center' }}>
+          <h3>No listing to display for this specific user.</h3>
+          <p>
+            You have to create listing that will display here on my listings
+            page
+          </p>
+        </Alert>
       </Wrapper>
     )
   }
@@ -44,7 +52,11 @@ const MyListings = () => {
 function OwnListing(props) {
   const navigate = useNavigate()
   const showdeletealert = () => {
-    Swal.fire('Deleted!', 'Your listing has been deleted', 'success')
+    setTimeout(() => {
+      toast.success('Listing has been deleted successfully!', {
+        position: toast.POSITION.TOP_RIGHT,
+      })
+    }, 1000)
   }
   const { deletelisting, seteditlisting } = useAppContext()
 
@@ -103,6 +115,7 @@ function OwnListing(props) {
             >
               Delete
             </Button>
+            <ToastContainer />
 
             {/* <div className='d-grid gap-2'>
               <Button variant='primary' size='lg'>

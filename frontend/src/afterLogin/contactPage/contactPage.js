@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
 import NavBarr from '../navbars/navbar'
-import { Card, Row, Col, Button } from 'react-bootstrap'
-import FormRow from '../../formrow'
+import { Row, Col, Button } from 'react-bootstrap'
 import '../../index.css'
 import Footer from '../footer/footer2'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { useAppContext } from '../../context/appcontext'
 import { FaUser, FaLocationArrow, FaPhone, FaAt } from 'react-icons/fa'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ContactPage = () => {
   const { users, listing, getUsersByAdmin } = useAppContext()
@@ -34,7 +35,9 @@ const ContactPage = () => {
     )
 
     if (response.status === 200) {
-      Swal.fire('Good job!', 'Your email has been sent', 'success')
+      toast.success('Message has been send successfully!', {
+        position: toast.POSITION.TOP_RIGHT,
+      })
     } else if (response.status === 404) {
       alert('Sorry')
     }
@@ -141,6 +144,7 @@ const ContactPage = () => {
             <Button type='submit' value='SEND' variant='primary'>
               Send Message
             </Button>
+            <ToastContainer />
           </form>
         </Col>
       </Row>

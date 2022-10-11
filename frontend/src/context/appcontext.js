@@ -3,6 +3,8 @@ import React, { useReducer, useContext } from 'react'
 import reducer from '../reducer'
 
 import Swal from 'sweetalert2'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import axios from 'axios'
 import {
@@ -316,14 +318,15 @@ const AppProvider = ({ children }) => {
 
   const createBid = async (bid) => {
     try {
+      // ;<ToastContainer />
       const { data } = await authFetch.post(`/bid`, bid)
       if (data) {
-        Swal.fire('Good job!', 'Your bid has been placed!', 'success')
+        toast.success('Your bid has been placed successfully!', {
+          position: toast.POSITION.TOP_RIGHT,
+        })
       } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
+        toast.error('oops something went wrong!', {
+          position: toast.POSITION.TOP_RIGHT,
         })
       }
     } catch (error) {

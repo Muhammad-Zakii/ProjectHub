@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/appcontext'
 import '../../index.css'
 import Swal from 'sweetalert2'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 //Stripe
 import StripeCheckout from 'react-stripe-checkout'
 
@@ -27,15 +29,13 @@ const Carddesc = (props) => {
     })
       .then((res) => res.json())
       .then((_) => {
-        Swal.fire(
-          'Transaction Successful!',
-          'Your transaction has been successful',
-          'success'
-        )
+        toast.success('Transaction has been successful!', {
+          position: toast.POSITION.TOP_RIGHT,
+        })
 
         setTimeout(() => {
           navigate(`/attachments/${props.listingId}`)
-        }, 2000)
+        }, 3000)
 
         // navigate('/attachments')
       })
@@ -71,6 +71,7 @@ const Carddesc = (props) => {
       className='shadow p-3 mb-5 bg-white rounded p-3'
       style={{ display: 'flex', justifyContent: 'center', width: '90%' }}
     >
+      <ToastContainer />
       <Card>
         <Card.Img
           variant='top'
